@@ -1,5 +1,4 @@
-Group 05
-Team Members:
+# Group 06 Team Members:
 
 Will Matherne
 Rohan Damani
@@ -7,13 +6,14 @@ Jeremy Nguyen
 Kenny Nguyen
 Aryan Samal
 
-Project Name: 
-Project Proposal:
+# Project Name: 
+
+# Project Proposal:
 URLs of at least three data sources that you will programmatically scrape (at least one must be a RESTful API) (be very sure about this):
 
-The three models:
+# The three models:
 
-Instance Estimation:
+# Instance Estimation:
 
 Model Attributes(each model must have many attributes -- describe five of those attributes for each model that you can filter or sort):
 
@@ -23,4 +23,4 @@ Instances of each model must be rich with different media (e.g., feeds, images, 
 
 Describe two types of media for instances of each model:
 
-Describe three questions that your site will answer:
+# Three questions our site will answer:
