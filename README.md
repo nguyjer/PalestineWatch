@@ -8,19 +8,46 @@ Aryan Samal
 
 # Project Name: 
 
+PalestineWatch
+
 # Project Proposal:
+
 URLs of at least three data sources that you will programmatically scrape (at least one must be a RESTful API) (be very sure about this):
 
+RESTful API: https://api.unhcr.org/docs/refugee-statistics.html?_gl=1*pjfjx4*_gcl_au*MjA3NTM3Mjgrup_ga_EVDQTJ4LMY*MTcyNzMwNDAxOS4xLjEuMTcyNzMwNDY5OS40MC4wLjA.
+
+https://data.techforpalestine.org/
+
+https://newsdata.io/news-sources/Palestine-news-api
+
+
+
 # The three models:
+
+News/Media
+Support Groups
+Countries
 
 # Instance Estimation:
 
 Model Attributes(each model must have many attributes -- describe five of those attributes for each model that you can filter or sort):
 
-Instances of each model must connect to instances of at least two other models:
+News: Title, Image, Description, Publisher, Date, Link
 
-Instances of each model must be rich with different media (e.g., feeds, images, maps, text, videos, etc.):
+Support Groups: Name, Resources provided, Status of Resource, Contact Info, Location, Year Established
+
+Countries: Name, Capital, Region, Distance, Refugees Accepted 
 
 Describe two types of media for instances of each model:
 
+News: Images, text
+
+Support Groups: Images, Text, Videos, feeds
+
+Countries: Images, Maps, Text
+
 # Three questions our site will answer:
+
+What is the latest news regarding the conflict?
+What are people doing to help?
+What can you do to help?
