@@ -18,6 +18,8 @@ PalestineWatch
 
 # Project Proposal:
 
+Spotlight on the conflict happening in Palestine.
+
 URLs of at least three data sources that you will programmatically scrape (at least one must be a RESTful API) (be very sure about this):
 
 - RESTful API: https://api.unhcr.org/docs/refugee-statistics.html?_gl=1*pjfjx4*_gcl_au*MjA3NTM3Mjgrup_ga_EVDQTJ4LMY*MTcyNzMwNDAxOS4xLjEuMTcyNzMwNDY5OS40MC4wLjA.
