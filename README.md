@@ -1,10 +1,16 @@
 # Group 06 Team Members:
 
-Will Matherne
-Rohan Damani
-Jeremy Nguyen
-Kenny Nguyen
-Aryan Samal
+
+
+- Will Matherne
+
+- Rohan Damani
+
+- Jeremy Nguyen
+
+- Kenny Nguyen
+
+- Aryan Samal
 
 # Project Name: 
 
@@ -14,40 +20,44 @@ PalestineWatch
 
 URLs of at least three data sources that you will programmatically scrape (at least one must be a RESTful API) (be very sure about this):
 
-RESTful API: https://api.unhcr.org/docs/refugee-statistics.html?_gl=1*pjfjx4*_gcl_au*MjA3NTM3Mjgrup_ga_EVDQTJ4LMY*MTcyNzMwNDAxOS4xLjEuMTcyNzMwNDY5OS40MC4wLjA.
+- RESTful API: https://api.unhcr.org/docs/refugee-statistics.html?_gl=1*pjfjx4*_gcl_au*MjA3NTM3Mjgrup_ga_EVDQTJ4LMY*MTcyNzMwNDAxOS4xLjEuMTcyNzMwNDY5OS40MC4wLjA.
 
-https://data.techforpalestine.org/
+- https://data.techforpalestine.org/
 
-https://newsdata.io/news-sources/Palestine-news-api
+- https://newsdata.io/news-sources/Palestine-news-api
 
 
 
-# The three models:
+# The three models/Instance Estimation:
 
-News/Media
-Support Groups
-Countries
+- News/Media (~100+)
 
-# Instance Estimation:
+- Support Groups (~50)
+
+- Countries (~20)
+
+# Instance Description:
 
 Model Attributes(each model must have many attributes -- describe five of those attributes for each model that you can filter or sort):
 
-News: Title, Image, Description, Publisher, Date, Link
+- News: Title, Image, Description, Publisher, Date, Link
 
-Support Groups: Name, Resources provided, Status of Resource, Contact Info, Location, Year Established
+- Support Groups: Name, Resources provided, Status of Resource, Contact Info, Location, Year Established
 
-Countries: Name, Capital, Region, Distance, Refugees Accepted 
+- Countries: Name, Capital, Region, Distance, Refugees Accepted 
 
 Describe two types of media for instances of each model:
 
-News: Images, text
+- News: Images, text
 
-Support Groups: Images, Text, Videos, feeds
+- Support Groups: Images, Text, Videos, feeds
 
-Countries: Images, Maps, Text
+- Countries: Images, Maps, Text
 
 # Three questions our site will answer:
 
-What is the latest news regarding the conflict?
-What are people doing to help?
-What can you do to help?
+- What is the latest news regarding the conflict?
+
+- What are people doing to help?
+
+- What can you do to help?
