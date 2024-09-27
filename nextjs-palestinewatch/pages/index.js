@@ -11,11 +11,11 @@ export default function Home() {
 
       <main>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Palestine Watch
         </h1>
 
         <p className={styles.description}>
-          Get started by editing <code>pages/index.js</code>
+          Website curated by Kenny Nguyen, Jeremy Nguyen, William, Rohan, Aaryan
         </p>
 
         <div className={styles.grid}>
@@ -55,8 +55,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
+          Palestine Watch
         </a>
       </footer>
 
