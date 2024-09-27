@@ -19,5 +19,5 @@ push:
 
 # run docker
 docker:
-	-docker pull nguyjer/palestine_watch
-	docker run --rm -i -t nguyjer/palestine_watch
+	-cd ./nextjs-palestinewatch && docker pull nguyjer/palestine_watch
+	cd ./nextjs-palestinewatch && docker run --rm -i -p 3000:3000 -t -v $$(pwd):/app nguyjer/palestine_watch
