@@ -1,38 +1,22 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import NavBar from "../components/NavBar";
 
 export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Palestine Watch</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <NavBar />
-
-      <main>
-        <h1 className={styles.title}>
-          Palestine Watch
-        </h1>
+      <div className={styles.overlay}></div> {/* Overlay */}
+      <main className={styles.mainContent}>
+        <h1 className={styles.title}>Palestine Watch</h1>
 
         <p className={styles.description}>
-          Website curated by Kenny Nguyen, Jeremy Nguyen, William, Rohan, Aaryan
+          Website by Kenny Nguyen, Jeremy Nguyen, William Matherne,
+          Rohan Damani, Aaryan Samal
         </p>
-        
       </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Palestine Watch
-        </a>
-      </footer>
-
       <style jsx>{`
         main {
           padding: 5rem 0;
@@ -59,40 +43,24 @@ export default function Home() {
           align-items: center;
           text-decoration: none;
           color: inherit;
+          z-index: 1;
         }
         code {
           background: #fafafa;
           border-radius: 5px;
           padding: 0.75rem;
           font-size: 1.1rem;
-          font-family:
-            Menlo,
-            Monaco,
-            Lucida Console,
-            Liberation Mono,
-            DejaVu Sans Mono,
-            Bitstream Vera Sans Mono,
-            Courier New,
-            monospace;
+          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
         }
       `}</style>
-
       <style jsx global>{`
         html,
         body {
           padding: 0;
           margin: 0;
-          font-family:
-            -apple-system,
-            BlinkMacSystemFont,
-            Segoe UI,
-            Roboto,
-            Oxygen,
-            Ubuntu,
-            Cantarell,
-            Fira Sans,
-            Droid Sans,
-            Helvetica Neue,
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
             sans-serif;
         }
         * {

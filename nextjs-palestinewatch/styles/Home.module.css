@@ -1,6 +1,20 @@
 .container {
   min-height: 100vh;
   padding: 0 0.5rem;
+  background-image: url('/Flag-Palestinian-Authority-Palestine.webp');
+    /* Set your image path */
+  background-size: cover;
+    /* Make sure the image covers the whole container */
+  background-position: center;
+    /* Center the image */
+  background-repeat: no-repeat;
+    /* Prevent the image from repeating */
+  opacity: 0.8;
+    /* Adjust opacity to make it transparent */
+  height: 100vh;
+    /* Full viewport height */
+  position: relative;
+    /* Position relative for any overlays */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -89,4 +103,22 @@
     width: 100%;
     flex-direction: column;
   }
+}
+
+.overlay {
+  position: absolute;
+  /* Positioning to cover the whole container */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent black overlay */
+  z-index: 0;
+  /* Make sure it’s below the content but above the background */
+}
+
+.mainContent {
+  padding-top: 70px;
+  /* Adjust this value based on your navbar height */
 }

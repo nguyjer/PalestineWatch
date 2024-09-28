@@ -1,9 +1,10 @@
 /* NavBar.module.css */
 .nav {
-    background-color: #333;
+    background-color: rgb(110, 2, 7);
     overflow: hidden;
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     z-index: 1000;
     margin: 0;
@@ -34,7 +35,6 @@
 .navItem:first-child {
     margin-right: auto;
     color: #FAF9F6;
-    pointer-events: none;
 }
 
 .navItem a {
@@ -45,7 +45,7 @@
     display: block;
 }
 
-.navItem a:hover {
+.navItem:not(:first-child) a:hover {
     background-color: #575757;
 }
 
@@ -60,4 +60,19 @@ body.scrolled .nav {
 .navItem a.scrolled {
     background-color: #575757;
     color: #FAF9F6 !important;
+}
+
+.active {
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: #FAF9F6;
+    /* Make the active page bold */
+    border-bottom: 3px solid #FAF9F6;
+    /* Add an underline/border to show it's active */
+}
+
+.navItem>a {
+    color: #FAF9F6;
+    text-decoration: none;
+    padding: 30px 20px;
 }
