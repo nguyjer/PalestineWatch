@@ -1,0 +1,61 @@
+.nav {
+    background-color: #333;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    margin: 0;
+    height: 70px;
+    /* Increase the height of the navbar */
+    display: flex;
+    align-items: center;
+}
+
+.navList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.navItem {
+    margin: 0;
+    /* Remove the margin between navbar items */
+}
+
+.navItem p {
+    display: block;
+    color: #FAF9F6 !important;
+    text-align: center;
+    padding: 30px 20px;
+    /* Adjust padding to increase navbar item height */
+    text-decoration: none;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.navItem:first-child {
+    margin-right: auto;
+}
+
+.navItem:not(:first-child) p:hover {
+    background-color: #575757;
+}
+
+/* Change the background color of the navbar when scrolled */
+body.scrolled .nav {
+    background-color: #575757;
+}
+
+.nav.scrolled {
+    background-color: #575757;
+}
+
+.navItem p.scrolled {
+    background-color: #575757;
+    color: #FAF9F6 !important;
+}
