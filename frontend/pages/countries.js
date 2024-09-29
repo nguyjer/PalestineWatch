@@ -1,11 +1,11 @@
-// pages/about.js
+// pages/Countries.js
 import { useEffect, useState } from 'react';
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 
-export default function About() {
+export default function Countries() {
   // State to hold the fetched data
-  const [supportGroups, setSupportGroups] = useState([]);
+  const [countries, setCountries] = useState([]);
 
   // Fetch data when the component mounts
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function About() {
       })
       .then(data => {
         console.log(data);
-        setSupportGroups(data['items'])
+        setCountries(data['items'])
       })
       .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
@@ -50,15 +50,15 @@ export default function About() {
 
         {/* Render the fetched data */}
         <div>
-          {supportGroups.length === 0 ? (
+          {countries.length === 0 ? (
             <p>Loading support groups...</p>
           ) : (
             <ul>
-              {supportGroups.map((group, index) => (
+              {countries.map((group, index) => (
                 <li key={index}>
                   {/* Customize this according to your API data structure */}
                   {/* <strong>{group.name}</strong>: {group.description} */}
-                  Year: {group.year}, Total: {group.total}
+                  Year: {group.year}, Total: {group.total}, Country: {group.coo}
 
                 </li>
               ))}

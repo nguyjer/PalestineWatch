@@ -62,7 +62,7 @@ body.scrolled .nav {
     color: #FAF9F6 !important;
 }
 
-.active {
+.active.navItem:not(:first-child) {
     font-weight: bold;
     text-decoration: underline;
     text-decoration-color: #FAF9F6;
