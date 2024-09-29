@@ -9,11 +9,11 @@ export default function About() {
       <Head>
         <title>Palestine Watch</title>
         <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className={styles.mainContent}>
-        <h1>Support Groups Page</h1>
-        <p>This is the Support Groups page for Palestine Watch.</p>
-      </main>
+          </Head>
+          <main className={styles.mainContent}>
+            <h1>Support Groups Page</h1>
+            <p>This is the Support Group page for Palestine Watch.</p>
+          </main>
     </div>
   );
 }
