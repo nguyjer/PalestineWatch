@@ -45,8 +45,8 @@ export default function About() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.mainContent}>
-        <h1>Support Groups Page</h1>
-        <p>This is the Support Groups page for Palestine Watch.</p>
+        <h1>Countries</h1>
+        <p>This is the Countries page for Palestine Watch.</p>
 
         {/* Render the fetched data */}
         <div>
