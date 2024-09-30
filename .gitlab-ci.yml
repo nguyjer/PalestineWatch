@@ -1,10 +1,10 @@
 build_frontend:
-image: node:20.17-alpine 
-cache:
-  paths:
-    - ./nextjs-palestinewatch/node_modules/
-    - ./nextjs-palestinewatch/.next/cache/
-script:
-  - cd nextjs-palestinewatch 
-  - npm install
-  - npm run build
+  image: node:20.17-alpine 
+  cache:
+    paths:
+      - ./nextjs-palestinewatch/node_modules/
+      - ./nextjs-palestinewatch/.next/cache/
+  script:
+    - cd nextjs-palestinewatch 
+    - npm install
+    - npm run build
