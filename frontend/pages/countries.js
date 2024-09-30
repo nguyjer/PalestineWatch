@@ -1,44 +1,74 @@
-// pages/Countries.js
 import { useEffect, useState } from 'react';
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import CountryCard from '../components/CountryCard';
+import axios from 'axios';
 
 export default function Countries() {
-  // State to hold the fetched data
   const [countries, setCountries] = useState([]);
+  const [countryDetails, setCountryDetails] = useState({});
 
-  // Fetch data when the component mounts
   useEffect(() => {
-
     const opts = {
       'page': 1,
-      'limit': 10,            // Adjust the limit as needed
-      'yearFrom': 2014,       // Fetch data starting from the year 2014
-      'yearTo': 2023,         // Fetch data up to the year 2023
-      'cooAll': true,         // Include all countries of origin
-      'coaAll': true,         // Include all countries of asylum
+      'yearFrom': 2014,
+      'yearTo': 2023,
+      'coa': "JOR,LBN,SYR",
+      'cf_type': 'ISO'
     };
 
     const baseUrl = 'https://api.unhcr.org/population/v1/unrwa/';
     const queryString = new URLSearchParams(opts).toString();
     const apiUrl = `${baseUrl}?${queryString}`;
 
-    // Fetch data from the API
     fetch(apiUrl)
       .then(response => {
         if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText);
+          throw new Error('Network response error ' + response.statusText);
         }
-        return response.json();  // Parse the JSON data
+        return response.json();
       })
       .then(data => {
-        console.log(data);
-        setCountries(data['items'])
+        const uniqueCountries = [];
+        const countrySet = new Set();
+
+        data['items'].forEach(country => {
+          if (!countrySet.has(country.coa_iso)) {
+            countrySet.add(country.coa_iso);
+            uniqueCountries.push(country);
+          }
+        });
+        setCountries(uniqueCountries);
+        fetchCountryDetails(uniqueCountries);
       })
       .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
+        console.error('Problem with fetch: ', error);
       });
-  }, []);  // Empty array means the effect will only run once when the component mounts
+  }, []);
+
+  const fetchCountryDetails = async (countries) => {
+    const details = {};
+
+    for (const country of countries) {
+      const coaIso = country.coa_iso;
+
+      try {
+        const res = await axios.get(`https://restcountries.com/v3.1/alpha/${coaIso}`);
+        const countryData = res.data[0];
+
+        details[coaIso] = {
+          flag: countryData.flags.png,
+          capital: countryData.capital ? countryData.capital[0] : 'Unknown',
+          population: countryData.population.toLocaleString(),
+          region: countryData.region,
+        };
+      } catch (error) {
+        console.error(`Problem with country - ${coaIso}:`, error);
+      }
+    }
+
+    setCountryDetails(details);
+  };
 
   return (
     <div>
@@ -48,23 +78,29 @@ export default function Countries() {
       </Head>
       <main className={styles.mainContent}>
         <h1>Countries</h1>
-        <p>This is the Countries page for Palestine Watch.</p>
 
-        {/* Render the fetched data */}
         <div>
           {countries.length === 0 ? (
-            <p>Loading support groups...</p>
+            <p>Loading countries...</p>
           ) : (
-            <ul>
-              {countries.map((group, index) => (
-                <li key={index}>
-                  {/* Customize this according to your API data structure */}
-                  {/* <strong>{group.name}</strong>: {group.description} */}
-                  Year: {group.year}, Total: {group.total}, Country: {group.coo}
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+              {countries.map((country, index) => {
+                const coaIso = country.coa_iso;
+                const details = countryDetails[coaIso] || {};
 
-                </li>
-              ))}
-            </ul>
+                return (
+                  <CountryCard
+                    key={index}
+                    country={country.coa_name}
+                    isoCode={coaIso}
+                    flag={details.flag}
+                    capital={details.capital}
+                    population={details.population}
+                    region={details.region}
+                  />
+                );
+              })}
+            </div>
           )}
         </div>
       </main>
