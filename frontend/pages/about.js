@@ -1,7 +1,6 @@
 // pages/about.js
 import styles from "../styles/Home.module.css";
 import Head from "next/head";
-import { useState } from "react";
 
 export default function About() {
 
@@ -59,7 +58,24 @@ export default function About() {
 
 	const [memberIndex, setmemberIndex] = useState(0);
 
+	const apiKey = glpat-dFrzisSrHFEZuhewUGLK;
+
+	const getBranches = async () => 
+	{
+		const response = await fetch('https://gitlab.com/api/v4/projects/61909583/repository/branches', {
+			headers: {
+				'PRIVATE-TOKEN': `${apiKey}`,
+			},
+		});
+
+		return await response.json();
+	};
 	
+	getBranches().then(branches => {
+		console.log(branches);
+	});
+
+
     return (
 	<div>
 	  <Head>
