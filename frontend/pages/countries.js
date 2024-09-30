@@ -9,7 +9,6 @@ export default function Countries() {
 
   // Fetch data when the component mounts
   useEffect(() => {
-    const apiUrl = 'https://api.unhcr.org/population/v1/unrwa/?limit=100&yearFrom=2000&yearTo=2023'; // Replace with your actual API URL
 
     const opts = {
       'page': 1,
@@ -18,8 +17,11 @@ export default function Countries() {
       'yearTo': 2023,         // Fetch data up to the year 2023
       'cooAll': true,         // Include all countries of origin
       'coaAll': true,         // Include all countries of asylum
-      'download': false       // Return data as JSON, not CSV
     };
+
+    const baseUrl = 'https://api.unhcr.org/population/v1/unrwa/';
+    const queryString = new URLSearchParams(opts).toString();
+    const apiUrl = `${baseUrl}?${queryString}`;
 
     // Fetch data from the API
     fetch(apiUrl)
