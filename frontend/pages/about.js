@@ -1,6 +1,8 @@
 // pages/about.js
 import styles from "../styles/Home.module.css";
 import Head from "next/head";
+import MemberCard from "../components/MemberCard.js";
+
 
 export default function About() {
 
@@ -56,9 +58,8 @@ export default function About() {
 	     utests: "unit tests"
 	}];
 
-	const [memberIndex, setmemberIndex] = useState(0);
 
-	const apiKey = glpat-dFrzisSrHFEZuhewUGLK;
+	const apiKey = 'glpat-dFrzisSrHFEZuhewUGLK';
 
 	const getBranches = async () => 
 	{
@@ -72,7 +73,9 @@ export default function About() {
 	};
 	
 	getBranches().then(branches => {
-		console.log(branches);
+		for (let branch of branches) {
+			console.log(branch.name);
+		}
 	});
 
 
@@ -84,10 +87,19 @@ export default function About() {
 	  </Head>
 
 	  <main className={styles.mainContent}>
-	    <h1 >About Page</h1>
+	    <h1>About Page</h1>
 	    <p>
-	      This is the About page for Palestine Watch.
+	      Welcome to Palestine Watch! The purpose of this website is to inform you about the ongoing conflict
+		  between Israel and Palestine, and, if you'd like, how you can help! Here, you'll be able to find
+		  different news sources about the latest events in the conflict, as well as support groups that you
+		  can donate to to help those in need. You'll also be able to find information about other countries
+		  that are involved in the conflict.
 	    </p>
+		<div className="container">
+			{members.map((member) => (
+				<MemberCard key={member.name} member={member}/>
+			))}
+		</div>
 	  </main>
 	</div>
     );
