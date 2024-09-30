@@ -1,23 +1,10 @@
-# Define the stages of the pipeline
-stages:
-  - install
-  - build
-
-# Install dependencies
-install_dependencies:
-  stage: install
-  image: node:20.17-alpine  
-  script:
-    - npm install
-  cache:
-    paths:
-      - node_modules/
-
-# Build the project
-build_website:
-  stage: build
-  image: node:20.17-alpine  
-  script:
-    - npm run build
-  only:
-    - main   # branch to run
+build_frontend:
+image: node:20.17-alpine 
+cache:
+  paths:
+    - ./nextjs-palestinewatch/node_modules/
+    - ./nextjs-palestinewatch/.next/cache/
+script:
+  - cd nextjs-palestinewatch 
+  - npm install
+  - npm run build
