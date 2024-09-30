@@ -1,0 +1,21 @@
+.newsCard {
+    width: 20rem;
+    height: 30rem;
+
+}
+
+.cardLink {
+    text-decoration: none;
+    color: inherit;
+}
+
+.removeUnderline {
+    text-decoration: none; 
+    color: inherit;
+}
+
+.newsImg {
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+}
