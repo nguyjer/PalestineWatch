@@ -211,6 +211,18 @@ export default function About() {
 			  ))}
 		  </div>
 		  <TotalStats key={stats.issues} stats={stats}/>
+		  <div className="datahere">
+		    <h2>Data</h2>
+			<p>Links</p>
+			<p>desc</p>
+		  </div>
+		  <div className="toolshere">
+		    <h2>Tools</h2>
+			<p>List tools</p>
+		  </div>
+		  <a href="https://gitlab.com/nguyjer/cs373-fall-2024-group-06">Gitlab Repository</a>
+		  <p/>
+		  <a href="https://group-06.postman.co/">Postman API</a>
 	    </main>
 	  </div>
     );
