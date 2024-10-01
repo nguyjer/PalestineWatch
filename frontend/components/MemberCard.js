@@ -6,7 +6,7 @@ export default function MemberCard({member}) {
 	return (
 		<div className="card">
 			<h2>{member.name}</h2>
-			/* <img src={member.img} alt={member.name}/> */
+			<img src={member.photo} alt={member.name}/>
 			<p>{member.bio}</p>
 			<p>{member.responsibilities}</p>
 			<p>No. of commits: {member.commits}</p>

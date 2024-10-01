@@ -4,58 +4,70 @@ import Head from "next/head";
 import MemberCard from "../components/MemberCard.js";
 import { useState, useEffect } from 'react';
 
+function TotalStats( {stats} ) {
+
+	return (
+		<section>
+			<h2>Overall Stats</h2>
+			<p>Total No. of Issues: {stats.issues}</p>
+			<p>Total No. of Commits: {stats.commits}</p>
+			<p>Total No. of Unit Tests: {stats.utests}</p>
+		</section>
+	);
+}
+
 export default function About() {
 
     const initMembers = [
 	{
 	    name: "Aryan Samal",
 		gitid: "aryan.samal",
-	    photo: "",
+	    photo: "/headshots/as.png",
 	    bio: "Aryan bio",
 	    responsibilities: "Aryan responsibilities",
-	    commits: "Aryan commits",
-	    issues: "help",
-	    utests: "unit tests"
+	    commits: 0,
+	    issues: 0,
+	    utests: 0
 	},
 	{
 	     name: "Jeremy Nguyen",
 		 gitid: "nguyjer",
-	     photo: "",
+	     photo: "/headshots/jn.png",
 		 bio: "Jeremy bio",
 		 responsibilities: "Jeremy responsibilities",
-		 commits: "Jeremy commits",
-		 issues: "issues",
-		 utests: "unit tests"
+		 commits: 0,
+		 issues: 0,
+		 utests: 0
 	},
 	{
 	     name: "Kenny Nguyen",
 		 gitid: "kenken17621",
-	     photo: "",
+	     photo: "/headshots/kn.png",
 		 bio: "Kenny bio",
 		 responsibilities: "Kenny responsibilities",
-		 commits: "Kenny commits",
-		 issues: "issues",
-	     utests: "unit tests"
+		 commits: 0,
+		 issues: 0,
+	     utests: 0
 	},
 	{
 	     name: "Rohan Damani",
 		 gitid: "rdamani1",
-	     photo: "",
+	     photo: "/headshots/rd.png",
 	     bio: "Rohan bio",
 	     responsibilities: "Rohan responsibilities",
-	     commits: "Rohan commits",
-	     issues: "issues",
-	     utests: "unit tests"
+	     commits: 0,
+	     issues: 0,
+	     utests: 0
 	},
 	{
 	     name: "Will Matherne",
 		 gitid: "wcm4284",
-	     photo: "",
+	     photo: "/headshots/wm.png",
 	     bio: "Will bio",
 	     responsibilities: "Will responsibilities",
-	     commits: "Will commits",
-	     issues: "issues",
-	     utests: "unit tests"
+	     commits: 0,
+	     issues: 0,
+	     utests: 0
 	}];
 
 	const apiKey = 'glpat-dFrzisSrHFEZuhewUGLK';
@@ -75,6 +87,26 @@ export default function About() {
 	};
 
 	const [members, updateMembers] = useState(initMembers);
+	const [stats, setStats] = useState( { 
+											issues: 0,
+											commits: 0,
+											utests: 0
+										});
+
+	useEffect(() => {
+		if (members.length > 0) {
+			let totalIssues = 0;
+			let totalCommits = 0;
+			let totalUTests = 0;
+			for (let member of members) {
+				totalIssues += Number(member.issues);
+				totalCommits += Number(member.commits);
+				totalUTests += Number(member.utests);
+			}
+
+			setStats ({ issues: totalIssues, commits: totalCommits, utests: totalUTests });
+		}
+	}, [members]);
 
 
 	const getIssues = async (member) => {
@@ -151,31 +183,35 @@ export default function About() {
 		updateMembers(updatedMembers);
 	};
 
-	updateMemberIssues();
-
-
+	useEffect(() => {
+		updateMemberIssues();
+	}, []);
+	
+	
     return (
-	<div>
-	  <Head>
-	    <title>Palestine Watch</title>
-	    <link rel="icon" href="/favicon.ico" />
-	  </Head>
-
-	  <main className={styles.mainContent}>
-	    <h1>About Page</h1>
-	    <p>
-	      Welcome to Palestine Watch! The purpose of this website is to inform you about the ongoing conflict
-		  between Israel and Palestine, and, if you'd like, how you can help! Here, you'll be able to find
-		  different news sources about the latest events in the conflict, as well as support groups that you
-		  can donate to to help those in need. You'll also be able to find information about other countries
-		  that are involved in the conflict.
-	    </p>
-		<div className="container">
-			{members.map((member) => (
+	  <div>
+	    <Head>
+	      <title>Palestine Watch</title>
+	      <link rel="icon" href="/favicon.ico" />
+	    </Head>
+ 
+ 	    <main className={styles.mainContent}>
+	      <h1>About Page</h1>
+	      <p>
+	        Welcome to Palestine Watch! The purpose of this website is to inform you about the ongoing conflict
+		    between Israel and Palestine, and, if you'd like, how you can help! Here, you'll be able to find
+		    different news sources about the latest events in the conflict, as well as support groups that you
+		    can donate to to help those in need. You'll also be able to find information about other countries
+		    that are involved in the conflict.
+	      </p>
+		  <div className="container">
+		    <h2>Members</h2>
+			  {members.map((member) => (
 				<MemberCard key={member.name} member={member}/>
-			))}
-		</div>
-	  </main>
-	</div>
+			  ))}
+		  </div>
+		  <TotalStats key={stats.issues} stats={stats}/>
+	    </main>
+	  </div>
     );
 }
