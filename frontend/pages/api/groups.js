@@ -21,17 +21,17 @@ export default async function handler(req, res) {
     $(".row-hover tr").each((index, element) => {
       const groupName = $(element).find(".column-1").text().trim();
       const groupEmail = $(element).find(".column-2 a").text().trim();
-      const groupLocation =
-        $(element).find(".column-4").text().trim() +
-        ", " +
-        $(element).find(".column-5").text().trim() +
-        $(element).find(".column-6").text().trim();
+      const groupCity = $(element).find(".column-4").text().trim();
+      const groupState = $(element).find(".column-5").text().trim();
+      const groupZipCode = $(element).find(".column-6").text().trim();
       const groupLink = $(element).find(".column-3").text().trim();
 
       groups.push({
         name: groupName,
         email: groupEmail,
-        location: groupLocation,
+        city: groupCity,
+        state: groupState,
+        zipCode: groupZipCode,
         link: groupLink,
       });
     });

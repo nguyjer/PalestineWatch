@@ -35,7 +35,10 @@ export default function SupportGroups() {
             <SupportCard
               key={index}
               groupName={group.name}
-              groupLocation={group.location}
+              groupEmail={group.email}
+              groupCity={group.city}
+              groupState={group.state}
+              groupZipCode={group.zipCode}
               groupLink={group.link}
             />
           ))}

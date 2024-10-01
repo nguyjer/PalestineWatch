@@ -3,7 +3,9 @@ import Link from "next/link";
 export default function SupportCard({
   groupName,
   groupEmail,
-  groupLocation,
+  groupCity,
+  groupState,
+  groupZipCode,
   groupLink,
 }) {
   return (
@@ -18,7 +20,9 @@ export default function SupportCard({
     >
       <h2>{groupName}</h2>
       <p>Email: {groupEmail || "Loading..."}</p>
-      <p>Location: {groupLocation || "Missing Data"}</p>
+      <p>City: {groupCity || "Missing Data"}</p>
+      <p>State: {groupState || "Missing Data"}</p>
+      <p>Zip Code: {groupZipCode || "Missing Data"}</p>
       {groupLink ? (
         <Link
           href={

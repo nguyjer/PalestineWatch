@@ -29,7 +29,7 @@
     font-family: 'Nunito Sans', sans-serif;
     font-weight: bold;
     transition: background-color 0.3s;
-    position: relative; /* Needed for positioning the active background */
+    text-decoration: none;
 }
 
 .navItem:first-child {
@@ -40,22 +40,15 @@
 .navItem a {
     color: #FAF9F6;
     text-decoration: none;
-    padding: 30px 20px; /* Adjust padding */
+    padding: 30px 20px;
+    /* Adjust padding */
     display: block;
-    height: 100%; /* Ensure full height for the link */
 }
 
-/* Hover effect */
 .navItem:not(:first-child) a:hover {
     background-color: #575757;
 }
 
-/* Active state */
-.active.navItem:not(:first-child) a {
-    background-color: #575757; /* Active background color */
-}
-
-/* Scroll effect */
 body.scrolled .nav {
     background-color: #575757;
 }
@@ -69,7 +62,13 @@ body.scrolled .nav {
     color: #FAF9F6 !important;
 }
 
-/* Style for active link */
-.navItem.active {
-    background-color: #575757; /* Ensure the entire item has the same background */
+.active.navItem:not(:first-child) {
+    font-weight: bold;
+    background-color: #575757;
+}
+
+.navItem>a {
+    color: #FAF9F6;
+    text-decoration: none;
+    padding: 30px 20px;
 }
