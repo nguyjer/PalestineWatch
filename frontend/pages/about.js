@@ -2,11 +2,11 @@
 import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import MemberCard from "../components/MemberCard.js";
-
+import { useState, useEffect } from 'react';
 
 export default function About() {
 
-    const members = [
+    const initMembers = [
 	{
 	    name: "Aryan Samal",
 		gitid: "aryan.samal",
@@ -14,7 +14,7 @@ export default function About() {
 	    bio: "Aryan bio",
 	    responsibilities: "Aryan responsibilities",
 	    commits: "Aryan commits",
-	    issues: "issues",
+	    issues: "help",
 	    utests: "unit tests"
 	},
 	{
@@ -58,25 +58,100 @@ export default function About() {
 	     utests: "unit tests"
 	}];
 
-
 	const apiKey = 'glpat-dFrzisSrHFEZuhewUGLK';
+	const id = '61909583';
 
 	const getBranches = async () => 
 	{
-		const response = await fetch('https://gitlab.com/api/v4/projects/61909583/repository/branches', {
-			headers: {
+	    const response = await fetch(`https://gitlab.com/api/v4/projects/${id}/repository/branches`, {
+	    	headers: {
 				'PRIVATE-TOKEN': `${apiKey}`,
-			},
-		});
+	    	},
+	    }).catch(error => {
+			console.error(`Error fetching branches:`, error)
+	    });
 
-		return await response.json();
+	    return await response.json();
+	};
+
+	const [members, updateMembers] = useState(initMembers);
+
+
+	const getIssues = async (member) => {
+		try {
+			const response = await fetch(`https://gitlab.com/api/v4/projects/${id}/issues?author_username=${member.gitid}`, {
+				headers: {
+					'PRIVATE-TOKEN': `${apiKey}`,
+				},
+			});
+
+			if (!response.ok) {
+				member.issues = "Error fetching issues";
+				throw new Error(`Error: ${response.status} ${response.statusText}`);
+			}
+
+			const issues = await response.json();
+			return issues.length;
+
+		} catch (error) {
+
+			console.error(`Error fetching issues for ${member.name}:`, error);
+			return "Error fetching issues";
+			
+		}
 	};
 	
-	getBranches().then(branches => {
-		for (let branch of branches) {
-			console.log(branch.name);
+	/* 		 this will be a little funky
+	    the way gitlab's api works, we have to 
+		get each branch, and then search each
+		branch for commits by each member.
+		sum those up, and we should have the
+		total number of commits.	   		   */
+	const getCommits = async (member) => {
+		try {
+			const branches = await getBranches();
+
+				let totalCommits = 0;
+				for (let branch of branches) {
+					const response = await fetch(`https://gitlab.com/api/v4/projects/${id}/repository/commits?author=${member.gitid}`, {
+						headers: {
+							'PRIVATE-TOKEN': `${apiKey}`,
+						},
+					});
+
+					if (!response.ok) {
+						console.error(`Error: ${response.status} ${response.statusText}`);
+					}
+					
+					const data = await response.json();
+					totalCommits += data.length;
+				}
+
+				return totalCommits;
+
+		} catch (error) {
+			console.error(`Error fetching issues for ${member.name} on ${branch.name}`);
+			return totalCommits;
 		}
-	});
+	}
+
+	
+
+	
+	
+	// TODO: update this to use useState, will have to use .map
+	const updateMemberIssues = async () => {	
+		const updatedMembers = await Promise.all(
+			members.map(async (member) => {
+				const issueNum = await getIssues(member);
+				const commitNum = await getCommits(member);
+				return { ...member, issues: issueNum, commits: commitNum };
+			})
+		);
+		updateMembers(updatedMembers);
+	};
+
+	updateMemberIssues();
 
 
     return (
