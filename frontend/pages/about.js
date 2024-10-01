@@ -61,7 +61,7 @@ export default function About() {
 	},
 	{
 	     name: "Will Matherne",
-		 gitid: "wcm4284",
+		 gitid: "willcmatherne",
 	     photo: "/headshots/wm.png",
 	     bio: "Will bio",
 	     responsibilities: "Will responsibilities",
@@ -145,7 +145,7 @@ export default function About() {
 
 				let totalCommits = 0;
 				for (let branch of branches) {
-					const response = await fetch(`https://gitlab.com/api/v4/projects/${id}/repository/commits?author=${member.gitid}`, {
+					const response = await fetch(`https://gitlab.com/api/v4/projects/${id}/repository/commits?author=${member.gitid}&ref_name=${branch.name}`, {	
 						headers: {
 							'PRIVATE-TOKEN': `${apiKey}`,
 						},
@@ -165,11 +165,7 @@ export default function About() {
 			console.error(`Error fetching issues for ${member.name} on ${branch.name}`);
 			return totalCommits;
 		}
-	}
-
-	
-
-	
+	}	
 	
 	// TODO: update this to use useState, will have to use .map
 	const updateMemberIssues = async () => {	
@@ -220,9 +216,10 @@ export default function About() {
 		    <h2>Tools</h2>
 			<p>List tools</p>
 		  </div>
-		  <a href="https://gitlab.com/nguyjer/cs373-fall-2024-group-06">Gitlab Repository</a>
+		  <h2>Links</h2>
+		  <a href="https://gitlab.com/nguyjer/cs373-fall-2024-group-06" target="_blank" rel="noopener noreferrer">Gitlab Repository</a>
 		  <p/>
-		  <a href="https://group-06.postman.co/">Postman API</a>
+		  <a href="https://group-06.postman.co/" target="_blank" rel="noopener noreferrer">Postman API</a>
 	    </main>
 	  </div>
     );
