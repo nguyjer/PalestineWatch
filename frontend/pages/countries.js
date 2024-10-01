@@ -80,9 +80,7 @@ export default function Countries() {
         <h1>Countries</h1>
 
         <div>
-          {countries.length === 0 ? (
-            <p>Loading countries...</p>
-          ) : (
+          {
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
               {countries.map((country, index) => {
                 const coaIso = country.coa_iso;
@@ -101,7 +99,7 @@ export default function Countries() {
                 );
               })}
             </div>
-          )}
+          }
         </div>
       </main>
     </div>
