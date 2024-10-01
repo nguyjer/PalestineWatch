@@ -21,3 +21,6 @@ push:
 docker:
 	-cd ./frontend && docker pull nguyjer/palestine_watch
 	cd ./frontend && docker run --rm -i -p 3000:3000 -t -v $$(pwd):/app nguyjer/palestine_watch
+
+build:
+	cd ./frontend && npm install && npm run build
