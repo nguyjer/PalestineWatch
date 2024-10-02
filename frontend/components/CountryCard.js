@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styles from "../styles/CountryCard.module.css";
 
-export default function CountryCard({ country, isoCode, flag, capital, population, region, subregion }) {
+export default function CountryCard({ id, country, flag, capital, population, region, subregion }) {
   return (
     <div className={styles.countryCard}>
       {flag && <img src={flag} alt={`${country} flag`} style={{ width: '100px' }} />}
@@ -11,7 +11,7 @@ export default function CountryCard({ country, isoCode, flag, capital, populatio
       <p>Region: {region || 'Loading...'}</p>
       <p>Subregion: {subregion || 'Loading...'}</p>
 
-      <Link href={`/country/${isoCode}`}>
+      <Link href={`/countries/${id}`}>
         <u>View Details</u>
       </Link>
     </div>

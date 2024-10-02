@@ -31,11 +31,16 @@ export default function Countries() {
       .then(data => {
         const uniqueCountries = [];
         const countrySet = new Set();
+        let idCounter = 1;
 
         data['items'].forEach(country => {
           if (!countrySet.has(country.coa_iso)) {
             countrySet.add(country.coa_iso);
-            uniqueCountries.push(country);
+            uniqueCountries.push({
+              ...country,
+              id: idCounter
+            });
+            idCounter += 1
           }
         });
         setCountries(uniqueCountries);
@@ -80,7 +85,7 @@ export default function Countries() {
       <main className={styles.mainContent}>
         <h1>Countries</h1>
         <br></br>
-        
+
         <p>&emsp;Some general supporters of Palestine include, but are not limited to:</p>
         <ul>
           <li>Argentina</li>
@@ -103,12 +108,12 @@ export default function Countries() {
               {countries.map((country, index) => {
                 const coaIso = country.coa_iso;
                 const details = countryDetails[coaIso] || {};
+                const id = country.id;
 
                 return (
                   <CountryCard
-                    key={index}
+                    id={id}
                     country={country.coa_name}
-                    isoCode={coaIso}
                     flag={details.flag}
                     capital={details.capital}
                     population={details.population}
