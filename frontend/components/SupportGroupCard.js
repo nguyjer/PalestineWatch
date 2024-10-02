@@ -2,6 +2,7 @@ import Link from "next/link";
 import styles from "../styles/SupportGroupCard.module.css";
 
 export default function SupportCard({
+  id,
   groupName,
   groupEmail,
   groupCity,
@@ -26,13 +27,14 @@ export default function SupportCard({
           target="_blank"
           rel="noopener noreferrer"
         >
-          <p>Link to Website</p>
+          <u>Link to Website</u>
+          <p></p>
         </Link>
       ) : (
         <p>No website available</p>
       )}
-      <Link href={`/support-groups/${encodeURIComponent(groupName)}`}>
-        <p>Expand</p>
+      <Link href={`/support-groups/${id}`}>
+        <u>Expand</u>
       </Link>
     </div>
   );
