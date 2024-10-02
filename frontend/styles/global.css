@@ -34,3 +34,7 @@ img {
 h1 {
   padding-left: 20px;
 }
+
+.navbar {
+    height: 75px;
+}
