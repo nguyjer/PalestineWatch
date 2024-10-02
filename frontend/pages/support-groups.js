@@ -8,7 +8,36 @@ export default function SupportGroups() {
   const [supportGroups, setSupportGroups] = useState([]);
 
   useEffect(() => {
-    fetchGroups();
+    //hard code three groups
+    setSupportGroups([
+      {
+        id: 1,
+        name: "Adalah-NY: Campaign for the Boycott of Israel",
+        email: "info@adalahny.org",
+        city: "New York City",
+        state: "NY",
+        zipCode: "10603",
+        link: "https://adalahny.org/",
+      },
+      {
+        id: 2,
+        name: "Al-Awda PRRC",
+        email: "amanibarakat@gmail.com",
+        city: "Coral Springs",
+        state: "FL",
+        zipCode: "33075",
+        link: "https://al-awdapalestine.org/",
+      },
+      {
+        id: 3,
+        name: "Chico Palestine Action Group",
+        email: "chicopalestineaction@gmail.com",
+        city: "Chico",
+        state: "CA",
+        zipCode: "95928",
+        link: "http://www.chicopeace.org/cpag",
+      }]);
+    // fetchGroups();
   }, []);
 
   const fetchGroups = async () => {
@@ -29,9 +58,9 @@ export default function SupportGroups() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.mainContent}>
-        <h1>Support Groups Page</h1>
+        <h1>Support Groups in the U.S.</h1>
         <div style={{ display: "flex", flexWrap: "wrap" }}>
-          {supportGroups.slice(0, 24).map((group, index) => (
+          {supportGroups.map((group, index) => (
             <SupportCard
               key={group.id}
               groupName={group.name}
