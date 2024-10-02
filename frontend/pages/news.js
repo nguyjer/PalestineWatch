@@ -2,6 +2,7 @@
 import Head from "next/head";
 import styles from "../styles/News.module.css";
 import NewsCard from "../components/NewsCard";
+import { Card } from 'react-bootstrap';
 import { React, useState, useEffect } from "react";
 
 

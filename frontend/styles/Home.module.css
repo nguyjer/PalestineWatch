@@ -1,20 +1,20 @@
 .container {
   min-height: 100vh;
   padding: 0 0.5rem;
-  background-image: url('/Flag-Palestinian-Authority-Palestine.webp');
-    /* Set your image path */
+  background-image: url("/Flag-Palestinian-Authority-Palestine.webp");
+  /* Set your image path */
   background-size: cover;
-    /* Make sure the image covers the whole container */
+  /* Make sure the image covers the whole container */
   background-position: center;
-    /* Center the image */
+  /* Center the image */
   background-repeat: no-repeat;
-    /* Prevent the image from repeating */
+  /* Prevent the image from repeating */
   opacity: 0.8;
-    /* Adjust opacity to make it transparent */
+  /* Adjust opacity to make it transparent */
   height: 100vh;
-    /* Full viewport height */
+  /* Full viewport height */
   position: relative;
-    /* Position relative for any overlays */
+  /* Position relative for any overlays */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -71,9 +71,7 @@
   text-decoration: none;
   border: 1px solid #eaeaea;
   border-radius: 10px;
-  transition:
-    color 0.15s ease,
-    border-color 0.15s ease;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
 
 .card:hover,
@@ -121,4 +119,21 @@
 .mainContent {
   padding-top: 70px;
   /* Adjust this value based on your navbar height */
+}
+
+.container main {
+  padding: 5rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.container code {
+  background: #fafafa;
+  border-radius: 5px;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+    Bitstream Vera Sans Mono, Courier New, monospace;
 }
