@@ -1,4 +1,5 @@
 import Link from "next/link";
+import styles from "../styles/SupportGroupCard.module.css";
 
 export default function SupportCard({
   groupName,
@@ -9,15 +10,7 @@ export default function SupportCard({
   groupLink,
 }) {
   return (
-    <div
-      style={{
-        border: "1px solid #ccc",
-        padding: "20px",
-        margin: "10px",
-        borderRadius: "8px",
-        width: "250px",
-      }}
-    >
+    <div className={styles.supportCard}>
       <h2>{groupName}</h2>
       <p>Email: {groupEmail || "Loading..."}</p>
       <p>City: {groupCity || "Missing Data"}</p>

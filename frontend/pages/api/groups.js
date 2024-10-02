@@ -17,7 +17,6 @@ export default async function handler(req, res) {
     const $ = cheerio.load(data);
     console.log("Cheerio loaded");
     const groups = [];
-
     $(".row-hover tr").each((index, element) => {
       const groupName = $(element).find(".column-1").text().trim();
       const groupEmail = $(element).find(".column-2 a").text().trim();
@@ -27,6 +26,7 @@ export default async function handler(req, res) {
       const groupLink = $(element).find(".column-3").text().trim();
 
       groups.push({
+        id: index,
         name: groupName,
         email: groupEmail,
         city: groupCity,

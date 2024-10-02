@@ -1,5 +1,5 @@
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
 import { Carousel } from 'react-bootstrap';
 
 export default function Home() {
@@ -53,6 +53,10 @@ export default function Home() {
               </Carousel.Caption>
             </Carousel.Item>
           </Carousel>
+          <p style={{fontSize: "30px", color: "black"}}><strong>42,385 Palestinians Killed</strong></p>
+          <p style={{fontSize: "18px", color: "black"}}><stong>A political website for all who belive that freedom for the Palestinian people <br></br>
+            is an integral part of achieving collective liberation.  We provie resources and information 
+            to help you learn more about the oppression faced by Palestine.</stong></p>
         </div>
       </main>
     </div>
