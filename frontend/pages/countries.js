@@ -61,6 +61,7 @@ export default function Countries() {
           capital: countryData.capital ? countryData.capital[0] : 'Unknown',
           population: countryData.population.toLocaleString(),
           region: countryData.region,
+          subregion: countryData.subregion,
         };
       } catch (error) {
         console.error(`Problem with country - ${coaIso}:`, error);
@@ -95,6 +96,7 @@ export default function Countries() {
                     capital={details.capital}
                     population={details.population}
                     region={details.region}
+                    subregion={details.subregion}
                   />
                 );
               })}
