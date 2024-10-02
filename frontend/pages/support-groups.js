@@ -1,5 +1,5 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/ModelPage.module.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import SupportCard from "../components/SupportGroupCard";
@@ -30,13 +30,14 @@ export default function SupportGroups() {
       },
       {
         id: 3,
-        name: "Chico Palestine Action Group",
-        email: "chicopalestineaction@gmail.com",
-        city: "Chico",
-        state: "CA",
-        zipCode: "95928",
-        link: "http://www.chicopeace.org/cpag",
-      }]);
+        name: "Chicago Faith Coalition on Middle East Policy",
+        email: "",
+        city: "Chicago",
+        state: "IL",
+        zipCode: "60605",
+        link: "	http://www.chicagofaithcoalition.org/",
+      },
+    ]);
     // fetchGroups();
   }, []);
 
@@ -63,6 +64,7 @@ export default function SupportGroups() {
           {supportGroups.map((group, index) => (
             <SupportCard
               key={group.id}
+              id={group.id}
               groupName={group.name}
               groupEmail={group.email}
               groupCity={group.city}

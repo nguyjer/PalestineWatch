@@ -1,5 +1,6 @@
 html,
 body {
+  overflow-x: hidden;
   padding: 0;
   margin: 0;
   font-family:
@@ -37,4 +38,7 @@ h1 {
 
 .navbar {
     height: 75px;
+}
+ main>p {
+  padding-left: 20px;
 }

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Head from "next/head";
-import styles from "../../styles/Home.module.css";
+import styles from "../../styles/ModelPage.module.css";
 import CountryDetails from '../../components/CountryDetails';
 import axios from 'axios';
 
