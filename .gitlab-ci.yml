@@ -5,6 +5,6 @@ build_frontend:
       - ./frontend/node_modules/
       - ./frontend/.next/cache/
   script:
-    - cd frontedn 
+    - cd frontend 
     - npm install
     - npm run build
