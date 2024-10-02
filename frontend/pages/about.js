@@ -1,5 +1,5 @@
 // pages/about.js
-import styles from "../styles/Home.module.css";
+import styles from "../styles/ModelPage.module.css";
 import Head from "next/head";
 
 export default function About() {
