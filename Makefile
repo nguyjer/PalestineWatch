@@ -23,4 +23,4 @@ docker:
 	cd ./frontend && docker run --rm -i -p 3000:3000 -t -v $$(pwd):/app nguyjer/palestine_watch
 
 build:
-	cd ./frontend && npm install && npm run build
+	cd ./frontend && npm install && npm ci && npm run build
