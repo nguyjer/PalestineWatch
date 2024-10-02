@@ -1,5 +1,5 @@
 run:
-	cd ./frontend && npm install && npm run dev
+	cd ./frontend && npm install && npm i bootstrap@5.3.3 && npm run dev
 #add all then show status
 add:
 	git add -A

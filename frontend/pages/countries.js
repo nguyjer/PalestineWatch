@@ -61,6 +61,7 @@ export default function Countries() {
           capital: countryData.capital ? countryData.capital[0] : 'Unknown',
           population: countryData.population.toLocaleString(),
           region: countryData.region,
+          subregion: countryData.subregion,
         };
       } catch (error) {
         console.error(`Problem with country - ${coaIso}:`, error);
@@ -78,7 +79,24 @@ export default function Countries() {
       </Head>
       <main className={styles.mainContent}>
         <h1>Countries</h1>
+        <br></br>
+        
+        <p>&emsp;Some general supporters of Palestine include, but are not limited to:</p>
+        <ul>
+          <li>Argentina</li>
+          <li>Brazil</li>
+          <li>China</li>
+          <li>India</li>
+          <li>Indonesia</li>
+          <li>Russia</li>
+          <li>Saudi Arabia</li>
+          <li>South Africa</li>
+          <li>Spain</li>
+          <li>Turkey</li>
+        </ul>
 
+        <br></br>
+        <p>&emsp;Countries of asylum that have taken refugees in the conflict include, but are not limited to:</p>
         <div>
           {
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -95,6 +113,7 @@ export default function Countries() {
                     capital={details.capital}
                     population={details.population}
                     region={details.region}
+                    subregion={details.subregion}
                   />
                 );
               })}

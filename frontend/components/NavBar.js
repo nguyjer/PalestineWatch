@@ -1,50 +1,40 @@
 // components/NavBar.js
-import styles from "../styles/NavBar.module.css";
-import Link from "next/link";
-import { useRouter } from "next/router"; // Import useRouter
-
 export default function NavBar() {
-  const router = useRouter(); // Use useRouter to get the current path
 
   return (
-    <nav className={styles.nav}>
-      <ul className={styles.navList}>
-        <li
-          className={`${styles.navItem} ${
-            router.pathname === "/" ? styles.active : ""
-          }`}
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand active" href="/">
+          PalestineWatch
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
-          <Link href="/">PalestineWatch</Link>
-        </li>
-        <li
-          className={`${styles.navItem} ${
-            router.pathname === "/about" ? styles.active : ""
-          }`}
-        >
-          <Link href="/about">About</Link>
-        </li>
-        <li
-          className={`${styles.navItem} ${
-            router.pathname === "/support-groups" ? styles.active : ""
-          }`}
-        >
-          <Link href="/support-groups">Support Groups</Link>
-        </li>
-        <li
-          className={`${styles.navItem} ${
-            router.pathname === "/countries" ? styles.active : ""
-          }`}
-        >
-          <Link href="/countries">Countries</Link>
-        </li>
-        <li
-          className={`${styles.navItem} ${
-            router.pathname === "/news" ? styles.active : ""
-          }`}
-        >
-          <Link href="/news">News</Link>
-        </li>
-      </ul>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="/about">
+              About
+            </a>
+            <a class="nav-link active" href="/news">
+              News
+            </a>
+            <a class="nav-link active" href="/support-groups">
+              Support Groups
+            </a>
+            <a class="nav-link active" href="/countries">
+              Countries
+            </a>
+          </div>
+        </div>
+      </div>
     </nav>
   );
 }
