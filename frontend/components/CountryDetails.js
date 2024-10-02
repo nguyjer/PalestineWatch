@@ -29,9 +29,9 @@ export default function CountryDetails({ countryData, countryDetails }) {
       </div>
       
       <div style={{ marginTop: '20px' }}>
-        <h4>Location:</h4>
+        <h4>Google Maps:</h4>
         <a href={countryDetails['maps']} target="_blank" rel="noopener noreferrer">
-          View on Google Maps
+          <u>View on Google Maps</u>
         </a>
       </div>
     </div>
