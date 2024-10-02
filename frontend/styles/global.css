@@ -38,3 +38,9 @@ h1 {
 .navbar {
     height: 75px;
 }
+ main>p {
+  padding-left: 20px;
+}
+ main>Link>p {
+  padding-left: 20px;
+}

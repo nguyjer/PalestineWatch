@@ -2,13 +2,13 @@
 export default function NavBar() {
 
   return (
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand active" href="/">
+    <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+      <div className="container-fluid">
+        <a className="navbar-brand active" href="/">
           PalestineWatch
         </a>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNavAltMarkup"
@@ -16,20 +16,20 @@ export default function NavBar() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-link active" aria-current="page" href="/about">
+        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div className="navbar-nav">
+            <a className="nav-link active" aria-current="page" href="/about">
               About
             </a>
-            <a class="nav-link active" href="/news">
+            <a className="nav-link active" href="/news">
               News
             </a>
-            <a class="nav-link active" href="/support-groups">
+            <a className="nav-link active" href="/support-groups">
               Support Groups
             </a>
-            <a class="nav-link active" href="/countries">
+            <a className="nav-link active" href="/countries">
               Countries
             </a>
           </div>

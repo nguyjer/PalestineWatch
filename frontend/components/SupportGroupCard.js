@@ -26,11 +26,14 @@ export default function SupportCard({
           target="_blank"
           rel="noopener noreferrer"
         >
-          <u>Link to Website</u>
+          <p>Link to Website</p>
         </Link>
       ) : (
         <p>No website available</p>
       )}
+      <Link href={`/support-groups/${encodeURIComponent(groupName)}`}>
+        <p>Expand</p>
+      </Link>
     </div>
   );
 }
