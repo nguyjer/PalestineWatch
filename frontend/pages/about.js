@@ -24,7 +24,7 @@ export default function About() {
 		gitid: "aryan.samal",
 	    photo: "/headshots/as.png",
 	    bio: "Aryan bio",
-	    responsibilities: "Aryan responsibilities",
+	    responsibilities: "News page & instances",
 	    commits: 0,
 	    issues: 0,
 	    utests: 0
@@ -34,7 +34,7 @@ export default function About() {
 		 gitid: "nguyjer",
 	     photo: "/headshots/jn.png",
 		 bio: "Jeremy bio",
-		 responsibilities: "Jeremy responsibilities",
+		 responsibilities: "Initial support group model setup, Nav bar, hosting on AWS",
 		 commits: 0,
 		 issues: 0,
 		 utests: 0
@@ -54,7 +54,7 @@ export default function About() {
 		 gitid: "rdamani1",
 	     photo: "/headshots/rd.png",
 	     bio: "Rohan bio",
-	     responsibilities: "Rohan responsibilities",
+	     responsibilities: "Countries page & instances",
 	     commits: 0,
 	     issues: 0,
 	     utests: 0
@@ -63,8 +63,8 @@ export default function About() {
 	     name: "Will Matherne",
 		 gitid: "willcmatherne",
 	     photo: "/headshots/wm.png",
-	     bio: "Will bio",
-	     responsibilities: "Will responsibilities",
+	     bio: "My name is Will Matherne, and I'm a junior computer science student. I like playing chess, soccer, and bouldering.",
+	     responsibilities: "About page",
 	     commits: 0,
 	     issues: 0,
 	     utests: 0
@@ -157,6 +157,8 @@ export default function About() {
 					
 					const data = await response.json();
 					totalCommits += data.length;
+					console.log(member.name, branch.name);
+					console.log(data);
 				}
 
 				return totalCommits;
@@ -209,12 +211,25 @@ export default function About() {
 		  <TotalStats key={stats.issues} stats={stats}/>
 		  <div className="datahere">
 		    <h2>Data</h2>
-			<p>Links</p>
-			<p>desc</p>
+			<a href="https://uscpr.org/connect-with-a-local-group/" target="_blank" rel="noopener noreferrer">US Campaign for Palestinian Rights</a>
+			<p>We used an API from this website to get information on our support group instances.</p>
+			<a href="restcountries.com" target="_blank" rel="noopener noreferrer">Rest Countries</a>
+			<p>We used this API to get information on our country instances.</p>
+			<a href="https://newsdata.io/" target="_blank" rel = "noopener noreferrer">News Data</a>
+			<p>We used this API to get information on different news sources and articles</p>
 		  </div>
 		  <div className="toolshere">
 		    <h2>Tools</h2>
-			<p>List tools</p>
+			<h4>Docker</h4>
+			<p>We used Docker to ensure a consistent environment across testing, development, and
+			production. This made it much easier for us to deploy our website without worrying about
+			different machine configurations.</p>
+			<h4>AWS</h4>
+			<p>We used AWS to host our website infrastructure.</p>
+			<h4>Bootstrap</h4>
+			<p>We used Bootstrap as a CSS framework, allowing us to streamline our front-end development.</p>
+			<h4>Axios</h4>
+			<p>We used Axios as a method of sending HTTP requests in order to fetch data from our APIs.</p>
 		  </div>
 		  <h2>Links</h2>
 		  <a href="https://gitlab.com/nguyjer/cs373-fall-2024-group-06" target="_blank" rel="noopener noreferrer">Gitlab Repository</a>

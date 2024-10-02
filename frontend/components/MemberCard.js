@@ -5,10 +5,10 @@ export default function MemberCard({member}) {
 
 	return (
 		<div className="card">
-			<h2>{member.name}</h2>
+			<h3>{member.name}</h3>
 			<img src={member.photo} alt={member.name}/>
 			<p>{member.bio}</p>
-			<p>{member.responsibilities}</p>
+			<p>Responsibilities: {member.responsibilities}</p>
 			<p>No. of commits: {member.commits}</p>
 			<p>No. of issues created: {member.issues}</p>
 			<p>No. of unit tests created: {member.utests}</p>
