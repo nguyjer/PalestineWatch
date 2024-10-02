@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import { Carousel } from 'react-bootstrap';
 
 export default function Home() {
   return (
@@ -10,12 +11,49 @@ export default function Home() {
       </Head>
       <div className={styles.overlay}></div> {/* Overlay */}
       <main className={styles.mainContent}>
-        <h1 className={styles.title}>Palestine Watch</h1>
+        <div className={styles.topContent}>
+          <h1 className={styles.title}>Palestine Watch</h1>
 
-        <p className={styles.description}>
-          Website by Kenny Nguyen, Jeremy Nguyen, William Matherne,
-          Rohan Damani, Aaryan Samal
-        </p>
+          <p className={styles.description}>
+            Website by Kenny Nguyen, Jeremy Nguyen, William Matherne,
+            Rohan Damani, Aryan Samal
+          </p>
+          <h2 className={styles.conflictTitle}>Palestine-Israel Conflict History</h2>
+        </div>
+        <div className={styles.carousel}>
+          <Carousel fade>
+            <Carousel.Item>
+              <img src='/partition-un.jpg' alt="Un partition image" style={{width: "100vh", height: "50vh"}}/>
+              <Carousel.Caption>
+                <p className={styles.carouselText}>1947: The United Nations divides Palestine</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+              <img src='/6-day-war.webp' alt="6 day war image" style={{width: "100vh", height: "50vh"}}/>
+              <Carousel.Caption>
+                <p className={styles.carouselText}>1967: 6-day War against Israel over West Bank and Gaza</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+              <img src='/camp-david.jpg' alt="camp david image" style={{width: "100vh", height: "50vh"}}/>
+              <Carousel.Caption>
+                <p className={styles.carouselText}>2000: President Clinton hosts Palestinian and Israeli leaders to discuss peace</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+              <img src='/passover-massacre.jpg' alt="passover massacre image" style={{width: "100vh", height: "50vh"}}/>
+              <Carousel.Caption>
+                <p className={styles.carouselText}>2002: Terrorist attack kills 30 Israelis</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+              <img src='/israel-hamas.jpg' alt="2021 Israel-Hamas crisis image" style={{width: "100vh", height: "50vh"}}/>
+              <Carousel.Caption>
+                <p className={styles.carouselText}>2021: Hundreds die in Gaza and Israel which sparks a conflict that is still ongoing</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+          </Carousel>
+        </div>
       </main>
     </div>
   );

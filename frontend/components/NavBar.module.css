@@ -64,11 +64,7 @@ body.scrolled .nav {
 
 .active.navItem:not(:first-child) {
     font-weight: bold;
-    text-decoration: underline;
-    text-decoration-color: #FAF9F6;
-    /* Make the active page bold */
-    border-bottom: 3px solid #FAF9F6;
-    /* Add an underline/border to show it's active */
+    background-color: #575757;
 }
 
 .navItem>a {

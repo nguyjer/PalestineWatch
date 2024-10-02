@@ -114,6 +114,7 @@ export default function About() {
                   imageUrl={article.urlToImage}
                   author={article.author}
                   publishedAt={article.publishedAt}
+                  source={article.source}
                 />
               </li>))}            
             </div>
