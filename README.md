@@ -22,6 +22,30 @@ Spotlight on the conflict happening in Palestine.
 
 URLs of at least three data sources that you will programmatically scrape (at least one must be a RESTful API) (be very sure about this):
 
+# Team Info
+
+- Git SHA: blank
+
+- Phase Leader: Jeremy Nguyen
+
+- Phase Leader Responsibilites: Guide the team and make sure tasks are being
+completed in a timely matter.
+
+
+| Team Member | Estimate Time | Actual Time |
+| ----- | --- | --- | 
+| Aryan Samal       | 10 hours | 12 hours |
+| Rohan Damani      |  8 hours | 10 hours |
+| Will Matherne     | 11 hours | 11 hours |
+| Kenny Nguyen      | 9 hours  | 10 hours |
+| Jeremy Nguyen     | 10 hours | 11 hours |
+
+# Website Link
+
+- blank
+
+# APIs Used
+
 - RESTful API: https://api.unhcr.org/docs/refugee-statistics.html?_gl=1*pjfjx4*_gcl_au*MjA3NTM3Mjgrup_ga_EVDQTJ4LMY*MTcyNzMwNDAxOS4xLjEuMTcyNzMwNDY5OS40MC4wLjA.
 
 - https://data.techforpalestine.org/
