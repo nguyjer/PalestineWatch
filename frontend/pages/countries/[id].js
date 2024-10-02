@@ -4,7 +4,7 @@ import Head from "next/head";
 import styles from "../../styles/ModelPage.module.css";
 import CountryDetails from '../../components/CountryDetails.js';
 import axios from 'axios';
-import idToCoaMap from './idToCoaMap.js';
+import idToCoaMap from '../../components/idToCoaMap.js';
 
 export default function CountryPage() {
   const router = useRouter();
