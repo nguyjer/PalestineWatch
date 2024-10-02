@@ -33,7 +33,7 @@ export default function SupportGroups() {
         <div style={{ display: "flex", flexWrap: "wrap" }}>
           {supportGroups.slice(0, 24).map((group, index) => (
             <SupportCard
-              key={index}
+              key={group.id}
               groupName={group.name}
               groupEmail={group.email}
               groupCity={group.city}
