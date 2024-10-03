@@ -120,7 +120,6 @@ export default function About() {
 			}
 
 			const issues = await response.json();
-			console.log(issues);
 			if (issues.length === 100) {
 				pn += 1;
 			} else {
