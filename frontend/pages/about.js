@@ -31,7 +31,8 @@ export default function About() {
       name: "Jeremy Nguyen",
       gitid: ["nguyjer"],
       photo: "/headshots/jn.png",
-      bio: "Jeremy bio",
+      bio: "Hi, my name is Jeremy Nguyen, and I am currently a junior at UT Austin studying computer science. I am interested in \
+            fashion, climbing, basketball, and modeling.",
       responsibilities:
         "Initial support group model setup, Nav bar, hosting on AWS",
       commits: 0,
@@ -42,8 +43,9 @@ export default function About() {
       name: "Kenny Nguyen",
       gitid: ["Kenny Nguyen"],
       photo: "/headshots/kn.png",
-      bio: "Kenny bio",
-      responsibilities: "Kenny responsibilities",
+      bio: "Hello World! My name is Kenny Nguyen, and I am a junior at UT Austin studying computer science. I have a variety of hobbies \
+            including playing volleyball, bouldering, and the occasional game of Hearthstone.",
+      responsibilities: "Helped with a little bit of everything. Worked a little on API implementation for countries page, and worked on AWS deployment.",
       commits: 0,
       issues: 0,
       utests: 0,
