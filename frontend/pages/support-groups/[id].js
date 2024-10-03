@@ -74,7 +74,7 @@ export default function SupportGroupPage() {
         <div>
           <h2>Explore More</h2>
           <ExploreCard
-            link={`/NewsPages/${randomArticle1}`}
+            link={`/news/${randomArticle1}`}
             type="News Article"
           />
           <ExploreCard link={`/countries/${randomArticle2}`} type="Country" />

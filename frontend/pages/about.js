@@ -52,8 +52,9 @@ export default function About() {
       name: "Rohan Damani",
       gitid: "rdamani1",
       photo: "/headshots/rd.png",
-      bio: "Rohan bio",
-      responsibilities: "Countries page & instances",
+      bio: "My name is Rohan Damani, and I'm a junior at UT Austin pursuing a degree in computer science and mathematics. I enjoy \
+            playing poker, tennis, and hanging out with friends.",
+      responsibilities: "Countries page & instances, Linking instances to other model instances",
       commits: 0,
       issues: 0,
       utests: 0,
