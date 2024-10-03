@@ -5,7 +5,7 @@ import Styles from './NewsCard.module.css';
 
 function NewsCard({articleId, title, description, imageUrl, author, publishedAt, source}) {
     return (
-        <Link href={`/NewsPages/${articleId}`} passHref className={Styles.removeUnderline}>
+        <Link href={`/news/${articleId}`} passHref className={Styles.removeUnderline}>
           <Card className={Styles.newsCard} style={{ cursor: 'pointer' }}>
             <Card.Title>{title}</Card.Title>
             <Card.Img className={Styles.newsImg} variant="top" src={imageUrl} />
