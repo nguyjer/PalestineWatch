@@ -12,6 +12,8 @@ const groupData = {
     state: "NY",
     zipCode: "10603",
     link: "https://adalahny.org/",
+    imageURL:
+      "https://images.squarespace-cdn.com/content/v1/6168ba7212c0a730b7d1b341/1634259315744-1AJ2CK53J61TVFCXC59K/Bye-bye+Leviev+December+2017.png?format=1500w",
   },
   2: {
     name: "Al-Awda PRRC",
@@ -20,14 +22,18 @@ const groupData = {
     state: "FL",
     zipCode: "33075",
     link: "https://al-awdapalestine.org/",
+    imageURL:
+      "https://al-awdapalestine.org/wp-content/uploads/2017/07/Al-AWDA-LARGE-WEB-LOGO.jpg",
   },
   3: {
     name: "Chicago Faith Coalition on Middle East Policy",
-    email: "",
+    email: "No Email Available",
     city: "Chicago",
     state: "IL",
     zipCode: "60605",
     link: "http://www.chicagofaithcoalition.org/",
+    imageURL:
+      "https://www.chicagofaithcoalition.org/images/KidsTearDownSignWall.jpg",
   },
 };
 
@@ -50,6 +56,11 @@ export default function SupportGroupPage() {
       </Head>
       <main className={styles.mainContent}>
         <h1>Details for {groupDetails.name}</h1>
+        <img
+          src={groupDetails.imageURL || "/placeholder-image.jpg"} // Use a placeholder if no image URL
+          alt={`${groupDetails.name} image`}
+          className={styles.supportImage}
+        />
         <p>Email: {groupDetails.email}</p>
         <p>City: {groupDetails.city}</p>
         <p>State: {groupDetails.state}</p>
@@ -63,13 +74,10 @@ export default function SupportGroupPage() {
         <div>
           <h2>Explore More</h2>
           <ExploreCard
-            link={`/NewsPages/${randomArticle1}`}
+            link={`/news/${randomArticle1}`}
             type="News Article"
           />
-          <ExploreCard
-            link={`/countries/${randomArticle2}`}
-            type="Country"
-          />
+          <ExploreCard link={`/countries/${randomArticle2}`} type="Country" />
         </div>
       </main>
     </div>

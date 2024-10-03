@@ -1,5 +1,5 @@
 run:
-	cd ./frontend && npm install && npm install react-bootstrap bootstrap && npm i bootstrap@5.3.3 && npm run dev
+	cd ./frontend && npm ci && npm run dev
 #add all then show status
 add:
 	git add -A
@@ -13,7 +13,7 @@ pull:
 #push to repo
 push:
 	git add .
-	git commit -m "Created MakeFile"
+	git commit -m "adjusted MakeFile"
 	git push
 	git status
 
@@ -23,4 +23,4 @@ docker:
 	cd ./frontend && docker run --rm -i -p 3000:3000 -t -v $$(pwd):/app nguyjer/palestine_watch
 
 build:
-	cd ./frontend && npm install && npm ci && npm run build
+	cd ./frontend && npm ci && npm run build

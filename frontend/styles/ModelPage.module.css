@@ -3,3 +3,9 @@
   flex-direction: column;
   margin-top: 20px;
 }
+.supportImage {
+    width: 50%;
+    height: 50%;
+    padding: 20px;
+    object-fit: cover;
+}
