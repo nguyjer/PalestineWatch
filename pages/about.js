@@ -19,20 +19,19 @@ export default function About() {
   const initMembers = [
     {
       name: "Aryan Samal",
-      gitid: "aryan.samal",
+      gitid: ["Aryan Samal"],
       photo: "/headshots/as.png",
-      bio: "My name is Aryan Samal, I am a junior CS student. I like kayaking, cliff jumping, and trying new food.",
-      responsibilities: "News page & instances, Postman documentation, technical report, conflict carousel",
+      bio: "Aryan bio",
+      responsibilities: "News page & instances",
       commits: 0,
       issues: 0,
       utests: 0,
     },
     {
       name: "Jeremy Nguyen",
-      gitid: "nguyjer",
+      gitid: ["nguyjer"],
       photo: "/headshots/jn.png",
-      bio: "Hi, my name is Jeremy Nguyen, and I am currently a junior at UT Austin studying computer science. I am interested in \
-            fashion, climbing, basketball, and modeling.",
+      bio: "Jeremy bio",
       responsibilities:
         "Initial support group model setup, Nav bar, hosting on AWS",
       commits: 0,
@@ -41,18 +40,17 @@ export default function About() {
     },
     {
       name: "Kenny Nguyen",
-      gitid: "kenken17621",
+      gitid: ["Kenny Nguyen"],
       photo: "/headshots/kn.png",
-      bio: "Hello World! My name is Kenny Nguyen, and I am a junior at UT Austin studying computer science. I have a variety of hobbies \
-            including playing volleyball, bouldering, and the occasional game of Hearthstone.",
-      responsibilities: "Helped with a little bit of everything. Worked a little on API implementation for countries page, and worked on AWS deployment.",
+      bio: "Kenny bio",
+      responsibilities: "Kenny responsibilities",
       commits: 0,
       issues: 0,
       utests: 0,
     },
     {
       name: "Rohan Damani",
-      gitid: "rdamani1",
+      gitid: ["Rohan Damani"],
       photo: "/headshots/rd.png",
       bio: "Rohan bio",
       responsibilities: "Countries page & instances",
@@ -62,7 +60,7 @@ export default function About() {
     },
     {
       name: "Will Matherne",
-      gitid: "willcmatherne",
+      gitid: ["Will Matherne", "wcm4284"],
       photo: "/headshots/wm.png",
       bio: "My name is Will Matherne, and I'm a junior computer science student. I like playing chess, soccer, and bouldering.",
       responsibilities: "About page",
@@ -74,21 +72,6 @@ export default function About() {
 
   const apiKey = "glpat-dFrzisSrHFEZuhewUGLK";
   const id = "61909583";
-
-  const getBranches = async () => {
-    const response = await fetch(
-      `https://gitlab.com/api/v4/projects/${id}/repository/branches`,
-      {
-        headers: {
-          "PRIVATE-TOKEN": `${apiKey}`,
-        },
-      }
-    ).catch((error) => {
-      console.error(`Error fetching branches:`, error);
-    });
-
-    return await response.json();
-  };
 
   const [members, updateMembers] = useState(initMembers);
   const [stats, setStats] = useState({
@@ -118,69 +101,84 @@ export default function About() {
 
   const getIssues = async (member) => {
     try {
-      const response = await fetch(
-        `https://gitlab.com/api/v4/projects/${id}/issues?author_username=${member.gitid}`,
-        {
-          headers: {
-            "PRIVATE-TOKEN": `${apiKey}`,
-          },
-        }
-      );
+		let totalIssues = 0;
+		let more = true;
+		let pn = 1;
 
-      if (!response.ok) {
-        member.issues = "Error fetching issues";
-        throw new Error(`Error: ${response.status} ${response.statusText}`);
-      }
+		while (more) {
 
-      const issues = await response.json();
-      return issues.length;
+			const response = await fetch(`https://gitlab.com/api/v4/projects/${id}/issues?per_page=100&page=${pn}`,	{
+					headers: {
+						"PRIVATE-TOKEN": `${apiKey}`,
+					},
+				}
+			);
+
+			if (!response.ok) {
+				member.issues = "Error fetching issues";
+				throw new Error(`Error: ${response.status} ${response.statusText}`);
+			}
+
+			const issues = await response.json();
+			console.log(issues);
+			if (issues.length === 100) {
+				pn += 1;
+			} else {
+				more = false;
+			}
+			for (let issue of issues) {
+				if (issue['author']['name'] === member.gitid[0]) {
+					totalIssues += 1;
+				} else {
+					console.log(issue['author']['name']);
+				}
+			}
+		}
+		return totalIssues;
     } catch (error) {
       console.error(`Error fetching issues for ${member.name}:`, error);
       return "Error fetching issues";
     }
   };
 
-  /* 		 this will be a little funky
-	    the way gitlab's api works, we have to 
-		get each branch, and then search each
-		branch for commits by each member.
-		sum those up, and we should have the
-		total number of commits.	   		   */
   const getCommits = async (member) => {
     try {
-      const branches = await getBranches();
+		let totalCommits = 0;
+        for (let gid of member.gitid) {
+            let more = true;
+            let pn = 1;
 
-      let totalCommits = 0;
-      for (let branch of branches) {
-        const response = await fetch(
-          `https://gitlab.com/api/v4/projects/${id}/repository/commits?author=${member.gitid}&ref_name=${branch.name}`,
-          {
-            headers: {
-              "PRIVATE-TOKEN": `${apiKey}`,
-            },
-          }
-        );
+            while (more) {
+      				const response = await fetch(
+				`https://gitlab.com/api/v4/projects/${id}/repository/commits?per_page=100&page=${pn}&author=${gid}&all=true`,
+				{
+					headers: {
+						"PRIVATE-TOKEN": `${apiKey}`,
+					},
+				}
+				);
 
-        if (!response.ok) {
-          console.error(`Error: ${response.status} ${response.statusText}`);
-        }
+				if (!response.ok) {
+					console.error(`Error: ${response.status} ${response.statusText}`);
+					return totalCommits;
+				}
 
-        const data = await response.json();
-        totalCommits += data.length;
-        console.log(member.name, branch.name);
-        console.log(data);
-      }
-
-      return totalCommits;
+				const data = await response.json();
+				totalCommits += data.length;
+				if (data.length === 100) {
+					pn += 1;
+				} else {
+					more = false;
+				}
+			}
+		}
+     	return totalCommits;
     } catch (error) {
-      console.error(
-        `Error fetching issues for ${member.name} on ${branch.name}`
-      );
+      console.error("Error fetching issues");
       return totalCommits;
     }
   };
 
-  // TODO: update this to use useState, will have to use .map
   const updateMemberIssues = async () => {
     const updatedMembers = await Promise.all(
       members.map(async (member) => {
