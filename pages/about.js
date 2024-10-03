@@ -284,7 +284,7 @@ export default function About() {
         </a>
         <p />
         <a
-          href="https://group-06.postman.co/"
+          href="https://documenter.getpostman.com/view/38731121/2sAXxLBDwn"
           target="_blank"
           rel="noopener noreferrer"
         >
