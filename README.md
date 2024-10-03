@@ -22,7 +22,7 @@ URLs of at least three data sources that you will programmatically scrape (at le
 
 # Team Info
 
-- Git SHA: blank
+- Git SHA: 37425328f05eb032a0d4a2c2b6c2260c237f727e
 
 - Phase Leader: Jeremy Nguyen
 
@@ -41,6 +41,11 @@ completed in a timely matter.
 # Website Link
 
 - https://www.palestinewatch.me/
+
+
+# API Documentation Link
+
+- https://documenter.getpostman.com/view/38731121/2sAXxLBDwn
 
 # APIs Used
 
