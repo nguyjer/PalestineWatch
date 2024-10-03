@@ -21,8 +21,9 @@ export default function About() {
       name: "Aryan Samal",
       gitid: ["Aryan Samal"],
       photo: "/headshots/as.png",
-      bio: "Aryan bio",
-      responsibilities: "News page & instances",
+      bio: "My name is Aryan Samal, I am a junior CS student. I like kayaking, cliff jumping, and trying new food.",
+      responsibilities:
+        "News page & instances, Postman documentation, technical report, conflict carousel",
       commits: 0,
       issues: 0,
       utests: 0,
@@ -31,9 +32,10 @@ export default function About() {
       name: "Jeremy Nguyen",
       gitid: ["nguyjer"],
       photo: "/headshots/jn.png",
-      bio: "Jeremy bio",
+      bio: "Hi, my name is Jeremy Nguyen, and I am currently a junior at UT Austin studying computer science. I am interested in \
+            fashion, climbing, basketball, and modeling.",
       responsibilities:
-        "Initial support group model setup, Nav bar, hosting on AWS",
+        "Support groups model & instances, Nav bar, hosting on AWS and connecting custom domain, and some style",
       commits: 0,
       issues: 0,
       utests: 0,
@@ -42,8 +44,10 @@ export default function About() {
       name: "Kenny Nguyen",
       gitid: ["Kenny Nguyen"],
       photo: "/headshots/kn.png",
-      bio: "Kenny bio",
-      responsibilities: "Kenny responsibilities",
+      bio: "Hello World! My name is Kenny Nguyen, and I am a junior at UT Austin studying computer science. I have a variety of hobbies \
+            including playing volleyball, bouldering, and the occasional game of Hearthstone.",
+      responsibilities:
+        "Worked on API implementation for countries page, and worked on AWS deployment.",
       commits: 0,
       issues: 0,
       utests: 0,
@@ -52,8 +56,10 @@ export default function About() {
       name: "Rohan Damani",
       gitid: ["Rohan Damani"],
       photo: "/headshots/rd.png",
-      bio: "Rohan bio",
-      responsibilities: "Countries page & instances",
+      bio: "My name is Rohan Damani, and I'm a junior at UT Austin pursuing a degree in computer science and mathematics. I enjoy \
+            playing poker, tennis, and hanging out with friends.",
+      responsibilities:
+        "Countries page & instances, Linking instances to other model instances",
       commits: 0,
       issues: 0,
       utests: 0,
@@ -101,40 +107,41 @@ export default function About() {
 
   const getIssues = async (member) => {
     try {
-		let totalIssues = 0;
-		let more = true;
-		let pn = 1;
+      let totalIssues = 0;
+      let more = true;
+      let pn = 1;
 
-		while (more) {
+      while (more) {
+        const response = await fetch(
+          `https://gitlab.com/api/v4/projects/${id}/issues?per_page=100&page=${pn}`,
+          {
+            headers: {
+              "PRIVATE-TOKEN": `${apiKey}`,
+            },
+          }
+        );
 
-			const response = await fetch(`https://gitlab.com/api/v4/projects/${id}/issues?per_page=100&page=${pn}`,	{
-					headers: {
-						"PRIVATE-TOKEN": `${apiKey}`,
-					},
-				}
-			);
+        if (!response.ok) {
+          member.issues = "Error fetching issues";
+          throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
 
-			if (!response.ok) {
-				member.issues = "Error fetching issues";
-				throw new Error(`Error: ${response.status} ${response.statusText}`);
-			}
-
-			const issues = await response.json();
-			console.log(issues);
-			if (issues.length === 100) {
-				pn += 1;
-			} else {
-				more = false;
-			}
-			for (let issue of issues) {
-				if (issue['author']['name'] === member.gitid[0]) {
-					totalIssues += 1;
-				} else {
-					console.log(issue['author']['name']);
-				}
-			}
-		}
-		return totalIssues;
+        const issues = await response.json();
+        console.log(issues);
+        if (issues.length === 100) {
+          pn += 1;
+        } else {
+          more = false;
+        }
+        for (let issue of issues) {
+          if (issue["author"]["name"] === member.gitid[0]) {
+            totalIssues += 1;
+          } else {
+            console.log(issue["author"]["name"]);
+          }
+        }
+      }
+      return totalIssues;
     } catch (error) {
       console.error(`Error fetching issues for ${member.name}:`, error);
       return "Error fetching issues";
@@ -143,36 +150,36 @@ export default function About() {
 
   const getCommits = async (member) => {
     try {
-		let totalCommits = 0;
-        for (let gid of member.gitid) {
-            let more = true;
-            let pn = 1;
+      let totalCommits = 0;
+      for (let gid of member.gitid) {
+        let more = true;
+        let pn = 1;
 
-            while (more) {
-      				const response = await fetch(
-				`https://gitlab.com/api/v4/projects/${id}/repository/commits?per_page=100&page=${pn}&author=${gid}&all=true`,
-				{
-					headers: {
-						"PRIVATE-TOKEN": `${apiKey}`,
-					},
-				}
-				);
+        while (more) {
+          const response = await fetch(
+            `https://gitlab.com/api/v4/projects/${id}/repository/commits?per_page=100&page=${pn}&author=${gid}&all=true`,
+            {
+              headers: {
+                "PRIVATE-TOKEN": `${apiKey}`,
+              },
+            }
+          );
 
-				if (!response.ok) {
-					console.error(`Error: ${response.status} ${response.statusText}`);
-					return totalCommits;
-				}
+          if (!response.ok) {
+            console.error(`Error: ${response.status} ${response.statusText}`);
+            return totalCommits;
+          }
 
-				const data = await response.json();
-				totalCommits += data.length;
-				if (data.length === 100) {
-					pn += 1;
-				} else {
-					more = false;
-				}
-			}
-		}
-     	return totalCommits;
+          const data = await response.json();
+          totalCommits += data.length;
+          if (data.length === 100) {
+            pn += 1;
+          } else {
+            more = false;
+          }
+        }
+      }
+      return totalCommits;
     } catch (error) {
       console.error("Error fetching issues");
       return totalCommits;
@@ -214,17 +221,20 @@ export default function About() {
         </p>
         <h2> Important Link + Statistics </h2>
         <p>
-        https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict <br></br>
-        https://www.un.org/unispal/history/ <br></br>
-        https://www.britannica.com/place/Palestine <br></br>
-        Palestine Causality Toll: 42,385 Palestinians Killed
+          https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict{" "}
+          <br></br>
+          https://www.un.org/unispal/history/ <br></br>
+          https://www.britannica.com/place/Palestine <br></br>
+          Palestine Causality Toll: 42,385 Palestinians Killed
         </p>
-        <div className="container">
-          <h2>Members</h2>
+
+        <h2>Members</h2>
+        <div className="row justify-content-center">
           {members.map((member) => (
             <MemberCard key={member.name} member={member} />
           ))}
         </div>
+
         <TotalStats key={stats.issues} stats={stats} />
         <div className="datahere">
           <h2>Data</h2>
