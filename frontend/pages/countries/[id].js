@@ -5,6 +5,7 @@ import styles from "../../styles/ModelPage.module.css";
 import CountryDetails from '../../components/CountryDetails.js';
 import axios from 'axios';
 import idToCoaMap from '../../components/idToCoaMap.js';
+import ExploreCard from '../../components/ExploreCard.js';
 
 export default function CountryPage() {
   const router = useRouter();
@@ -12,6 +13,8 @@ export default function CountryPage() {
   const [countryData, setCountryData] = useState([]);
   const [countryDetails, setCountryDetails] = useState({});
   const coa = idToCoaMap[id];
+  const randomArticle1 = Math.floor(Math.random() * 3) + 1;
+  const randomArticle2 = Math.floor(Math.random() * 3) + 1;
 
   useEffect(() => {
     if (!coa) return;
@@ -80,6 +83,17 @@ export default function CountryPage() {
           countryData={countryData}
           countryDetails={countryDetails}
         />
+        <div>
+          <h2>Explore More</h2>
+          <ExploreCard
+            link={`/NewsPages/${randomArticle1}`}
+            type="News Article"
+          />
+          <ExploreCard
+            link={`/support-groups/${randomArticle2}`}
+            type="Support Group"
+          />
+        </div>
       </main>
     </div>
   );
