@@ -22,7 +22,7 @@ export default function About() {
       gitid: "aryan.samal",
       photo: "/headshots/as.png",
       bio: "My name is Aryan Samal, I am a junior CS student. I like kayaking, cliff jumping, and trying new food.",
-      responsibilities: "News page & instances",
+      responsibilities: "News page & instances, Postman documentation, technical report, conflict carousel",
       commits: 0,
       issues: 0,
       utests: 0,
