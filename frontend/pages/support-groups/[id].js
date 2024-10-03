@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import styles from "../../styles/ModelPage.module.css";
 import Head from "next/head";
 import Link from "next/link";
+import ExploreCard from '../../components/ExploreCard.js';
 
 const groupData = {
   1: {
@@ -35,6 +36,8 @@ export default function SupportGroupPage() {
   const { id } = router.query;
 
   const groupDetails = groupData[id];
+  const randomArticle1 = Math.floor(Math.random() * 3) + 1;
+  const randomArticle2 = Math.floor(Math.random() * 3) + 1;
 
   if (!groupDetails) {
     return <p>Loading...</p>;
@@ -56,6 +59,18 @@ export default function SupportGroupPage() {
             <u>{groupDetails.link}</u>
           </Link>
         </p>
+
+        <div>
+          <h2>Explore More</h2>
+          <ExploreCard
+            link={`/NewsPages/${randomArticle1}`}
+            type="News Article"
+          />
+          <ExploreCard
+            link={`/countries/${randomArticle2}`}
+            type="Country"
+          />
+        </div>
       </main>
     </div>
   );
