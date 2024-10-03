@@ -40,7 +40,7 @@ completed in a timely matter.
 
 # Website Link
 
-- [](palestinewatch.me)
+- https://www.palestinewatch.me/
 
 # APIs Used
 
