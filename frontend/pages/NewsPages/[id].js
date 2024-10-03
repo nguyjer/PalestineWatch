@@ -3,11 +3,15 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 import styles from './id.module.css';
+import ExploreCard from '../../components/ExploreCard.js';
 
 function ArticlePage() {
   const router = useRouter();
   const { id } = router.query; // Retrieve the dynamic article ID from the URL
   const [article, setArticle] = useState(null);
+  const randomSupport = Math.floor(Math.random() * 3) + 1;
+  const randomCountry = Math.floor(Math.random() * 3) + 1;
+
 
   useEffect(() => {
     if (!id) return;
@@ -74,6 +78,17 @@ function ArticlePage() {
             <p>Source: {article.source}</p>
             <p>Published on: {article.publishedAt}</p>
     </div>
+	<div>
+		<h2>Explore More</h2>
+		<ExploreCard
+            link={`/countries/${randomCountry}`}
+            type="Country"
+          />
+          <ExploreCard
+            link={`/support-groups/${randomSupport}`}
+            type="Support Group"
+          />
+	</div>
     </main>
   );
 } 
