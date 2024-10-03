@@ -120,6 +120,7 @@ export default function About() {
 			}
 
 			const issues = await response.json();
+			console.log(issues);
 			if (issues.length === 100) {
 				pn += 1;
 			} else {
@@ -279,7 +280,7 @@ export default function About() {
         </a>
         <p />
         <a
-          href="https://group-06.postman.co/"
+          href="https://documenter.getpostman.com/view/38731121/2sAXxLBDwn"
           target="_blank"
           rel="noopener noreferrer"
         >
