@@ -1,7 +1,5 @@
 # Group 06 Team Members:
 
-
-
 - Will Matherne
 
 - Rohan Damani
@@ -42,7 +40,7 @@ completed in a timely matter.
 
 # Website Link
 
-- blank
+- [](palestinewatch.me)
 
 # APIs Used
 
@@ -51,7 +49,6 @@ completed in a timely matter.
 - https://data.techforpalestine.org/
 
 - https://newsdata.io/news-sources/Palestine-news-api
-
 
 
 # The three models/Instance Estimation:
