@@ -101,40 +101,41 @@ export default function About() {
 
   const getIssues = async (member) => {
     try {
-		let totalIssues = 0;
-		let more = true;
-		let pn = 1;
+      let totalIssues = 0;
+      let more = true;
+      let pn = 1;
 
-		while (more) {
+      while (more) {
+        const response = await fetch(
+          `https://gitlab.com/api/v4/projects/${id}/issues?per_page=100&page=${pn}`,
+          {
+            headers: {
+              "PRIVATE-TOKEN": `${apiKey}`,
+            },
+          }
+        );
 
-			const response = await fetch(`https://gitlab.com/api/v4/projects/${id}/issues?per_page=100&page=${pn}`,	{
-					headers: {
-						"PRIVATE-TOKEN": `${apiKey}`,
-					},
-				}
-			);
+        if (!response.ok) {
+          member.issues = "Error fetching issues";
+          throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
 
-			if (!response.ok) {
-				member.issues = "Error fetching issues";
-				throw new Error(`Error: ${response.status} ${response.statusText}`);
-			}
-
-			const issues = await response.json();
-			console.log(issues);
-			if (issues.length === 100) {
-				pn += 1;
-			} else {
-				more = false;
-			}
-			for (let issue of issues) {
-				if (issue['author']['name'] === member.gitid[0]) {
-					totalIssues += 1;
-				} else {
-					console.log(issue['author']['name']);
-				}
-			}
-		}
-		return totalIssues;
+        const issues = await response.json();
+        console.log(issues);
+        if (issues.length === 100) {
+          pn += 1;
+        } else {
+          more = false;
+        }
+        for (let issue of issues) {
+          if (issue["author"]["name"] === member.gitid[0]) {
+            totalIssues += 1;
+          } else {
+            console.log(issue["author"]["name"]);
+          }
+        }
+      }
+      return totalIssues;
     } catch (error) {
       console.error(`Error fetching issues for ${member.name}:`, error);
       return "Error fetching issues";
@@ -143,36 +144,36 @@ export default function About() {
 
   const getCommits = async (member) => {
     try {
-		let totalCommits = 0;
-        for (let gid of member.gitid) {
-            let more = true;
-            let pn = 1;
+      let totalCommits = 0;
+      for (let gid of member.gitid) {
+        let more = true;
+        let pn = 1;
 
-            while (more) {
-      				const response = await fetch(
-				`https://gitlab.com/api/v4/projects/${id}/repository/commits?per_page=100&page=${pn}&author=${gid}&all=true`,
-				{
-					headers: {
-						"PRIVATE-TOKEN": `${apiKey}`,
-					},
-				}
-				);
+        while (more) {
+          const response = await fetch(
+            `https://gitlab.com/api/v4/projects/${id}/repository/commits?per_page=100&page=${pn}&author=${gid}&all=true`,
+            {
+              headers: {
+                "PRIVATE-TOKEN": `${apiKey}`,
+              },
+            }
+          );
 
-				if (!response.ok) {
-					console.error(`Error: ${response.status} ${response.statusText}`);
-					return totalCommits;
-				}
+          if (!response.ok) {
+            console.error(`Error: ${response.status} ${response.statusText}`);
+            return totalCommits;
+          }
 
-				const data = await response.json();
-				totalCommits += data.length;
-				if (data.length === 100) {
-					pn += 1;
-				} else {
-					more = false;
-				}
-			}
-		}
-     	return totalCommits;
+          const data = await response.json();
+          totalCommits += data.length;
+          if (data.length === 100) {
+            pn += 1;
+          } else {
+            more = false;
+          }
+        }
+      }
+      return totalCommits;
     } catch (error) {
       console.error("Error fetching issues");
       return totalCommits;
