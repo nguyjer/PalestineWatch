@@ -9,10 +9,16 @@ export default function SupportCard({
   groupState,
   groupZipCode,
   groupLink,
+  groupImageURL,
 }) {
   return (
     <div className={styles.supportCard}>
       <h2>{groupName}</h2>
+      <img
+        src={groupImageURL || "/placeholder-image.jpg"} // Use a placeholder if no image URL
+        alt={`${groupName} image`}
+        className={styles.supportCardImage}
+      />
       <p>Email: {groupEmail || "Loading..."}</p>
       <p>City: {groupCity || "Missing Data"}</p>
       <p>State: {groupState || "Missing Data"}</p>
