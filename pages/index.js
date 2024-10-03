@@ -90,10 +90,6 @@ export default function App() {
         </div>
       </main>
       <div className={styles.infoSection}>
-        <h1>Palestine Causality Toll:</h1>
-        <p style={{ fontSize: "30px", color: "black" }}>
-          <strong>42,385 Palestinians Killed</strong>
-        </p>
         <h1>Info:</h1>
         <p style={{ fontSize: "18px", color: "black" }}>
           <strong>

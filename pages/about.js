@@ -212,6 +212,13 @@ export default function About() {
           also be able to find information about other countries that are
           involved in the conflict.
         </p>
+        <h2> Important Link + Statistics </h2>
+        <p>
+        https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict <br></br>
+        https://www.un.org/unispal/history/ <br></br>
+        https://www.britannica.com/place/Palestine <br></br>
+        Palestine Causality Toll: 42,385 Palestinians Killed
+        </p>
         <div className="container">
           <h2>Members</h2>
           {members.map((member) => (
