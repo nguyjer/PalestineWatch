@@ -1,16 +1,27 @@
 #base image
 FROM node:20.17-alpine
 
-WORKDIR /frontend
+# Set working directory inside the container
+WORKDIR /app
 
-# Installing dependencies
-COPY package.json /frontend
-RUN npm install
+# Install a specific version of npm
+RUN npm install -g npm@7.20.0
 
-# Copying all the files in our project
-COPY . .
+# Copy package.json and package-lock.json to the container
+COPY package.json package-lock.json /app/
 
+# Install dependencies using npm
+RUN npm install --prefer-offline --no-audit
+
+# Copy the rest of the application code
+COPY . /app
+
+# Build the Next.js project
+RUN npm run build
+
+# Expose the default Next.js port
 EXPOSE 3000
+
 
 # Starting our application
 CMD ["npm", "run","dev"]

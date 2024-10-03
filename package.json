@@ -6,7 +6,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "aws-amplify": "^6.4.0",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "cheerio": "^1.0.0",
