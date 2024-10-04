@@ -22,7 +22,7 @@ URLs of at least three data sources that you will programmatically scrape (at le
 
 # Team Info
 
-- Git SHA: 41de260f69b4d33482e56612b2b504f926cf655b
+- Git SHA: 74bf5ad3e8d07a999d9d318d42353c29c5b0119c
 
 - Phase Leader: Jeremy Nguyen
 
