@@ -1,5 +1,5 @@
 run:
-cd ./frontend
+	cd ./frontend
 	npm ci && npm run dev
 #add all then show status
 add:
