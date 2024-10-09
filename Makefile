@@ -1,6 +1,6 @@
 run:
-	cd ./frontend
-	npm ci && npm run dev
+	cd ./frontend && npm ci && npm run dev
+
 #add all then show status
 add:
 	git add -A
@@ -14,7 +14,7 @@ pull:
 #push to repo
 push:
 	git add .
-	git commit -m "adjusted MakeFile"
+	git commit -m "added backend directory"
 	git push
 	git status
 
@@ -24,5 +24,4 @@ docker:
 	docker run --rm -i -p 3000:3000 -t -v $$(pwd):/app nguyjer/palestine_watch
 
 build:
-	cd ./frontend
-	npm ci && npm run build
+	npm ci && npm run dev && npm ci && npm run build
