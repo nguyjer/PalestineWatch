@@ -7,31 +7,23 @@ import time
 
 def fetch_groups():
     try:
-                # Set up Selenium options (headless if you don't want a browser window to appear)
         options = Options()
-        options.headless = True  # Set to False if you want to see the browser window
-        options.add_argument('--disable-gpu')  # Recommended for headless
+        options.headless = True
+        options.add_argument('--disable-gpu')  
 
-        # Set up the WebDriver
         service = Service(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service, options=options)
 
-        # Open the webpage
         driver.get("https://uscpr.org/connect-with-a-local-group/")
 
-        # Let the page load fully
-        time.sleep(3)  # You may need to adjust the sleep time based on your internet speed
+        time.sleep(3) 
 
-        # Get the fully rendered HTML source
         html = driver.page_source
 
-        # Close the browser
         driver.quit()
 
-        # Parse the HTML with BeautifulSoup
         soup = BeautifulSoup(html, 'html.parser')
 
-        # Scrape the table data as before
         groups = []
         rows = soup.select('.row-hover tr')
         for index, row in enumerate(rows):
@@ -41,7 +33,27 @@ def fetch_groups():
             group_state = row.select_one('.column-5').get_text(strip=True) if row.select_one('.column-5') else 'Missing Data'
             group_zip_code = row.select_one('.column-6').get_text(strip=True) if row.select_one('.column-6') else 'Missing Data'
             group_link = row.select_one('.column-3').get_text(strip=True) if row.select_one('.column-3') else 'Missing Data'
+            group_image = 'No Image Found'
 
+            if group_link != 'Missing Data' and index < 5:
+                try:
+                    driver = webdriver.Chrome(service=service, options=options)
+                    driver.get(group_link)
+
+                    time.sleep(3) 
+
+                    group_html = driver.page_source
+                    driver.quit()
+
+                    group_soup = BeautifulSoup(group_html, 'html.parser')
+
+                    image_tag = group_soup.find('img')
+                    if image_tag and 'src' in image_tag.attrs:
+                        group_image = image_tag['src']
+
+                except Exception as e:
+                    print(f"Error fetching image for {group_name}: {str(e)}")
+                    
             groups.append({
                 'id': index,
                 'name': group_name,
@@ -50,6 +62,7 @@ def fetch_groups():
                 'state': group_state,
                 'zipCode': group_zip_code,
                 'link': group_link,
+                'urlImage': group_image
             })
 
         return groups
