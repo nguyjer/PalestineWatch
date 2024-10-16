@@ -1,3 +1,6 @@
+// components/NavBar.js
+import React from "react";
+
 export default function NavBar() {
   return (
     <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
