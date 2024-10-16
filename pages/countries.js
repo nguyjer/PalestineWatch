@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import Head from "next/head";
-import styles from "../styles/ModelPage.module.css";
 import CountryCard from '../components/CountryCard';
 import axios from 'axios';
+import "bootstrap/dist/css/bootstrap.min.css";
+
+const ITEMS_PER_PAGE = 2; // Number of countries per page
 
 export default function Countries() {
   const [countries, setCountries] = useState([]);
   const [countryDetails, setCountryDetails] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const opts = {
@@ -40,7 +43,7 @@ export default function Countries() {
               ...country,
               id: idCounter
             });
-            idCounter += 1
+            idCounter += 1;
           }
         });
         setCountries(uniqueCountries);
@@ -76,13 +79,34 @@ export default function Countries() {
     setCountryDetails(details);
   };
 
+  // Pagination logic
+  const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
+  const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
+  const currentCountries = countries.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(countries.length / ITEMS_PER_PAGE);
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div>
       <Head>
         <title>Palestine Watch</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.mainContent}>
+      <main>
         <h1>Countries</h1>
         <br></br>
 
@@ -103,27 +127,65 @@ export default function Countries() {
         <br></br>
         <p>&emsp;Countries of asylum that have taken refugees in the conflict include, but are not limited to:</p>
         <div>
-          {
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-              {countries.map((country, index) => {
-                const coaIso = country.coa_iso;
-                const details = countryDetails[coaIso] || {};
-                const id = country.id;
+          <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+            {currentCountries.map((country, index) => {
+              const coaIso = country.coa_iso;
+              const details = countryDetails[coaIso] || {};
+              const id = country.id;
 
-                return (
-                  <CountryCard
-                    id={id}
-                    country={country.coa_name}
-                    flag={details.flag}
-                    capital={details.capital}
-                    population={details.population}
-                    region={details.region}
-                    subregion={details.subregion}
-                  />
-                );
-              })}
-            </div>
-          }
+              return (
+                <CountryCard
+                  key={id}
+                  id={id}
+                  country={country.coa_name}
+                  flag={details.flag}
+                  capital={details.capital}
+                  population={details.population}
+                  region={details.region}
+                  subregion={details.subregion}
+                />
+              );
+            })}
+          </div>
+
+          {/* Pagination Controls */}
+          <nav aria-label="Page navigation">
+            <ul className="pagination justify-content-center mt-4">
+              <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+                <button
+                  className="page-link"
+                  onClick={handlePrevPage}
+                  disabled={currentPage === 1}
+                >
+                  Previous
+                </button>
+              </li>
+
+              {[...Array(totalPages)].map((_, index) => (
+                <li
+                  key={index}
+                  className={`page-item ${currentPage === index + 1 ? "active" : ""}`}
+                >
+                  <button
+                    className="page-link"
+                    onClick={() => paginate(index + 1)}
+                  >
+                    {index + 1}
+                  </button>
+                </li>
+              ))}
+
+              <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+                <button
+                  className="page-link"
+                  onClick={handleNextPage}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                </button>
+              </li>
+            </ul>
+          </nav>
         </div>
       </main>
     </div>

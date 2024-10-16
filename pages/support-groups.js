@@ -1,14 +1,17 @@
+//import styles from "../styles/ModelPage.module.css";
+//import axios from "axios";
 import Head from "next/head";
-import styles from "../styles/ModelPage.module.css";
-// import axios from "axios";
 import { useEffect, useState } from "react";
 import SupportCard from "../components/SupportGroupCard";
+import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is installed
 
 export default function SupportGroups() {
   const [supportGroups, setSupportGroups] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const groupSize = 3; // Number of groups per page
 
   useEffect(() => {
-    //hard code three groups
+    // Hard code groups
     setSupportGroups([
       {
         id: 1,
@@ -43,20 +46,65 @@ export default function SupportGroups() {
         urlImage:
           "https://www.chicagofaithcoalition.org/images/KidsTearDownSignWall.jpg",
       },
+      {
+        id: 4,
+        name: "Palestine Legal",
+        email: "info@palestinelegal.org",
+        city: "Chicago",
+        state: "IL",
+        zipCode: "60613",
+        link: "https://palestinelegal.org/",
+        urlImage:
+          "https://palestinelegal.org/images/palestine-legal-logo.png",
+      },
+      {
+        id: 5,
+        name: "US Campaign for Palestinian Rights",
+        email: "info@uscpr.org",
+        city: "Washington",
+        state: "DC",
+        zipCode: "20036",
+        link: "https://uscpr.org/",
+        urlImage:
+          "https://uscpr.org/wp-content/uploads/2017/08/cropped-uscpr-logo.png",
+      },
+      {
+        id: 6,
+        name: "American Muslims for Palestine",
+        email: "info@ampalestine.org",
+        city: "Bridgeview",
+        state: "IL",
+        zipCode: "60455",
+        link: "https://www.ampalestine.org/",
+        urlImage:
+          "https://www.ampalestine.org/sites/default/files/AMP-logo.png",
+      },
+      // Add more groups if needed
     ]);
-    // fetchGroups();
   }, []);
 
-  // const fetchGroups = async () => {
-  //   try {
-  //     console.log("Fetching groups from API");
-  //     const response = await axios.get("/api/groups");
-  //     console.log("Groups fetched: ", response.data);
-  //     setSupportGroups(response.data);
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   }
-  // };
+  // Dynamically calculate total number of pages
+  const totalPages = Math.ceil(supportGroups.length / groupSize);
+
+  // Get the current page's support groups
+  const currentGroups = supportGroups.slice(
+    (currentPage - 1) * groupSize,
+    currentPage * groupSize
+  );
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <div>
@@ -64,10 +112,10 @@ export default function SupportGroups() {
         <title>Palestine Watch</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.mainContent}>
+      <main>
         <h1>Support Groups in the U.S.</h1>
         <div style={{ display: "flex", flexWrap: "wrap" }}>
-          {supportGroups.map((group, index) => (
+          {currentGroups.map((group) => (
             <SupportCard
               key={group.id}
               id={group.id}
@@ -81,6 +129,45 @@ export default function SupportGroups() {
             />
           ))}
         </div>
+
+        {/* Pagination */}
+        <nav aria-label="Page navigation">
+          <ul className="pagination justify-content-center">
+            <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+              <button
+                className="page-link"
+                onClick={handlePrevPage}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </button>
+            </li>
+
+            {[...Array(totalPages)].map((_, index) => (
+              <li
+                key={index}
+                className={`page-item ${currentPage === index + 1 ? "active" : ""}`}
+              >
+                <button
+                  className="page-link"
+                  onClick={() => paginate(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              </li>
+            ))}
+
+            <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+              <button
+                className="page-link"
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </button>
+            </li>
+          </ul>
+        </nav>
       </main>
     </div>
   );
