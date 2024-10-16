@@ -5,6 +5,7 @@ export default function NavBar() {
   return (
     <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
+        {/* Keep PalestineWatch aligned to the left */}
         <a className="navbar-brand" href="/">
           PalestineWatch
         </a>
@@ -20,17 +21,18 @@ export default function NavBar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div className="navbar-nav">
-            <a className="nav-link" aria-current="page" href="/about">
+          {/* Shift all links to the right */}
+          <div className="navbar-nav ms-auto">
+            <a className="nav-link me-4" aria-current="page" href="/about">
               About
             </a>
-            <a className="nav-link" href="/news">
+            <a className="nav-link me-4" href="/news">
               News
             </a>
-            <a className="nav-link" href="/support-groups">
+            <a className="nav-link me-4" href="/support-groups">
               Support Groups
             </a>
-            <a className="nav-link" href="/countries">
+            <a className="nav-link me-4" href="/countries">
               Countries
             </a>
           </div>
