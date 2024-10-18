@@ -1,5 +1,5 @@
 import NavBar from "../components/NavBar";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/global.css";
 import { useEffect } from "react";
 import Footer from "../components/footer";
@@ -9,11 +9,13 @@ function MyApp({ Component, pageProps }) {
     // Dynamically load Bootstrap JS on client-side only
     import("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
-  
+
   return (
     <>
       <NavBar />
-      <Component {...pageProps} />
+      <main>
+        <Component {...pageProps} />
+      </main>
       <Footer />
     </>
   );
