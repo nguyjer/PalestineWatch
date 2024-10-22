@@ -2,7 +2,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import Link from "next/link";
-import styles from './id.module.css';
 import ExploreCard from '../../components/ExploreCard.js';
 
 function ArticlePage() {
@@ -70,10 +69,10 @@ function ArticlePage() {
   if (!article) return <p>Loading...</p>;
 
   return (
-    <main className={styles.mainContent}>
-    <div className={styles.ArticleTitle}><h1>{article.title}</h1></div>
-    <div className={styles.ArticlePage}>
-        <div ><img className={styles.ArticleImage} src={article.urlToImage} alt="Article Image" />        </div>
+    <main>
+    <div><h1>{article.title}</h1></div>
+    <div>
+        <div ><img src={article.urlToImage} alt="Article Image" />        </div>
             <p>{removeBracketedText(article.content)}<a href={article.url}>Read More</a></p>
             <p>Source: {article.source}</p>
             <p>Published on: {article.publishedAt}</p>

@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import styles from "../../styles/ModelPage.module.css";
 import Head from "next/head";
 import Link from "next/link";
 import ExploreCard from '../../components/ExploreCard.js';
@@ -54,12 +53,11 @@ export default function SupportGroupPage() {
       <Head>
         <title>{groupDetails.name} Details</title>
       </Head>
-      <main className={styles.mainContent}>
+      <main>
         <h1>Details for {groupDetails.name}</h1>
         <img
           src={groupDetails.imageURL || "/placeholder-image.jpg"} // Use a placeholder if no image URL
           alt={`${groupDetails.name} image`}
-          className={styles.supportImage}
         />
         <p>Email: {groupDetails.email}</p>
         <p>City: {groupDetails.city}</p>
