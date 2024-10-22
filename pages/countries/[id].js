@@ -76,8 +76,6 @@ export default function CountryPage() {
         <title>{coa} Details</title>
       </Head>
       <main>
-        <h1>Details for {coa}</h1>
-
         <CountryDetails
           countryData={countryData}
           countryDetails={countryDetails}

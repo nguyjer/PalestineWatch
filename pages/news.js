@@ -77,8 +77,13 @@ export default function About() {
         <title>Palestine Watch</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="container">
+        <main className="container">
         <h1 className="text-center mt-4 mb-4">News</h1> {/* Centered title */}
+        
+        {/* Summary below the word "News" */}
+        <p className="text-center mb-4">
+        News outlets play a crucial role in raising awareness about the situation in Palestine by providing information to a global audience. They highlight key developments, humanitarian issues, and the perspectives of those affected by the conflict. By reporting on events, injustices, and negotiations, news organizations help inform public opinion, foster international discourse, and encourage diplomatic or humanitarian action. Without media coverage, the complexities of the situation and the voices of Palestinians might be overlooked or underrepresented.
+        </p>
         
         <div className="row justify-content-center">
           {currentCards.map((article) => (
