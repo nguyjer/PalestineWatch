@@ -2,8 +2,9 @@ build_frontend:
   image: node:20.17-alpine 
   cache:
     paths:
-      - ./node_modules/
-      - ./.next/cache/
+      - .frontend/node_modules/
+      - .frontend/.next/cache/
   script:
+    - cd frontend
     - npm install
     - npm run build
