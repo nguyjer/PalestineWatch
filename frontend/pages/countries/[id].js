@@ -109,15 +109,12 @@ export default function CountryPage() {
         <title>{coa} Details</title>
       </Head>
       <main>
-        <h1>Details for {coa}</h1>
-
         <CountryDetails
           countryData={countryData}
           countryDetails={countryDetails}
         />
         <div>
           <h2>Explore More</h2>
-
           {/* Conditional rendering for NewsCard and SupportCard */}
           {news && Object.keys(news).length > 0 ? (
             <NewsCard {...news} />

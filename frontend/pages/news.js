@@ -44,26 +44,42 @@ export default function About() {
       </Head>
       <main className="container">
         <h1 className="text-center mt-4 mb-4">News</h1> {/* Centered title */}
-        <h2 className="text-center mb-4">Number of Articles: {newsCards.length}</h2>
+        {/* Summary below the word "News" */}
+        <p className="text-center mb-4">
+          News outlets play a crucial role in raising awareness about the
+          situation in Palestine by providing information to a global audience.
+          They highlight key developments, humanitarian issues, and the
+          perspectives of those affected by the conflict. By reporting on
+          events, injustices, and negotiations, news organizations help inform
+          public opinion, foster international discourse, and encourage
+          diplomatic or humanitarian action. Without media coverage, the
+          complexities of the situation and the voices of Palestinians might be
+          overlooked or underrepresented.
+        </p>
+        <h2 className="text-center mb-4">
+          Number of Articles: {newsCards.length}
+        </h2>
         <div className="row justify-content-center">
           {currentCards.map((article) => (
-            <div key={article.id} className="col-lg-4 col-md-6 mb-4">
+            <div key={article.article_id} className="col-lg-4 col-md-6 mb-4">
               <NewsCard
-                articleId={article.id}
+                articleId={article.article_id}
                 title={truncateString(article.title, 50)}
                 description={truncateString(article.description, 95)}
-                imageUrl={article.url_image}
+                imageUrl={article.urlToImage}
                 author={article.author}
-                publishedAt={article.publish_date}
+                publishedAt={article.publishedAt}
                 source={article.source}
               />
-          </div>
+            </div>
           ))}
         </div>
-        
         {/* Pagination */}
         <Pagination className="justify-content-center">
-          <Pagination.Prev onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+          <Pagination.Prev
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
             Previous
           </Pagination.Prev>
           {[...Array(totalPages)].map((_, index) => (
@@ -75,7 +91,10 @@ export default function About() {
               {index + 1}
             </Pagination.Item>
           ))}
-          <Pagination.Next onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+          <Pagination.Next
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
             Next
           </Pagination.Next>
         </Pagination>
