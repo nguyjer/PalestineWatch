@@ -8,10 +8,12 @@ WORKDIR /frontend
 COPY package*.json ./
 
 # Install dependencies using npm
-RUN npm install --prefer-offline --no-audit
+RUN npm ci --prefer-offline --no-audit
 
 # Copy the rest of the application code
 COPY . .
+
+EXPOSE 3000
 
 # Starting our application
 CMD ["npm", "run","dev"]
