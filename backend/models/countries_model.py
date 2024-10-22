@@ -3,6 +3,7 @@ from database import db
 class CountriesModel(db.Model):
     __tablename__ = 'countries' 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    coa_iso = db.Column(db.String(255), nullable=False)
     flag_url = db.Column(db.String(255), nullable=False)
     capital = db.Column(db.String(255), nullable=False)
     population = db.Column(db.String(255), nullable=False)

@@ -1,13 +1,10 @@
 import requests
 import json
 from datetime import datetime
-from database import db  
-from models import NewsModel, SupportGroupsModel, CountriesModel  
+from ..database import db  
+from ..models import NewsModel, SupportGroupsModel, CountriesModel  
+from ..app import app
 import random
-
-def get_random_id(model):
-    ids = [item.id for item in model.query.all()]
-    return random.choice(ids) if ids else None
 
 def populate_news_db():
     try:
@@ -57,4 +54,5 @@ def populate_news_db():
         return []
 
 if __name__ == '__main__':
-    populate_news_db()
+    with app.app_context():
+        populate_news_db()

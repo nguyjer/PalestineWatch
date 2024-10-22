@@ -4,7 +4,7 @@ from database import db  # Import db from the new module
 from flask_migrate import Migrate  # Import Migrate
 from models import NewsModel, SupportGroupsModel, CountriesModel  # Import models
 from scripts.support_groups import fetch_groups
-from scripts.news import populate_news_db  # Import the news function
+# from scripts.news import populate_news_db  # Import the news function
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = (
@@ -19,6 +19,7 @@ migrate = Migrate(app, db)
 # Create tables if they do not exist
 with app.app_context():
     db.create_all()
+    # populate_news_db()  # Populate the news table
     db.session.commit()  # Commit the change
 
 

@@ -35,6 +35,8 @@ backendInstallWindows:
 	pip install requests
 	pip install flask
 	pip install Flask-CORS
+	pip install Flask-Migrate
+	pip install Flask-SQLAlchemy
 	pip install python-dotenv
 	pip install psycopg2-binary
 	pip install selenium
