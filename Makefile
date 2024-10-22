@@ -1,5 +1,5 @@
 run:
-	npm ci && npm run dev
+	cd frontend && npm ci && npm run dev
 #add all then show status
 add:
 	git add -A
@@ -23,4 +23,4 @@ docker:
 	docker run --rm -i -p 3000:3000 -t -v $$(pwd):/app nguyjer/palestine_watch
 
 build:
-	npm ci && npm run build
+	cd frontend && npm ci && npm run build
