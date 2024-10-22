@@ -1,12 +1,10 @@
-import styles from "../styles/CountryDetails.module.css";
-
 export default function CountryDetails({ countryData, countryDetails }) {
   if (countryData.length === 0) {
     return <p>Loading data...</p>;
   }
 
   return (
-    <div className={styles.countryDetails}>
+    <div>
       {countryDetails['flag'] && <img src={countryDetails['flag']} alt={`flag picture`} style={{ width: '100px' }} />}
       <h3>Official Name: {countryDetails['officialName']}</h3>
       <h3>Common Name: {countryDetails['commonName']}</h3>
@@ -18,7 +16,7 @@ export default function CountryDetails({ countryData, countryDetails }) {
       <p>Region: {countryDetails['region']}</p>
       <p>Subregion: {countryDetails['subregion']}</p>
 
-      <div className={styles.yearlyStats}>
+      <div>
         <ul>
           {countryData.map((entry, index) => (
             <li key={index}>
@@ -28,7 +26,7 @@ export default function CountryDetails({ countryData, countryDetails }) {
         </ul>
       </div>
       
-      <div style={{ marginTop: '20px' }}>
+      <div>
         <h4>Google Maps:</h4>
         <a href={countryDetails['maps']} target="_blank" rel="noopener noreferrer">
           <u>View on Google Maps</u>

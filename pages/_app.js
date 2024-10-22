@@ -1,6 +1,5 @@
 import NavBar from "../components/NavBar";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "../styles/global.css";
 import { useEffect } from "react";
 import Footer from "../components/footer";
 

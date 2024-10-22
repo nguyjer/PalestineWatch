@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import "bootstrap/dist/css/bootstrap.min.css";
+import Link from "next/link";
 
 export default function CountryCard({ id, country, flag, capital, population, region, subregion }) {
   return (
@@ -15,6 +15,12 @@ export default function CountryCard({ id, country, flag, capital, population, re
           <strong>Region:</strong> {region || 'Loading...'} <br />
           <strong>Subregion:</strong> {subregion || 'Loading...'}
         </p>
+
+        <div className="mt-auto">
+          <Link href={`/countries/${id}`} className="btn btn-primary">
+            Read More
+          </Link>
+        </div>
       </div>
     </div>
   );

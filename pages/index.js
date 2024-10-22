@@ -17,8 +17,8 @@ export default function App() {
           backgroundImage: "url('/palestineflag.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          height: "100vh",
-          position: "relative", // Ensure the arrow is positioned relative to the container
+          height: "95vh", // Adjusted height
+          position: "relative",
         }}
       >
         <div
@@ -36,9 +36,9 @@ export default function App() {
           className="text-center"
           style={{
             position: "absolute",
-            bottom: "20px", // Adjusts the position from the bottom
-            left: "50%", // Centers it horizontally
-            transform: "translateX(-50%)", // Fine-tunes centering
+            bottom: "20px", 
+            left: "50%",
+            transform: "translateX(-50%)",
           }}
         >
           <span className="text-white" style={{ fontSize: "2rem" }}>
@@ -51,35 +51,44 @@ export default function App() {
       </div>
 
       {/* Main Content */}
-      <main>
-        {/* Carousel Component */}
-        {/* <div className={styles.carousel}>
-          <CarouselComponent />
-        </div> */}
-
+      <main
+        style={{
+          backgroundColor: "#f8f9fa", // Softer white (light gray) background
+          height: "90vh", // Set height to match the background image section
+        }}
+      >
         {/* Our Mission Section */}
-        <div className="container my-5">
-          <div className="row">
+        <div className="container my-5" style={{ paddingTop: "50px" }}> {/* Added padding to move section down */}
+          <div className="row align-items-center" style={{ height: "100%" }}>
             {/* Text Column */}
-            <div className="col-md-6">
+            <div className="col-md-6" style={{ fontSize: "1.25rem" }}> {/* Increased font size */}
               <h2 className="mb-4">Our Objective</h2>
               <p>
-                A political website for all who believe that freedom for the
-                Palestinian people is an integral part of achieving collective
-                liberation. We provide resources and information to help you
-                learn more about the oppression faced by Palestine.
+                Palestine Watch is committed to providing a platform for all those
+                who believe that the liberation of Palestine is a crucial part of
+                global justice. The conflict between Israel and Palestine is long-standing,
+                and our aim is to educate, inform, and inspire people to take action.
               </p>
               <p>
-                Our goal is to bring attention to the history and ongoing
-                struggles of Palestinians and to provide ways for people to get
-                involved in the movement for justice and human rights in the
-                region.
+                We offer resources and information on the ongoing conflict, human rights violations, 
+                and international response. By raising awareness, we hope to engage individuals in 
+                meaningful discussions and actions that contribute to a just and peaceful future for
+                Palestine. 
+              </p>
+              <p>
+                Together, we can challenge the status quo and stand in solidarity with the Palestinian
+                people, advocating for their rights, freedom, and the dignity they deserve.
+              </p>
+              <p>
+                The future depends on our collective efforts to push for diplomatic resolutions, 
+                economic sanctions, and awareness campaigns that can turn the tide of oppression 
+                into one of liberty and justice.
               </p>
             </div>
 
-            {/* Image Column */}
+            {/* Carousel Column */}
             <div className="col-md-6">
-              {/* add carousel here*/}
+              <CarouselComponent /> {/* Carousel added */}
             </div>
           </div>
         </div>

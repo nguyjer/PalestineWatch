@@ -1,110 +1,73 @@
-//import styles from "../styles/ModelPage.module.css";
-//import axios from "axios";
 import Head from "next/head";
-import { useEffect, useState } from "react";
 import SupportCard from "../components/SupportGroupCard";
-import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is installed
+import { React, useState, useEffect } from "react";
+import { Pagination } from "react-bootstrap";  // Assuming you're using Bootstrap for pagination
 
 export default function SupportGroups() {
   const [supportGroups, setSupportGroups] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const groupSize = 3; // Number of groups per page
+  const groupsPerPage = 3; // Number of support groups to display per page
 
   useEffect(() => {
-    // Hard code groups
-    setSupportGroups([
-      {
-        id: 1,
-        name: "Adalah-NY: Campaign for the Boycott of Israel",
-        email: "info@adalahny.org",
-        city: "New York City",
-        state: "NY",
-        zipCode: "10603",
-        link: "https://adalahny.org/",
-        urlImage:
-          "https://images.squarespace-cdn.com/content/v1/6168ba7212c0a730b7d1b341/1634259315744-1AJ2CK53J61TVFCXC59K/Bye-bye+Leviev+December+2017.png?format=1500w",
-      },
-      {
-        id: 2,
-        name: "Al-Awda PRRC",
-        email: "amanibarakat@gmail.com",
-        city: "Coral Springs",
-        state: "FL",
-        zipCode: "33075",
-        link: "https://al-awdapalestine.org/",
-        urlImage:
-          "https://al-awdapalestine.org/wp-content/uploads/2017/07/Al-AWDA-LARGE-WEB-LOGO.jpg",
-      },
-      {
-        id: 3,
-        name: "Chicago Faith Coalition on Middle East Policy",
-        email: "No Email Available",
-        city: "Chicago",
-        state: "IL",
-        zipCode: "60605",
-        link: "	http://www.chicagofaithcoalition.org/",
-        urlImage:
-          "https://www.chicagofaithcoalition.org/images/KidsTearDownSignWall.jpg",
-      },
-      {
-        id: 4,
-        name: "Palestine Legal",
-        email: "info@palestinelegal.org",
-        city: "Chicago",
-        state: "IL",
-        zipCode: "60613",
-        link: "https://palestinelegal.org/",
-        urlImage:
-          "https://palestinelegal.org/images/palestine-legal-logo.png",
-      },
-      {
-        id: 5,
-        name: "US Campaign for Palestinian Rights",
-        email: "info@uscpr.org",
-        city: "Washington",
-        state: "DC",
-        zipCode: "20036",
-        link: "https://uscpr.org/",
-        urlImage:
-          "https://uscpr.org/wp-content/uploads/2017/08/cropped-uscpr-logo.png",
-      },
-      {
-        id: 6,
-        name: "American Muslims for Palestine",
-        email: "info@ampalestine.org",
-        city: "Bridgeview",
-        state: "IL",
-        zipCode: "60455",
-        link: "https://www.ampalestine.org/",
-        urlImage:
-          "https://www.ampalestine.org/sites/default/files/AMP-logo.png",
-      },
-      // Add more groups if needed
-    ]);
+    const fetchSupportGroups = async () => {
+      try {
+        const groups = [
+          {
+            id: 1,
+            name: "Adalah-NY: Campaign for the Boycott of Israel",
+            email: "info@adalahny.org",
+            city: "New York City",
+            state: "NY",
+            zipCode: "10603",
+            link: "https://adalahny.org/",
+            urlImage:
+              "https://images.squarespace-cdn.com/content/v1/6168ba7212c0a730b7d1b341/1634259315744-1AJ2CK53J61TVFCXC59K/Bye-bye+Leviev+December+2017.png?format=1500w",
+          },
+          {
+            id: 2,
+            name: "Al-Awda PRRC",
+            email: "amanibarakat@gmail.com",
+            city: "Coral Springs",
+            state: "FL",
+            zipCode: "33075",
+            link: "https://al-awdapalestine.org/",
+            urlImage:
+              "https://al-awdapalestine.org/wp-content/uploads/2017/07/Al-AWDA-LARGE-WEB-LOGO.jpg",
+          },
+          {
+            id: 3,
+            name: "Chicago Faith Coalition on Middle East Policy",
+            email: "No Email Available",
+            city: "Chicago",
+            state: "IL",
+            zipCode: "60605",
+            link: "http://www.chicagofaithcoalition.org/",
+            urlImage:
+              "https://www.chicagofaithcoalition.org/images/KidsTearDownSignWall.jpg",
+          },
+        ];
+
+        setSupportGroups(groups);
+      } catch (error) {
+        console.error('Error fetching support groups:', error);
+      }
+    };
+
+    fetchSupportGroups();
   }, []);
 
-  // Dynamically calculate total number of pages
-  const totalPages = Math.ceil(supportGroups.length / groupSize);
+  function truncateString(str, num) {
+    return str.length > num ? str.slice(0, num) + "..." : str;
+  }
 
-  // Get the current page's support groups
-  const currentGroups = supportGroups.slice(
-    (currentPage - 1) * groupSize,
-    currentPage * groupSize
-  );
+  // Pagination logic
+  const indexOfLastGroup = currentPage * groupsPerPage;
+  const indexOfFirstGroup = indexOfLastGroup - groupsPerPage;
+  const currentGroups = supportGroups.slice(indexOfFirstGroup, indexOfLastGroup);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const totalPages = Math.ceil(supportGroups.length / groupsPerPage);
 
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
+  const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div>
@@ -112,62 +75,44 @@ export default function SupportGroups() {
         <title>Palestine Watch</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <h1>Support Groups in the U.S.</h1>
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
+      <main className="container">
+        <h1 className="text-center mt-4 mb-4">Support Groups</h1> {/* Centered title */}
+        
+        <div className="row justify-content-center">
           {currentGroups.map((group) => (
-            <SupportCard
-              key={group.id}
-              id={group.id}
-              groupName={group.name}
-              groupEmail={group.email}
-              groupCity={group.city}
-              groupState={group.state}
-              groupZipCode={group.zipCode}
-              groupLink={group.link}
-              groupImageURL={group.urlImage}
-            />
+            <div key={group.id} className="col-lg-4 col-md-6 mb-4">
+              <SupportCard
+                id={group.id}
+                groupName={truncateString(group.name, 50)}
+                groupEmail={group.email}
+                groupCity={group.city}
+                groupState={group.state}
+                groupZipCode={group.zipCode}
+                groupLink={group.link}
+                groupImageURL={group.urlImage}
+              />
+            </div>
           ))}
         </div>
-
+        
         {/* Pagination */}
-        <nav aria-label="Page navigation">
-          <ul className="pagination justify-content-center">
-            <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-              <button
-                className="page-link"
-                onClick={handlePrevPage}
-                disabled={currentPage === 1}
-              >
-                Previous
-              </button>
-            </li>
-
-            {[...Array(totalPages)].map((_, index) => (
-              <li
-                key={index}
-                className={`page-item ${currentPage === index + 1 ? "active" : ""}`}
-              >
-                <button
-                  className="page-link"
-                  onClick={() => paginate(index + 1)}
-                >
-                  {index + 1}
-                </button>
-              </li>
-            ))}
-
-            <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
-              <button
-                className="page-link"
-                onClick={handleNextPage}
-                disabled={currentPage === totalPages}
-              >
-                Next
-              </button>
-            </li>
-          </ul>
-        </nav>
+        <Pagination className="justify-content-center">
+          <Pagination.Prev onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+            Previous
+          </Pagination.Prev>
+          {[...Array(totalPages)].map((_, index) => (
+            <Pagination.Item
+              key={index + 1}
+              active={index + 1 === currentPage}
+              onClick={() => handlePageChange(index + 1)}
+            >
+              {index + 1}
+            </Pagination.Item>
+          ))}
+          <Pagination.Next onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+            Next
+          </Pagination.Next>
+        </Pagination>
       </main>
     </div>
   );
