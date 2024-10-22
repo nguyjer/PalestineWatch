@@ -25,3 +25,18 @@ docker:
 
 build:
 	npm ci && npm run dev && npm ci && npm run build
+
+backendStartWindows:
+	cd backend
+	python -m venv venv
+	venv/Scripts/activate
+
+backendInstallWindows:
+	pip install requests
+	pip install flask
+	pip install Flask-CORS
+	pip install python-dotenv
+	pip install psycopg2-binary
+	pip install selenium
+	pip install beautifulsoup4
+	pip install webdriver_manager
