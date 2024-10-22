@@ -5,6 +5,7 @@ from flask_migrate import Migrate  # Import Migrate
 from models import NewsModel, SupportGroupsModel, CountriesModel  # Import models
 from scripts.support_groups import fetch_groups
 # from scripts.news import populate_news_db  # Import the news function
+from scripts.countries import fetch_countries
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = (
@@ -31,6 +32,10 @@ def get_news():
 def get_groups():
     groups = fetch_groups()
     return jsonify(groups)
+
+@app.route('/api/countries', methods=['GET'])
+def get_countries():
+    return fetch_countries()
 
 if __name__ == '__main__':
     app.run(debug=True, port=4000)
