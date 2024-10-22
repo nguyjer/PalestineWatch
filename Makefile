@@ -21,7 +21,7 @@ push:
 # run docker
 docker:
 	- docker pull nguyjer/palestine_watch
-	docker run --rm -i -p 3000:3000 -t -v $$(pwd):/app nguyjer/palestine_watch
+	docker-compose up --build
 
 build:
 	npm ci && npm run dev && npm ci && npm run build

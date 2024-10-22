@@ -8,8 +8,9 @@ export default function SupportGroups() {
   const [supportGroups, setSupportGroups] = useState([]);
 
   useEffect(() => {
+    
     //hard code three groups
-    setSupportGroups([
+    const groups = [
       {
         id: 1,
         name: "Adalah-NY: Campaign for the Boycott of Israel",
@@ -43,7 +44,9 @@ export default function SupportGroups() {
         urlImage:
           "https://www.chicagofaithcoalition.org/images/KidsTearDownSignWall.jpg",
       },
-    ]);
+    ];
+
+    setSupportGroups(groups);
     // fetchGroups();
   }, []);
 
