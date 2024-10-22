@@ -3,6 +3,14 @@ import Head from "next/head";
 import CarouselComponent from "../components/CarouselComponent"; // Import Carousel component
 
 export default function App() {
+  // Function to handle scrolling
+  const handleScroll = () => {
+    const element = document.getElementById("main-content");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div>
       <Head>
@@ -39,7 +47,9 @@ export default function App() {
             bottom: "20px", 
             left: "50%",
             transform: "translateX(-50%)",
+            cursor: "pointer" // Change cursor to pointer to indicate clickability
           }}
+          onClick={handleScroll} // Call the scroll function on click
         >
           <span className="text-white" style={{ fontSize: "2rem" }}>
             ↓
@@ -52,9 +62,11 @@ export default function App() {
 
       {/* Main Content */}
       <main
+        id="main-content" // Add an id for scrolling reference
         style={{
           backgroundColor: "#f8f9fa", // Softer white (light gray) background
           height: "90vh", // Set height to match the background image section
+          marginTop:"-6vh"
         }}
       >
         {/* Our Mission Section */}
