@@ -51,8 +51,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-<<<<<<< HEAD
-=======
 /***/ "./node_modules/react-bootstrap/esm/PageItem.js":
 /*!******************************************************!*\
   !*** ./node_modules/react-bootstrap/esm/PageItem.js ***!
@@ -73,7 +71,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
->>>>>>> 2ba86119c7f8de9f9c8a60d39ac9943d16e0498f
 /***/ "./node_modules/react-bootstrap/esm/ThemeProvider.js":
 /*!***********************************************************!*\
   !*** ./node_modules/react-bootstrap/esm/ThemeProvider.js ***!

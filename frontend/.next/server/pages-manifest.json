@@ -2,11 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-<<<<<<< HEAD
-  "/": "pages/index.js"
-=======
-  "/": "pages/index.js",
+  "/about": "pages/about.js",
   "/news": "pages/news.js",
-  "/about": "pages/about.js"
->>>>>>> 2ba86119c7f8de9f9c8a60d39ac9943d16e0498f
+  "/support-groups": "pages/support-groups.js",
+  "/countries": "pages/countries.js",
+  "/": "pages/index.js"
 }
