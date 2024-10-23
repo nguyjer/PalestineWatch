@@ -30,6 +30,11 @@ backendStartWindows:
 	python -m venv venv
 	venv/Scripts/activate
 
+backendStartLinux:
+	cd backend
+	python -m venv venv
+	. venv/bin/activate
+
 backendInstallWindows:
 	pip install requests
 	pip install flask
