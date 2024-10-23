@@ -1,10 +1,46 @@
-build_frontend:
+stages:
+  - build
+  - test
+  - deploy
+
+build-job:
+  stage: build
   image: node:20.17-alpine 
   cache:
     paths:
       - .frontend/node_modules/
       - .frontend/.next/cache/
   script:
+    - echo "Compiling the code..."
     - cd frontend
     - npm install
     - npm run build
+    - echo "Compile complete."
+
+unit-test-job:
+  stage: test
+  image: node:20-alpine
+  script:
+    - echo "Running Jest tests..."
+    - cd front-end # Navigate to the front-end directory
+    - npm install # Install dependencies
+    - npm test # Run Jest tests
+    - echo "Jest tests complete."
+
+selenium-test-job:
+  stage: test
+  image: python:latest
+  services:
+    - selenium/standalone-chrome:latest
+  script:
+    - echo "Running Selenium tests..."
+    # replace this with the command to run Selenium acceptance tests
+    - echo "Selenium tests complete."
+
+api-test-job:
+  stage: test
+  image: python:latest
+  script:
+    - echo "Running API tests..."
+    # replace this with the command to run api unittests
+    - echo "API tests complete."

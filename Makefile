@@ -41,3 +41,5 @@ backendInstallWindows:
 	pip install selenium
 	pip install beautifulsoup4
 	pip install webdriver_manager
+
+	

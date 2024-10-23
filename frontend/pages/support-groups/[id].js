@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
-import ExploreCard from '../../components/ExploreCard.js';
+
+import NewsCard from "../../components/NewsCard.js";
 
 const groupData = {
   1: {
@@ -36,18 +37,43 @@ const groupData = {
   },
 };
 
-export default function SupportGroupPage() {
+async function getNews() {
+  try {
+    const response = await axios.get("http://127.0.0.1:5000/api/news");
+    const articles = response.data; // Ensure correct data access
+    setNewsCards(articles); // Set the articles to state
+  } catch (error) {
+    console.error("Error fetching news:", error);
+  }
+}
+
+export default async function SupportGroupPage() {
   const router = useRouter();
   const { id } = router.query;
 
   const groupDetails = groupData[id];
-  const randomArticle1 = Math.floor(Math.random() * 3) + 1;
-  const randomArticle2 = Math.floor(Math.random() * 3) + 1;
+  
 
   if (!groupDetails) {
     return <p>Loading...</p>;
   }
 
+  const [news, setNews] = useState([]);
+
+  useEffect(() => {
+    async function fetchNews() {
+      try {
+        const response = await axios.get("http://127.0.0.1:5000/api/news");
+        const articles = response.data;
+        setNews(articles);
+      } catch (error) {
+        console.error("Error fetching news:", error);
+      }
+    }
+    fetchNews();
+  }, []);
+  const randomArticle1 = Math.floor(Math.random() * len(news)) + 1;
+  const randomArticle2 = Math.floor(Math.random() * 3) + 1;
   return (
     <div>
       <Head>
@@ -71,11 +97,8 @@ export default function SupportGroupPage() {
 
         <div>
           <h2>Explore More</h2>
-          <ExploreCard
-            link={`/news/${randomArticle1}`}
-            type="News Article"
-          />
-          <ExploreCard link={`/countries/${randomArticle2}`} type="Country" />
+          <NewsCard {...news[randomArticle1]} />
+          
         </div>
       </main>
     </div>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is imported
 
-export default function SupportCard({
+export default async function SupportCard({
   id,
   groupName,
   groupEmail,
@@ -13,6 +13,7 @@ export default function SupportCard({
   groupLink,
   groupImageURL,
 }) {
+  
   return (
     <div className="card h-100 d-flex flex-column">
       <img
