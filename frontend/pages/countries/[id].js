@@ -12,8 +12,9 @@ export default function CountryPage() {
   const { id } = router.query;
   const [countryData, setCountryData] = useState([]);
   const [countryDetails, setCountryDetails] = useState({});
-  const [news, setNews] = useState([]);
+  const [news, setNews] = useState({}); // Keep as an object for a single article
   const coa = idToCoaMap[id];
+  const [supportGroup, setSupportGroup] = useState({}); // Keep as an object
 
   useEffect(() => {
     if (!coa) return;
@@ -45,35 +46,39 @@ export default function CountryPage() {
         console.error("Problem with fetch: ", error);
       });
 
-    async function fetchNews() {
+    const fetchNews = async () => {
       try {
         const response = await axios.get(
           `http://127.0.0.1:5000/api/news/${id}`
         );
         const articles = response.data;
+
         setNews(articles);
       } catch (error) {
         console.error("Error fetching news:", error);
       }
-    }
-    const fetchSupportGroups = async () => {
+    };
+
+    const fetchSupportGroup = async () => {
       try {
         const response = await axios.get(
           `http://127.0.0.1:5000/api/support-groups/${id}`
         );
-        const groups = response.data;
-        setSupportGroups(groups);
+        const group = response.data;
+
+        // Assuming group is an object for a single support group
+        setSupportGroup(group);
       } catch (error) {
-        console.error("Error fetching news:", error);
+        console.error("Error fetching support group:", error);
       }
     };
-    fetchSupportGroups();
+
+    fetchSupportGroup();
     fetchNews();
   }, [coa]);
 
   const fetchCountryDetails = async () => {
     const details = {};
-
     try {
       const res = await axios.get(
         `https://restcountries.com/v3.1/alpha/${coa}`
@@ -112,8 +117,19 @@ export default function CountryPage() {
         />
         <div>
           <h2>Explore More</h2>
-          <NewsCard {...news} />
-          <SupportCard {...supportGroups} />
+
+          {/* Conditional rendering for NewsCard and SupportCard */}
+          {news && Object.keys(news).length > 0 ? (
+            <NewsCard {...news} />
+          ) : (
+            <p>No news available</p>
+          )}
+
+          {supportGroup && Object.keys(supportGroup).length > 0 ? (
+            <SupportCard {...supportGroup} />
+          ) : (
+            <p>No support group available</p>
+          )}
         </div>
       </main>
     </div>

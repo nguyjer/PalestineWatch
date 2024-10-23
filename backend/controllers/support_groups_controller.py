@@ -23,7 +23,7 @@ def get_all_groups():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-def get_groups_by_id(groups_id):
+def get_group_by_id(groups_id):
     try:
         group = SupportGroupsModel.query.get(groups_id)
         if group is None:
