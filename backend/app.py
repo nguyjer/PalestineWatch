@@ -24,7 +24,7 @@ cors = CORS(app, origins="*")
 # add script methods to populate db here if necessary
 with app.app_context():
     db.create_all()
-    populate_news_db() 
+    #populate_news_db() 
     fetch_groups()
     pass
 
