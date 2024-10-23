@@ -6,6 +6,7 @@ from backend.scripts import populate_news_db, fetch_groups
 from controllers.news_controller import get_all_news, get_news_by_id
 
 
+from scripts.countries import fetch_countries
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = (
@@ -40,6 +41,10 @@ def news_by_id(news_id):
 def get_groups():
     groups = fetch_groups()
     return jsonify(groups)
+
+@app.route('/api/countries', methods=['GET'])
+def get_countries():
+    return fetch_countries()
 
 if __name__ == '__main__':
     app.run(debug=True, port=4000)
