@@ -8,8 +8,8 @@ import NewsCard from "../../components/NewsCard.js";
 export default function SupportGroupPage() {
   const router = useRouter();
   const { id } = router.query;
-  const [news, setNews] = useState({});
-  const [supportGroups, setSupportGroups] = useState([]); // Initialize as null for loading
+  const [news, setNews] = useState(null);
+  const [supportGroups, setSupportGroups] = useState(null); // Initialize as array
 
   useEffect(() => {
     if (!id) return; // Ensure id is available before fetching
@@ -19,7 +19,8 @@ export default function SupportGroupPage() {
         const response = await axios.get(
           `http://127.0.0.1:5000/api/support-groups/${id}`
         );
-        setSupportGroups(response.data);
+        const group = await response.data;
+        setSupportGroups(group || {});
       } catch (error) {
         console.error("Error fetching support groups:", error);
       }
@@ -30,8 +31,8 @@ export default function SupportGroupPage() {
         const response = await axios.get(
           `http://127.0.0.1:5000/api/news/${id}`
         );
-        const article = response.data;
-        setNews(article);
+        const article = await response.data;
+        setNews(article || {});
       } catch (error) {
         console.error("Error fetching news:", error);
       }
@@ -41,8 +42,10 @@ export default function SupportGroupPage() {
     fetchNews();
   }, [id]); // Add id as a dependency to trigger the effect when it changes
 
-  // Display loading state while data is being fetched
   if (!supportGroups) {
+    return <p>Loading...</p>;
+  }
+  if (!news) {
     return <p>Loading...</p>;
   }
 

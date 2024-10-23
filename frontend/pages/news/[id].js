@@ -5,6 +5,7 @@ import axios from "axios";
 import Link from "next/link";
 import ExploreCard from "../../components/ExploreCard.js";
 import SupportCard from "../../components/SupportGroupCard.js";
+import SupportGroups from "../support-groups.js";
 
 function ArticlePage() {
   const router = useRouter();
@@ -12,7 +13,7 @@ function ArticlePage() {
   const [article, setArticle] = useState(null);
   const randomSupport = Math.floor(Math.random() * 3) + 1;
   const randomCountry = Math.floor(Math.random() * 3) + 1;
-  const [supportGroups, setSupportGroups] = useState([]);
+  const [supportGroups, setSupportGroups] = useState({});
 
   useEffect(() => {
     if (!id) return;
@@ -25,7 +26,7 @@ function ArticlePage() {
         ); // Fetch the article details
         const data = await response.data;
         console.log(data);
-        setArticle(data);
+        setArticle(data || {});
       } catch (error) {
         console.error("Error fetching article:", error);
       }
@@ -36,8 +37,8 @@ function ArticlePage() {
         const response = await axios.get(
           `http://127.0.0.1:5000/api/support-groups/${id}`
         );
-        const groups = response.data;
-        setSupportGroups(groups);
+        const groups = await response.data;
+        setSupportGroups(groups || {});
       } catch (error) {
         console.error("Error fetching news:", error);
       }
@@ -52,6 +53,7 @@ function ArticlePage() {
   }
 
   if (!article) return <p>Loading...</p>;
+  if (!SupportGroups) return <p>Loading...</p>;
 
   return (
     <main>
