@@ -1,6 +1,5 @@
 run:
-	cd ./frontend && npm ci && npm run dev
-
+	cd frontend && npm ci && npm run dev
 #add all then show status
 add:
 	git add -A
@@ -24,7 +23,7 @@ docker:
 	docker-compose up --build
 
 build:
-	npm ci && npm run dev && npm ci && npm run build
+	cd frontend && npm ci && npm run build
 
 backendStartWindows:
 	cd backend

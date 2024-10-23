@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Head from "next/head";
-import styles from "../../styles/ModelPage.module.css";
 import CountryDetails from '../../components/CountryDetails.js';
 import axios from 'axios';
 import idToCoaMap from '../../components/idToCoaMap.js';
@@ -76,7 +75,7 @@ export default function CountryPage() {
       <Head>
         <title>{coa} Details</title>
       </Head>
-      <main className={styles.mainContent}>
+      <main>
         <h1>Details for {coa}</h1>
 
         <CountryDetails

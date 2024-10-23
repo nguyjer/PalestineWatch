@@ -27,7 +27,7 @@ with app.app_context():
     pass
 
 
-
+# news endpoints
 @app.route('/api/news', methods=['GET'])
 def all_news():
     return get_all_news()
@@ -36,12 +36,13 @@ def all_news():
 def news_by_id(news_id):
     return get_news_by_id(news_id)
 
-
+# support groups endpoints
 @app.route('/api/support_groups', methods=['GET'])
 def get_groups():
     groups = fetch_groups()
     return jsonify(groups)
 
+# countries endpoints
 @app.route('/api/countries', methods=['GET'])
 def get_countries():
     return fetch_countries()
