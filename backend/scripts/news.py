@@ -1,14 +1,13 @@
 import requests
 import json
 from datetime import datetime
-from ..database import db  
-from ..models import NewsModel, SupportGroupsModel, CountriesModel  
-from ..app import app
+from backend import db  
+from backend.models import NewsModel
 import random
 
 def populate_news_db():
     try:
-        url = "https://newsapi.org/v2/everything?q=palestine+OR+gaza+NOT+hezbollah&language=en&from=2024-10-08&sortBy=publishedAt&apiKey=0a5c13088b4c4cf88185456e537735a5"
+        url = "https://newsapi.org/v2/everything?q=palestine+OR+gaza+NOT+hezbollah&language=en&from=2024-10-20&sortBy=publishedAt&apiKey=0a5c13088b4c4cf88185456e537735a5"
         response = requests.get(url)
         data = response.json()
 
@@ -18,7 +17,6 @@ def populate_news_db():
 
         articles = data.get("articles", [])
 
-        # filter the article with null values
         filtered_articles = [
             article for article in articles
             if all(
@@ -27,9 +25,14 @@ def populate_news_db():
             )
         ]
 
-        # Insert the filtered articles into the NewsModel table
+        inserted_count = 0
         for article in filtered_articles:
-            # Create a new NewsModel instance
+            existing_article = NewsModel.query.filter_by(description=article["description"]).first()
+            
+            if existing_article:
+                print(f"Skipping duplicate article: {article['title']}")
+                continue  
+
             news = NewsModel(
                 author=article["author"],
                 description=article["description"],
@@ -41,18 +44,16 @@ def populate_news_db():
                 countryId=None
             )
 
-            # Add the news article to the session
             db.session.add(news)
+            inserted_count += 1
 
-        # Commit the changes to the database
         db.session.commit()
-        print(f"Inserted {len(filtered_articles)} articles into the database.")
+        print(f"Inserted {inserted_count} new articles into the database.")
 
     except Exception as e:
         print(f"An error occurred: {str(e)}")
-        db.session.rollback()  # Rollback in case of an error
+        db.session.rollback() 
         return []
 
 if __name__ == '__main__':
-    with app.app_context():
-        populate_news_db()
+    print("hello world")

@@ -1,7 +1,8 @@
-from database import db
+from backend import db
 
 class CountriesModel(db.Model):
     __tablename__ = 'countries' 
+    __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     coa_iso = db.Column(db.String(255), nullable=False)
     flag_url = db.Column(db.String(255), nullable=False)
