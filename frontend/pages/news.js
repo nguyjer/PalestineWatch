@@ -3,6 +3,7 @@ import axios from "axios";
 import NewsCard from "../components/NewsCard";
 import { React, useState, useEffect } from "react";
 import { Pagination } from "react-bootstrap"; // Assuming you're using Bootstrap for pagination
+import SupportCard from "../components/SupportGroupCard";
 
 export default function About() {
   const [newsCards, setNewsCards] = useState([]);

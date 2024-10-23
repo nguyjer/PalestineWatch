@@ -11,45 +11,11 @@ export default function SupportGroups() {
   useEffect(() => {
     const fetchSupportGroups = async () => {
       try {
-        const groups = [
-          {
-            id: 1,
-            name: "Adalah-NY: Campaign for the Boycott of Israel",
-            email: "info@adalahny.org",
-            city: "New York City",
-            state: "NY",
-            zipCode: "10603",
-            link: "https://adalahny.org/",
-            urlImage:
-              "https://images.squarespace-cdn.com/content/v1/6168ba7212c0a730b7d1b341/1634259315744-1AJ2CK53J61TVFCXC59K/Bye-bye+Leviev+December+2017.png?format=1500w",
-          },
-          {
-            id: 2,
-            name: "Al-Awda PRRC",
-            email: "amanibarakat@gmail.com",
-            city: "Coral Springs",
-            state: "FL",
-            zipCode: "33075",
-            link: "https://al-awdapalestine.org/",
-            urlImage:
-              "https://al-awdapalestine.org/wp-content/uploads/2017/07/Al-AWDA-LARGE-WEB-LOGO.jpg",
-          },
-          {
-            id: 3,
-            name: "Chicago Faith Coalition on Middle East Policy",
-            email: "No Email Available",
-            city: "Chicago",
-            state: "IL",
-            zipCode: "60605",
-            link: "http://www.chicagofaithcoalition.org/",
-            urlImage:
-              "https://www.chicagofaithcoalition.org/images/KidsTearDownSignWall.jpg",
-          },
-        ];
-
-        setSupportGroups(groups);
+        const response = await axios.get("http://127.0.0.1:5000/api/support-groups");
+        const groups = response.data; // Ensure correct data access
+        setSupportGroups(groups); // Set the articles to state
       } catch (error) {
-        console.error('Error fetching support groups:', error);
+        console.error("Error fetching news:", error);
       }
     };
 

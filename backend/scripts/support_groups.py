@@ -4,6 +4,8 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 import time
+from backend import db  
+from backend.models import SupportGroupsModel
 
 def fetch_groups():
     try:
@@ -24,7 +26,6 @@ def fetch_groups():
 
         soup = BeautifulSoup(html, 'html.parser')
 
-        groups = []
         rows = soup.select('.row-hover tr')
         for index, row in enumerate(rows):
             group_name = row.select_one('.column-1').get_text(strip=True) if row.select_one('.column-1') else 'Missing Data'
@@ -54,19 +55,30 @@ def fetch_groups():
                 except Exception as e:
                     print(f"Error fetching image for {group_name}: {str(e)}")
                     
-            groups.append({
-                'id': index,
-                'name': group_name,
-                'email': group_email,
-                'city': group_city,
-                'state': group_state,
-                'zipCode': group_zip_code,
-                'link': group_link,
-                'urlImage': group_image
-            })
+            existing_group = SupportGroupsModel.query.filter_by(email=group_email, name=group_name).first()
 
-        return groups
+            if existing_group:
+                print(f"Skipping duplicate group: {group_name}")
+                continue
+
+            # Insert the new group directly into the database
+            new_group = SupportGroupsModel(
+                name=group_name,
+                email=group_email,
+                city=group_city,
+                state=group_state,
+                zip_code=group_zip_code,
+                link=group_link,
+                url_image=group_image,
+                newsId=None,
+                countryId=None
+            )
+
+            db.session.add(new_group)
+            inserted_count += 1
+
+        db.session.commit()
 
     except Exception as e:
         print("Error fetching data:", str(e))
-        return {'error': 'Error fetching data'}
+        db.session.rollback()

@@ -4,8 +4,8 @@ import Head from "next/head";
 import CountryDetails from "../../components/CountryDetails.js";
 import axios from "axios";
 import idToCoaMap from "../../components/idToCoaMap.js";
-import ExploreCard from "../../components/ExploreCard.js";
 import NewsCard from "../../components/NewsCard.js";
+import SupportCard from "../../components/SupportGroupCard.js";
 
 export default function CountryPage() {
   const router = useRouter();
@@ -47,13 +47,27 @@ export default function CountryPage() {
 
     async function fetchNews() {
       try {
-        const response = await axios.get("http://127.0.0.1:5000/api/news");
+        const response = await axios.get(
+          `http://127.0.0.1:5000/api/news/${id}`
+        );
         const articles = response.data;
         setNews(articles);
       } catch (error) {
         console.error("Error fetching news:", error);
       }
     }
+    const fetchSupportGroups = async () => {
+      try {
+        const response = await axios.get(
+          `http://127.0.0.1:5000/api/support-groups/${id}`
+        );
+        const groups = response.data;
+        setSupportGroups(groups);
+      } catch (error) {
+        console.error("Error fetching news:", error);
+      }
+    };
+    fetchSupportGroups();
     fetchNews();
   }, [coa]);
 
@@ -84,9 +98,6 @@ export default function CountryPage() {
     setCountryDetails(details);
   };
 
-  const randomArticle1 = Math.floor(Math.random() * len(news)) + 1;
-  const randomArticle2 = Math.floor(Math.random() * 3) + 1;
-
   return (
     <div>
       <Head>
@@ -101,11 +112,8 @@ export default function CountryPage() {
         />
         <div>
           <h2>Explore More</h2>
-          <NewsCard {...news[randomArticle1]} />
-          <ExploreCard
-            link={`/support-groups/${randomArticle2}`}
-            type="Support Group"
-          />
+          <NewsCard {...news} />
+          <SupportCard {...supportGroups} />
         </div>
       </main>
     </div>

@@ -3,7 +3,8 @@ from flask_cors import CORS
 from flask_migrate import Migrate  # Import Migrate
 from backend import db  # Import init_app() and db
 from backend.scripts import populate_news_db, fetch_groups
-from controllers.news_controller import get_all_news, get_news_by_id
+from controllers import get_all_news, get_news_by_id, get_groups_by_id, get_all_groups
+
 
 
 from scripts.countries import fetch_countries
@@ -24,6 +25,7 @@ cors = CORS(app, origins="*")
 with app.app_context():
     db.create_all()
     populate_news_db() 
+    fetch_groups()
     pass
 
 
@@ -38,8 +40,13 @@ def news_by_id(news_id):
 
 # support groups endpoints
 @app.route('/api/support_groups', methods=['GET'])
-def get_groups():
-    groups = fetch_groups()
+def all_groups():
+    groups = get_all_groups()
+    return jsonify(groups)
+
+@app.route('/api/support_groups/<int:news_id>', methods=['GET'])
+def group_by_id(group_id):
+    groups = get_groups_by_id(group_id)
     return jsonify(groups)
 
 # countries endpoints
