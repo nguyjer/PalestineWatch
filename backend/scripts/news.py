@@ -7,7 +7,7 @@ import random
 
 def populate_news_db():
     try:
-        url = "https://newsapi.org/v2/everything?q=palestine+OR+gaza+NOT+hezbollah&language=en&from=2024-10-20&sortBy=publishedAt&apiKey=0a5c13088b4c4cf88185456e537735a5"
+        url = "https://newsapi.org/v2/everything?q=palestine+OR+gaza+NOT+hezbollah&language=en&from=2024-09-22&sortBy=publishedAt&apiKey=0a5c13088b4c4cf88185456e537735a5"
         response = requests.get(url)
         data = response.json()
 
@@ -21,7 +21,7 @@ def populate_news_db():
             article for article in articles
             if all(
                 article.get(attr)
-                for attr in ["author", "title", "url", "description", "urlToImage", "publishedAt", "content"]
+                for attr in ["author", "title", "url", "description", "urlToImage", "publishedAt", "content", "source"]
             )
         ]
 
@@ -33,12 +33,17 @@ def populate_news_db():
                 print(f"Skipping duplicate article: {article['title']}")
                 continue  
 
+            publish_date = datetime.strptime(article["publishedAt"][:10], "%Y-%m-%d")
+
+            source_name = article["source"].get("name", "Unknown Source")
+
             news = NewsModel(
                 author=article["author"],
                 description=article["description"],
                 url=article["url"],
                 url_image=article["urlToImage"],
                 publish_date=datetime.fromisoformat(article["publishedAt"].replace('Z', '')),
+                source=source_name,
                 content=article["content"],
                 supportGroupId=None,
                 countryId=None

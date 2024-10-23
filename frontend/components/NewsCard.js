@@ -25,7 +25,7 @@ export default function NewsCard({
         <p className="card-text">{description}</p>
         <p className="card-text">
           <small className="text-muted">
-            By {author || "Unknown"} | {new Date(publishedAt).toLocaleDateString()}
+            By {author || "Unknown"} | {new Date(publishedAt).toLocaleDateString()} | {source || "Unknown"}
           </small>
         </p>
         {/* Adding a spacer to push the button to the bottom */}

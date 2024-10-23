@@ -7,17 +7,16 @@ import { Pagination } from "react-bootstrap"; // Assuming you're using Bootstrap
 export default function About() {
   const [newsCards, setNewsCards] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const cardsPerPage = 3; // Number of cards to display per page
+  const cardsPerPage = 9; // Number of cards to display per page
 
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const articles = await axios.get('http://127.0.0.1:4000/api/news')
-
-        // Set the articles into the newsCards array state
-        setNewsCards(articles);
+        const response = await axios.get("http://127.0.0.1:5000/api/news");
+        const articles = response.data; // Ensure correct data access
+        setNewsCards(articles); // Set the articles to state
       } catch (error) {
-        console.error('Error fetching news:', error);
+        console.error("Error fetching news:", error);
       }
     };
 
@@ -25,7 +24,7 @@ export default function About() {
   }, []);
 
   function truncateString(str, num) {
-    return str.length > num ? str.slice(0, num) + "..." : str;
+    return str?.length > num ? str.slice(0, num) + "..." : str;
   }
 
   // Pagination logic
@@ -47,17 +46,17 @@ export default function About() {
         
         <div className="row justify-content-center">
           {currentCards.map((article) => (
-            <div key={article.article_id} className="col-lg-4 col-md-6 mb-4">
+            <div key={article.id} className="col-lg-4 col-md-6 mb-4">
               <NewsCard
-                articleId={article.article_id}
+                articleId={article.id}
                 title={truncateString(article.title, 50)}
                 description={truncateString(article.description, 95)}
-                imageUrl={article.urlToImage}
+                imageUrl={article.url_image}
                 author={article.author}
-                publishedAt={article.publishedAt}
+                publishedAt={article.publish_date}
                 source={article.source}
               />
-            </div>
+          </div>
           ))}
         </div>
         

@@ -9,6 +9,7 @@ class NewsModel(db.Model):
     url = db.Column(db.String(500), nullable=False)
     url_image = db.Column(db.String(500), nullable=False)
     publish_date = db.Column(db.DateTime, nullable=False)
+    source = db.Column(db.String(500), nullable=False)
     content = db.Column(db.Text, nullable=False)
     supportGroupId = db.Column(db.Integer, db.ForeignKey('support_groups.id'), nullable=True)
     countryId = db.Column(db.Integer, db.ForeignKey('countries.id'), nullable=True)
