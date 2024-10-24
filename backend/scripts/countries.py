@@ -14,8 +14,6 @@ def fetch_countries():
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         db.session.rollback()
-        return 1
-    return 0
 
 
 def fetch_country_details(coa_iso):

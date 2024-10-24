@@ -1,8 +1,15 @@
-// pages/index.js
 import Head from "next/head";
 import CarouselComponent from "../components/CarouselComponent"; // Import Carousel component
 
 export default function App() {
+  // Function to handle scrolling
+  const handleScroll = () => {
+    const element = document.getElementById("main-content");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div>
       <Head>
@@ -39,7 +46,9 @@ export default function App() {
             bottom: "20px", 
             left: "50%",
             transform: "translateX(-50%)",
+            cursor: "pointer" // Change cursor to pointer to indicate clickability
           }}
+          onClick={handleScroll} // Call the scroll function on click
         >
           <span className="text-white" style={{ fontSize: "2rem" }}>
             ↓
@@ -52,16 +61,17 @@ export default function App() {
 
       {/* Main Content */}
       <main
+        id="main-content" // Add an id for scrolling reference
         style={{
           backgroundColor: "#f8f9fa", // Softer white (light gray) background
-          height: "90vh", // Set height to match the background image section
+          padding: "20px 0", // Added padding to the top and bottom
         }}
       >
         {/* Our Mission Section */}
-        <div className="container my-5" style={{ paddingTop: "50px" }}> {/* Added padding to move section down */}
-          <div className="row align-items-center" style={{ height: "100%" }}>
+        <div className="container my-5"> {/* Removed fixed height */}
+          <div className="row align-items-start"> {/* Changed align-items-center to align-items-start for better stacking */}
             {/* Text Column */}
-            <div className="col-md-6" style={{ fontSize: "1.25rem" }}> {/* Increased font size */}
+            <div className="col-md-6 mb-4" style={{ fontSize: "1.25rem" }}> {/* Increased font size */}
               <h2 className="mb-4">Our Objective</h2>
               <p>
                 Palestine Watch is committed to providing a platform for all those
@@ -87,7 +97,7 @@ export default function App() {
             </div>
 
             {/* Carousel Column */}
-            <div className="col-md-6">
+            <div className="col-md-6 mb-4" style={{ marginTop: "7vh" }}> {/* Added margin to push it down */}
               <CarouselComponent /> {/* Carousel added */}
             </div>
           </div>

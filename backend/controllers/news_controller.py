@@ -2,6 +2,7 @@ from flask import jsonify, abort
 from backend.models import NewsModel
 from backend import db
 
+
 def get_all_news():
     try:
         articles = NewsModel.query.all()

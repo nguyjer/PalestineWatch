@@ -39,6 +39,7 @@ export default function MemberCard({ member }) {
           <li className="list-group-item">No. of commits: {member.commits}</li>
           <li className="list-group-item">No. of issues created: {member.issues}</li>
           <li className="list-group-item">No. of unit tests created: {member.utests}</li>
+          <li className="list-group-item">Role: {member.role}</li>
         </ul>
       </div>
     </div>

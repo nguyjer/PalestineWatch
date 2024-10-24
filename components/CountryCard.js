@@ -1,15 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
 
-export default function CountryCard({
-  id,
-  country,
-  flag,
-  capital,
-  population,
-  region,
-  subregion,
-}) {
+export default function CountryCard({ id, country, flag, capital, population, region, subregion }) {
   return (
     <div className="card h-100 d-flex flex-column">
       <div className="d-flex justify-content-center">
@@ -18,7 +10,7 @@ export default function CountryCard({
             src={flag}
             className="card-img-top pt-3"
             alt={`${country} flag`}
-            style={{ height: "100px", width: "auto", maxWidth: "100%" }} // Adjusting the width to keep aspect ratio
+            style={{ height: '100px', width: 'auto', maxWidth: '100%' }} // Adjusting the width to keep aspect ratio
           />
         )}
       </div>
@@ -26,23 +18,20 @@ export default function CountryCard({
         <h5 className="card-title">{country}</h5>
         <div className="mb-2">
           <p className="card-text mb-1">
-            <strong>Capital:</strong> {capital || "Loading..."}
+            <strong>Capital:</strong> {capital || 'Loading...'}
           </p>
           <p className="card-text mb-1">
-            <strong>Population:</strong> {population || "Loading..."}
+            <strong>Population:</strong> {population || 'Loading...'}
           </p>
           <p className="card-text mb-1">
-            <strong>Region:</strong> {region || "Loading..."}
+            <strong>Region:</strong> {region || 'Loading...'}
           </p>
           <p className="card-text mb-1">
-            <strong>Subregion:</strong> {subregion || "Loading..."}
+            <strong>Subregion:</strong> {subregion || 'Loading...'}
           </p>
         </div>
         <div className="mt-auto">
-          <Link
-            href={`/countries/${id}`}
-            className="btn btn-primary mt-2 align-self-start"
-          >
+          <Link href={`/countries/${id}`} className="btn btn-primary mt-2 align-self-start">
             Read More
           </Link>
         </div>

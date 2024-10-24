@@ -22,7 +22,7 @@ unit-test-job:
   image: node:20-alpine
   script:
     - echo "Running Jest tests..."
-    - cd front-end # Navigate to the front-end directory
+    - cd frontend # Navigate to the front-end directory
     - npm install # Install dependencies
     - npm test # Run Jest tests
     - echo "Jest tests complete."

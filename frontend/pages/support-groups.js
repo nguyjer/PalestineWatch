@@ -12,7 +12,7 @@ export default function SupportGroups() {
     const fetchSupportGroups = async () => {
       try {
         const response = await axios.get("http://127.0.0.1:5000/api/support-groups");
-        const groups = response.data; // Ensure correct data access
+        const groups = await response.data; // Ensure correct data access
         setSupportGroups(groups); // Set the articles to state
       } catch (error) {
         console.error("Error fetching news:", error);
@@ -43,7 +43,13 @@ export default function SupportGroups() {
       </Head>
       <main className="container">
         <h1 className="text-center mt-4 mb-4">Support Groups</h1> {/* Centered title */}
+        <h2 className="text-center mb-4">Number of Groups: {supportGroups.length}</h2>
         
+        {/* Summary below the word "Support Groups" */}
+        <p className="text-center mb-4">
+          Support groups are vital for maintaining morale, raising funds, and delivering aid to the Palestinian people. By fostering a sense of solidarity and hope, these groups keep communities engaged and motivated. They also play a critical role in mobilizing financial resources through donations and fundraising efforts, which are essential for humanitarian assistance. Additionally, support groups help coordinate and distribute aid, ensuring that essential supplies like food, medical care, and shelter reach those in need despite difficult conditions on the ground.       
+        </p>
+
         <div className="row justify-content-center">
           {currentGroups.map((group) => (
             <div key={group.id} className="col-lg-4 col-md-6 mb-4">
