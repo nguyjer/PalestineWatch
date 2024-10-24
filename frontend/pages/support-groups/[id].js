@@ -17,7 +17,7 @@ export default function SupportGroupPage() {
     const fetchSupportGroups = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:5000/api/support-groups/${id}`
+          `http://api.palestinewatch.me/api/support-groups/${id}`
         );
         const group = await response.data;
         setSupportGroups(group || {});
@@ -29,7 +29,7 @@ export default function SupportGroupPage() {
     const fetchNews = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:5000/api/news/${id}`
+          `http://api.palestinewatch.me/api/news/${id}`
         );
         const article = await response.data;
         setNews(article || {});

@@ -13,7 +13,7 @@ export default function About() {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get("https://18.117.144.78/api/news");
+        const response = await axios.get("http://api.palestinewatch.me/api/news");
         const articles = response.data; // Ensure correct data access
         setNewsCards(articles); // Set the articles to state
       } catch (error) {
