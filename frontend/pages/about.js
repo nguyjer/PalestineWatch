@@ -28,6 +28,7 @@ export default function About() {
       commits: 0,
       issues: 0,
       utests: 0,
+      role: "Backend",
     },
     {
       name: "Jeremy Nguyen",
@@ -40,6 +41,7 @@ export default function About() {
       commits: 0,
       issues: 0,
       utests: 0,
+      role: "Full Stack",
     },
     {
       name: "Kenny Nguyen",
@@ -52,6 +54,7 @@ export default function About() {
       commits: 0,
       issues: 0,
       utests: 0,
+      role: "Frontend",
     },
     {
       name: "Rohan Damani",
@@ -64,6 +67,7 @@ export default function About() {
       commits: 0,
       issues: 0,
       utests: 0,
+      role: "Backend",
     },
     {
       name: "Will Matherne",
@@ -74,6 +78,7 @@ export default function About() {
       commits: 0,
       issues: 0,
       utests: 0,
+      role: "Full Stack",
     },
   ];
 

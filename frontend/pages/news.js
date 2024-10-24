@@ -44,7 +44,7 @@ export default function About() {
       </Head>
       <main className="container">
         <h1 className="text-center mt-4 mb-4">News</h1> {/* Centered title */}
-        
+        <h2 className="text-center mb-4">Number of Articles: {newsCards.length}</h2>
         <div className="row justify-content-center">
           {currentCards.map((article) => (
             <div key={article.id} className="col-lg-4 col-md-6 mb-4">

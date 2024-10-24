@@ -43,7 +43,7 @@ export default function SupportGroups() {
       </Head>
       <main className="container">
         <h1 className="text-center mt-4 mb-4">Support Groups</h1> {/* Centered title */}
-        
+        <h2 className="text-center mb-4">Number of Groups: {supportGroups.length}</h2>
         <div className="row justify-content-center">
           {currentGroups.map((group) => (
             <div key={group.id} className="col-lg-4 col-md-6 mb-4">
