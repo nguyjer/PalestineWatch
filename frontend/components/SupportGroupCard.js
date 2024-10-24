@@ -3,7 +3,7 @@
 import Link from "next/link";
 import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is imported
 
-export default async function SupportCard({
+export default function SupportCard({
   id,
   groupName,
   groupEmail,

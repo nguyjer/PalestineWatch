@@ -12,7 +12,7 @@ export default function SupportGroups() {
     const fetchSupportGroups = async () => {
       try {
         const response = await axios.get("http://127.0.0.1:5000/api/support-groups");
-        const groups = response.data; // Ensure correct data access
+        const groups = await response.data; // Ensure correct data access
         setSupportGroups(groups); // Set the articles to state
       } catch (error) {
         console.error("Error fetching news:", error);
