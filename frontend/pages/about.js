@@ -271,56 +271,57 @@ export default function About() {
             articles
           </p>
         </div>
-      <div className="container my-5">
-        <h2 className="text-center pt-5 pb-3">Tools</h2>
-        <div className="row">
-          <div className="col-3 mb-4">
-            <div className="card h-100">
-              <div className="card-body">
-                <h3 className="card-title text-center">Docker</h3>
-                <p className="card-text text-center">
-                  We used Docker to ensure a consistent environment across testing,
-                  development, and production. This made it much easier for us to
-                  deploy our website without worrying about different machine
-                  configurations.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col-3 mb-4">
-            <div className="card h-100">
-              <div className="card-body">
-                <h3 className="card-title text-center">AWS</h3>
-                <p className="card-text text-center">
-                  We used AWS to host our website infrastructure.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col-3 mb-4">
-            <div className="card h-100">
-              <div className="card-body">
-                <h3 className="card-title text-center">Bootstrap</h3>
-                <p className="card-text text-center">
-                  We used Bootstrap as a CSS framework, allowing us to streamline our
-                  front-end development.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col-3 mb-4">
-            <div className="card h-100">
-              <div className="card-body">
-                <h3 className="card-title text-center">Axios</h3>
-                <p className="card-text text-center">
-                  We used Axios as a method of sending HTTP requests in order to fetch
-                  data from our APIs.
-                </p>
-              </div>
-            </div>
-          </div>
+        <div className="container my-5">
+  <h2 className="text-center pt-5 pb-3">Tools</h2>
+  <div className="row">
+    <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
+      <div className="card h-100">
+        <div className="card-body">
+          <h3 className="card-title text-center">Docker</h3>
+          <p className="card-text text-center">
+            We used Docker to ensure a consistent environment across testing,
+            development, and production. This made it much easier for us to
+            deploy our website without worrying about different machine
+            configurations.
+          </p>
         </div>
       </div>
+    </div>
+    <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
+      <div className="card h-100">
+        <div className="card-body">
+          <h3 className="card-title text-center">AWS</h3>
+          <p className="card-text text-center">
+            We used AWS to host our website infrastructure.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
+      <div className="card h-100">
+        <div className="card-body">
+          <h3 className="card-title text-center">Bootstrap</h3>
+          <p className="card-text text-center">
+            We used Bootstrap as a CSS framework, allowing us to streamline our
+            front-end development.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
+      <div className="card h-100">
+        <div className="card-body">
+          <h3 className="card-title text-center">Axios</h3>
+          <p className="card-text text-center">
+            We used Axios as a method of sending HTTP requests in order to fetch
+            data from our APIs.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
     <h2 className="text-center">Links</h2>
     <div className="text-center link-primary pb-5">
       <a
