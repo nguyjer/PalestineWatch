@@ -7,6 +7,15 @@ WORKDIR /backend
 RUN apt-get update \
     && apt-get install -y python3 python3-pip
 
+RUN apt-get update && apt-get install -y \
+    chromium \
+    chromium-driver \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set environment variables for Chromium
+ENV CHROME_BIN=/usr/bin/chromium
+ENV CHROME_DRIVER=/usr/bin/chromium-driver
+
 # Install system dependencies and PostgreSQL client libraries
 RUN apt-get update && apt-get install -y libpq-dev
 
@@ -15,6 +24,8 @@ COPY . /backend
 
 # Copy the .flaskenv file into the container
 COPY .flaskenv /backend/.flaskenv
+
+ENV PYTHONPATH=/backend
 
 # Install Python dependencies from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
