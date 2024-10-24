@@ -1,7 +1,7 @@
 import Head from "next/head";
 import SupportCard from "../components/SupportGroupCard";
 import { React, useState, useEffect } from "react";
-import { Pagination } from "react-bootstrap";  // Assuming you're using Bootstrap for pagination
+import { Pagination } from "react-bootstrap"; // Assuming you're using Bootstrap for pagination
 
 export default function SupportGroups() {
   const [supportGroups, setSupportGroups] = useState([]);
@@ -11,7 +11,9 @@ export default function SupportGroups() {
   useEffect(() => {
     const fetchSupportGroups = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:5000/api/support-groups");
+        const response = await axios.get(
+          "http://127.0.0.1:5000/api/support-groups"
+        );
         const groups = await response.data; // Ensure correct data access
         setSupportGroups(groups); // Set the articles to state
       } catch (error) {
@@ -29,7 +31,10 @@ export default function SupportGroups() {
   // Pagination logic
   const indexOfLastGroup = currentPage * groupsPerPage;
   const indexOfFirstGroup = indexOfLastGroup - groupsPerPage;
-  const currentGroups = supportGroups.slice(indexOfFirstGroup, indexOfLastGroup);
+  const currentGroups = supportGroups.slice(
+    indexOfFirstGroup,
+    indexOfLastGroup
+  );
 
   const totalPages = Math.ceil(supportGroups.length / groupsPerPage);
 
@@ -39,17 +44,26 @@ export default function SupportGroups() {
     <div>
       <Head>
         <title>Palestine Watch</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/watermelon.ico" />
       </Head>
       <main className="container">
-        <h1 className="text-center mt-4 mb-4">Support Groups</h1> {/* Centered title */}
-        <h2 className="text-center mb-4">Number of Groups: {supportGroups.length}</h2>
-        
+        <h1 className="text-center mt-4 mb-4">Support Groups</h1>{" "}
+        {/* Centered title */}
         {/* Summary below the word "Support Groups" */}
         <p className="text-center mb-4">
-          Support groups are vital for maintaining morale, raising funds, and delivering aid to the Palestinian people. By fostering a sense of solidarity and hope, these groups keep communities engaged and motivated. They also play a critical role in mobilizing financial resources through donations and fundraising efforts, which are essential for humanitarian assistance. Additionally, support groups help coordinate and distribute aid, ensuring that essential supplies like food, medical care, and shelter reach those in need despite difficult conditions on the ground.       
+          Support groups are vital for maintaining morale, raising funds, and
+          delivering aid to the Palestinian people. By fostering a sense of
+          solidarity and hope, these groups keep communities engaged and
+          motivated. They also play a critical role in mobilizing financial
+          resources through donations and fundraising efforts, which are
+          essential for humanitarian assistance. Additionally, support groups
+          help coordinate and distribute aid, ensuring that essential supplies
+          like food, medical care, and shelter reach those in need despite
+          difficult conditions on the ground.
         </p>
-
+        <h2 className="text-center mb-4">
+          Number of Groups: {supportGroups.length}
+        </h2>
         <div className="row justify-content-center">
           {currentGroups.map((group) => (
             <div key={group.id} className="col-lg-4 col-md-6 mb-4">
@@ -66,10 +80,12 @@ export default function SupportGroups() {
             </div>
           ))}
         </div>
-        
         {/* Pagination */}
         <Pagination className="justify-content-center">
-          <Pagination.Prev onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+          <Pagination.Prev
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
             Previous
           </Pagination.Prev>
           {[...Array(totalPages)].map((_, index) => (
@@ -81,7 +97,10 @@ export default function SupportGroups() {
               {index + 1}
             </Pagination.Item>
           ))}
-          <Pagination.Next onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+          <Pagination.Next
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
             Next
           </Pagination.Next>
         </Pagination>

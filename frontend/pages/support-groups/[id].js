@@ -53,6 +53,7 @@ export default function SupportGroupPage() {
     <div>
       <Head>
         <title>{supportGroups.name} Details</title>
+        <link rel="icon" href="/watermelon.ico" />
       </Head>
       <main>
         <h1>Details for {supportGroups.name}</h1>

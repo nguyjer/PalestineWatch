@@ -107,7 +107,7 @@ export default function Countries() {
     <div>
       <Head>
         <title>Palestine Watch</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/watermelon.ico" />
       </Head>
       <main className="container">
         <h1 className="text-center mt-4 mb-4">Countries</h1>{" "}
@@ -127,6 +127,7 @@ export default function Countries() {
           following countries have shown support for Palestine and have provided
           asylum to refugees during the conflict:
         </p>
+        <h2 className="text-center mb-4">Number of Countries: {countries.length}</h2>
         <div className="row justify-content-center">
           {currentCountries.map((country, index) => {
             const coaIso = country.coa_iso;

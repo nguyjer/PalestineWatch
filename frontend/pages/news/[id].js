@@ -56,6 +56,11 @@ function ArticlePage() {
   if (!SupportGroups) return <p>Loading...</p>;
 
   return (
+    <div>
+      <Head>
+        <title>Palestine Watch</title>
+        <link rel="icon" href="/watermelon.ico" />
+      </Head>
     <main>
       <div>
         <h1>{article.title}</h1>
@@ -76,7 +81,8 @@ function ArticlePage() {
         <ExploreCard link={`/countries/${randomCountry}`} type="Country" />
         <SupportCard {...supportGroups} />
       </div>
-    </main>
+      </main>
+    </div>
   );
 }
 

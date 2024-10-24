@@ -107,6 +107,7 @@ export default function CountryPage() {
     <div>
       <Head>
         <title>{coa} Details</title>
+        <link rel="icon" href="/watermelon.ico" />
       </Head>
       <main>
         <CountryDetails
