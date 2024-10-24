@@ -63,12 +63,12 @@ export default function About() {
           {currentCards.map((article) => (
             <div key={article.article_id} className="col-lg-4 col-md-6 mb-4">
               <NewsCard
-                articleId={article.article_id}
+                articleId={article.id}
                 title={truncateString(article.title, 50)}
                 description={truncateString(article.description, 95)}
-                imageUrl={article.urlToImage}
+                imageUrl={article.url_image}
                 author={article.author}
-                publishedAt={article.publishedAt}
+                publishedAt={article.publish_date}
                 source={article.source}
               />
             </div>

@@ -11,7 +11,7 @@ export default function SupportGroups() {
   useEffect(() => {
     const fetchSupportGroups = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:5000/api/support-groups");
+        const response = await axios.get("https://api.palestinewatch.me/api/support-groups");
         const groups = await response.data; // Ensure correct data access
         setSupportGroups(groups); // Set the articles to state
       } catch (error) {
@@ -61,7 +61,7 @@ export default function SupportGroups() {
                 groupState={group.state}
                 groupZipCode={group.zipCode}
                 groupLink={group.link}
-                groupImageURL={group.urlImage}
+                groupImageURL={group.url_image}
               />
             </div>
           ))}
