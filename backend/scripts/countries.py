@@ -1,6 +1,6 @@
 import requests
-from database import db  
-from models import CountriesModel
+from backend import db  
+from backend.models import CountriesModel
 
 def fetch_countries():
     unique_countries = ['JOR', 'LBN', 'SYR']
@@ -56,4 +56,4 @@ def fetch_country_details(coa_iso):
     return country
 
 if __name__ == '__main__':
-    fetch_countries()
+    print("hello world")
