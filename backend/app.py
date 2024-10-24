@@ -1,11 +1,14 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_migrate import Migrate  # Import Migrate
+
+from dotenv import load_dotenv
+load_dotenv(dotenv_path='.flaskenv')
+
 from backend import db  # Import init_app() and db
 from backend.scripts import populate_news_db, fetch_groups
-from controllers import get_all_news, get_news_by_id, get_group_by_id, get_all_groups
-
-
+from controllers.news_controller import get_all_news, get_news_by_id
+from controllers.support_groups_controller import get_all_groups, get_group_by_id
 
 from scripts.countries import fetch_countries
 

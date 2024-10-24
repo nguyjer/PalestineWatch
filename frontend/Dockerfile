@@ -2,19 +2,19 @@
 FROM node:20.17-alpine
 
 # Set working directory inside the container
-WORKDIR /app
+WORKDIR /frontend
 
 # Install a specific version of npm
 RUN npm install -g npm@7.20.0
 
 # Copy package.json and package-lock.json to the container
-COPY package.json package-lock.json /app/
+COPY package.json package-lock.json /frontend/
 
 # Install dependencies using npm
 RUN npm install --prefer-offline --no-audit
 
 # Copy the rest of the application code
-COPY . /app
+COPY . /frontend
 
 # Build the Next.js project
 RUN npm run build
