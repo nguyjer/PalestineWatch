@@ -6,12 +6,10 @@ from dotenv import load_dotenv
 load_dotenv(dotenv_path='.flaskenv')
 
 from backend import db  # Import init_app() and db
-from backend.scripts import populate_news_db, fetch_groups
-from controllers.news_controller import get_all_news, get_news_by_id
-from controllers.support_groups_controller import get_all_groups, get_group_by_id
-from controllers.countries_controller import get_all_countries, get_country_by_id
-
-from scripts.countries import fetch_countries
+from backend.scripts import populate_news_db, fetch_groups, fetch_countries
+from backend.controllers.news_controller import get_all_news, get_news_by_id
+from backend.controllers.support_groups_controller import get_all_groups, get_group_by_id
+from backend.controllers.countries_controller import get_all_countries, get_country_by_id
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = (
@@ -30,7 +28,8 @@ with app.app_context():
     db.create_all()
     #populate_news_db() 
     fetch_groups()
-    fetch_countries()
+
+    # fetch_countries()
     pass
 
 
