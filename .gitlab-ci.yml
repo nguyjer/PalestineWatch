@@ -17,6 +17,14 @@ build-job:
     - npm run build
     - echo "Compile complete."
 
+postman-test-job:
+  stage: test
+  image: postman/newman:alpine
+  script:
+    - echo "Running Postman tests..."
+    - newman run PalestineWatch.postman_collection.json
+    - echo "Postman tests complete."
+
 unit-test-job:
   stage: test
   image: node:20-alpine

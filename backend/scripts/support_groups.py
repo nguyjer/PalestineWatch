@@ -67,7 +67,7 @@ def fetch_groups():
                 email=group_email,
                 city=group_city,
                 state=group_state,
-                zip_code=group_zip_code,
+                zipcode=group_zip_code,
                 link=group_link,
                 url_image=group_image,
                 newsId=None,
