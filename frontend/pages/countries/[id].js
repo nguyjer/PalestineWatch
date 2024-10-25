@@ -104,7 +104,7 @@ export default function CountryPage() {
       </Head>
       <main>
         <CountryDetails
-          countryData={countryData}
+          countryData={country}
           countryDetails={countryDetails}
         />
         <div>
