@@ -42,12 +42,12 @@ def news_by_id(news_id):
     return get_news_by_id(news_id)
 
 # support groups endpoints
-@app.route('/api/support_groups', methods=['GET'])
+@app.route('/api/support-groups', methods=['GET'])
 def all_groups():
     groups = get_all_groups()
     return jsonify(groups)
 
-@app.route('/api/support_groups/<int:news_id>', methods=['GET'])
+@app.route('/api/support-groups/<int:group_id>', methods=['GET'])
 def group_by_id(group_id):
     groups = get_group_by_id(group_id)
     return jsonify(groups)

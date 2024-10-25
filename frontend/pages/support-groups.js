@@ -73,9 +73,9 @@ export default function SupportGroups() {
                 groupEmail={group.email}
                 groupCity={group.city}
                 groupState={group.state}
-                groupZipCode={group.zipCode}
+                groupZipCode={group.zipcode}
                 groupLink={group.link}
-                groupImageURL={group.urlImage}
+                groupImageURL={group.url_image}
               />
             </div>
           ))}

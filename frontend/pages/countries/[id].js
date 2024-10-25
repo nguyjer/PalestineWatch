@@ -27,9 +27,9 @@ export default function CountryPage() {
       cf_type: "ISO",
     };
 
-    const baseUrl = "https://api.unhcr.org/population/v1/unrwa/";
-    const queryString = new URLSearchParams(opts).toString();
-    const apiUrl = `${baseUrl}?${queryString}`;
+    // const baseUrl = "https://api.unhcr.org/population/v1/unrwa/";
+    // const queryString = new URLSearchParams(opts).toString();
+    const apiUrl = `http://api.palestinewatch.me/api/countries`;
 
     fetch(apiUrl)
       .then((response) => {
@@ -80,15 +80,12 @@ export default function CountryPage() {
   const fetchCountryDetails = async () => {
     const details = {};
     try {
-      const res = await axios.get(
-        `https://restcountries.com/v3.1/alpha/${coa}`
-      );
-      const countryData = res.data[0];
+
 
       details["commonName"] = countryData.name.common;
       details["officialName"] = countryData.name.official;
-      details["unMember"] = countryData.unMember ? "Yes" : "No";
-      details["flag"] = countryData.flags.png;
+      details["unMember"] = countryData.unMembership ? "Yes" : "No";
+      details["flag"] = countryData.flag_url.png;
       details["maps"] = countryData.maps.googleMaps;
       details["capital"] = countryData.capital
         ? countryData.capital[0]

@@ -23,7 +23,7 @@ export default function Countries() {
 
     const baseUrl = "https://api.unhcr.org/population/v1/unrwa/";
     const queryString = new URLSearchParams(opts).toString();
-    const apiUrl = `${baseUrl}?${queryString}`;
+    const apiUrl = `http://api.palestinewatch.me/api/countries`;
 
     fetch(apiUrl)
       .then((response) => {
@@ -62,15 +62,12 @@ export default function Countries() {
       const coaIso = country.coa_iso;
 
       try {
-        const res = await axios.get(
-          `https://restcountries.com/v3.1/alpha/${coaIso}`
-        );
         const countryData = res.data[0];
 
         details[coaIso] = {
-          flag: countryData.flags.png,
-          capital: countryData.capital ? countryData.capital[0] : "Unknown",
-          population: countryData.population.toLocaleString(),
+          flag: country.flag_url,
+          capital: country.capital ? country.capital : "Unknown",
+          population: country.population,
           region: countryData.region,
           subregion: countryData.subregion,
         };

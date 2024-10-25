@@ -10,6 +10,7 @@ export default function SupportGroupPage() {
   const { id } = router.query;
   const [news, setNews] = useState(null);
   const [supportGroups, setSupportGroups] = useState(null); // Initialize as array
+  const [country, setCountry] = useState(null);
 
   useEffect(() => {
     if (!id) return; // Ensure id is available before fetching
@@ -23,6 +24,19 @@ export default function SupportGroupPage() {
         setSupportGroups(group || {});
       } catch (error) {
         console.error("Error fetching support groups:", error);
+      }
+    };
+
+    const fetchCountry = async () => {
+      try {
+        const response = await axios.get(
+          `http://api.palestinewatch.me/api/countries`
+        ); // Fetch the article details
+        const data = await response.data;
+        console.log(data);
+        setCountry(data[id] || {});
+      } catch (error) {
+        console.error("Error fetching country:", error);
       }
     };
 
@@ -40,12 +54,16 @@ export default function SupportGroupPage() {
 
     fetchSupportGroups();
     fetchNews();
+    fetchCountry();
   }, [id]); // Add id as a dependency to trigger the effect when it changes
 
   if (!supportGroups) {
     return <p>Loading...</p>;
   }
   if (!news) {
+    return <p>Loading...</p>;
+  }
+  if (!country) {
     return <p>Loading...</p>;
   }
 
@@ -58,13 +76,13 @@ export default function SupportGroupPage() {
       <main>
         <h1>Details for {supportGroups.name}</h1>
         <img
-          src={supportGroups.imageURL || "/placeholder-image.jpg"} // Use a placeholder if no image URL
+          src={supportGroups.url_image || "/placeholder-image.jpg"} // Use a placeholder if no image URL
           alt={`${supportGroups.name} image`}
         />
         <p>Email: {supportGroups.email}</p>
         <p>City: {supportGroups.city}</p>
         <p>State: {supportGroups.state}</p>
-        <p>Zip Code: {supportGroups.zipCode}</p>
+        <p>Zip Code: {supportGroups.zipcode}</p>
         <p>
           <Link href={supportGroups.link}>
             <u>{supportGroups.link}</u>
@@ -77,6 +95,11 @@ export default function SupportGroupPage() {
             <NewsCard {...news} />
           ) : (
             <p>No news available</p>
+          )}
+          {country && Object.keys(country).length > 0 ? (
+            <CountryCard {...country} />
+          ) : (
+            <p>No country available</p>
           )}
         </div>
       </main>
