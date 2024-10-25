@@ -145,17 +145,6 @@ export default function ArticlePage() {
           )}
         </div>
 
-        {/* Explore More Section */}
-        <div className="text-center mb-3">
-          {randomCountryId && (
-            <ExploreCard link={`/countries/${randomCountryId}`} type="Country" />
-          )}
-        </div>
-        <div className="text-center mb-3">
-          {randomSupportGroupId && (
-            <ExploreCard link={`/support-groups/${randomSupportGroupId}`} type="Support Group" />
-          )}
-        </div>
       </main>
     </div>
   );
