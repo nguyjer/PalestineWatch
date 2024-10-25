@@ -1,5 +1,5 @@
 import random
-from your_flask_app import db, NewsModel, SupportGroupsModel, CountriesModel
+from backend.models import db, NewsModel, SupportGroupsModel, CountriesModel
 
 def get_random_id(model):
     ids = [item.id for item in model.query.all()]
