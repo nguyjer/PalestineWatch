@@ -47,7 +47,7 @@ export default function CountryPage() {
     const fetchNews = async () => {
       try {
         const response = await axios.get(
-          `http://api.palestinewatch.me/api/news/${id}`
+          `http://api.palestinewatch.me/api/news/${country.newsId}`
         );
         const articles = await response.data;
 
@@ -60,7 +60,7 @@ export default function CountryPage() {
     const fetchSupportGroup = async () => {
       try {
         const response = await axios.get(
-          `http://api.palestinewatch.me/api/support-groups/${id}`
+          `http://api.palestinewatch.me/api/support-groups/${country.supportGroupId}`
         );
         const group = await response.data;
 

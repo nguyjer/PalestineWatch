@@ -14,13 +14,14 @@ def get_all_groups():
                 "zipcode": group.zipcode,
                 "link": group.link,
                 "url_image": group.url_image,
-                "newId": group.supportGroupId,
+                "newsId": group.newsId,
                 "countryId": group.countryId,
             }
             for group in groups
         ]
         return jsonify(groups_data), 200
     except Exception as e:
+        print(f"Error in get_all_groups: {e}")
         return jsonify({"error": str(e)}), 500
 
 def get_group_by_id(groups_id):
@@ -38,9 +39,10 @@ def get_group_by_id(groups_id):
             "zipcode": group.zipcode,
             "link": group.link,
             "url_image": group.url_image,
-            "newId": group.supportGroupId,
+            "newsId": group.newsId,
             "countryId": group.countryId,
         }
         return jsonify(group_data), 200
     except Exception as e:
+        print(f"Error in get_group_by_id: {e}")
         return jsonify({"error": str(e)}), 500

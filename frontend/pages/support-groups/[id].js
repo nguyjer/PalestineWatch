@@ -30,7 +30,7 @@ export default function SupportGroupPage() {
     const fetchCountry = async () => {
       try {
         const response = await axios.get(
-          `http://api.palestinewatch.me/api/countries/${id}`
+          `http://api.palestinewatch.me/api/countries/${supportGroups.countryId}`
         ); // Fetch the article details
         const data = await response.data;
         console.log(data);
@@ -43,7 +43,7 @@ export default function SupportGroupPage() {
     const fetchNews = async () => {
       try {
         const response = await axios.get(
-          `http://api.palestinewatch.me/api/news/${id}`
+          `http://api.palestinewatch.me/api/news/${supportGroups.newsId}`
         );
         const article = await response.data;
         setNews(article || {});
