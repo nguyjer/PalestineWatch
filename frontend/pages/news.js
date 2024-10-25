@@ -5,7 +5,7 @@ import { React, useState, useEffect } from "react";
 import { Pagination } from "react-bootstrap"; // Assuming you're using Bootstrap for pagination
 
 
-export default function About() {
+export default function News() {
   const [newsCards, setNewsCards] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 9; // Number of cards to display per page

@@ -46,12 +46,12 @@ def news_by_id(news_id):
 @app.route('/api/support-groups', methods=['GET'])
 def all_groups():
     groups = get_all_groups()
-    return jsonify(groups)
+    return (groups)
 
 @app.route('/api/support-groups/<int:group_id>', methods=['GET'])
 def group_by_id(group_id):
     groups = get_group_by_id(group_id)
-    return jsonify(groups)
+    return (groups)
 
 # countries endpoints
 @app.route('/api/countries', methods=['GET'])

@@ -15,7 +15,7 @@ export default function SupportGroups() {
         const groups = await response.data; // Ensure correct data access
         setSupportGroups(groups); // Set the articles to state
       } catch (error) {
-        console.error("Error fetching news:", error);
+        console.error("Error fetching groups:", error);
       }
     };
 

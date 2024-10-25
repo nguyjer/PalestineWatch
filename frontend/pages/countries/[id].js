@@ -10,7 +10,7 @@ import SupportCard from "../../components/SupportGroupCard.js";
 export default function CountryPage() {
   const router = useRouter();
   const { id } = router.query;
-  const [countryData, setCountryData] = useState([]);
+  const [country, setCountry] = useState({});
   const [countryDetails, setCountryDetails] = useState({});
   const [news, setNews] = useState({}); // Keep as an object for a single article
   const coa = idToCoaMap[id];
@@ -31,27 +31,25 @@ export default function CountryPage() {
     // const queryString = new URLSearchParams(opts).toString();
     const apiUrl = `http://api.palestinewatch.me/api/countries`;
 
-    fetch(apiUrl)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response error " + response.statusText);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setCountryData(data["items"]);
-        fetchCountryDetails();
-      })
-      .catch((error) => {
-        console.error("Problem with fetch: ", error);
-      });
+    const fetchCountries = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.palestinewatch.me/api/countries/${id}`
+        );
+        const data = await response.data; // Access the data directly
+
+        setCountry(data); // Set the unique countries data to state
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
+    };
 
     const fetchNews = async () => {
       try {
         const response = await axios.get(
           `http://api.palestinewatch.me/api/news/${id}`
         );
-        const articles = response.data;
+        const articles = await response.data;
 
         setNews(articles);
       } catch (error) {
@@ -64,7 +62,7 @@ export default function CountryPage() {
         const response = await axios.get(
           `http://api.palestinewatch.me/api/support-groups/${id}`
         );
-        const group = response.data;
+        const group = await response.data;
 
         // Assuming group is an object for a single support group
         setSupportGroup(group);
@@ -72,33 +70,31 @@ export default function CountryPage() {
         console.error("Error fetching support group:", error);
       }
     };
+    const fetchCountryDetails = async () => {
+      const details = {};
+      try {
+        details["commonName"] = country.common_name;
+        details["officialName"] = country.official_name;
+        details["unMember"] = country.unMembership ? "Yes" : "No";
+        details["flag"] = country.flag_url;
+        details["maps"] = country.maps || "Unknown";
+        details["capital"] = country.capital ? country.capital[0] : "Unknown";
+        details["population"] = country.population.toLocaleString();
+        details["region"] = country.region;
+        details["subregion"] = country.subregion;
+      } catch (error) {
+        console.error(`Problem with country - ${coa}:`, error);
+      }
 
+      setCountryDetails(details);
+    };
+
+    fetchCountries();
+    fetchCountryDetails();
     fetchSupportGroup();
     fetchNews();
   }, [coa]);
 
-  const fetchCountryDetails = async () => {
-    const details = {};
-    try {
-
-
-      details["commonName"] = countryData.name.common;
-      details["officialName"] = countryData.name.official;
-      details["unMember"] = countryData.unMembership ? "Yes" : "No";
-      details["flag"] = countryData.flag_url.png;
-      details["maps"] = countryData.maps.googleMaps;
-      details["capital"] = countryData.capital
-        ? countryData.capital[0]
-        : "Unknown";
-      details["population"] = countryData.population.toLocaleString();
-      details["region"] = countryData.region;
-      details["subregion"] = countryData.subregion;
-    } catch (error) {
-      console.error(`Problem with country - ${coa}:`, error);
-    }
-
-    setCountryDetails(details);
-  };
 
   return (
     <div>
