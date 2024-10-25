@@ -3,6 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { React, useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is imported
+
 import SupportCard from "../../components/SupportGroupCard";
 
 export default function ArticlePage() {
@@ -54,6 +55,40 @@ export default function ArticlePage() {
     fetchSupportGroups();
     fetchArticle();
   }, [id]); // Refetch whenever `id` changes
+
+  useEffect(() => {
+    const fetchRandomCountryId = async () => {
+      try {
+        const response = await axios.get('https://api.palestinewatch.me/api/countries');
+        const countries = response.data;
+        if (countries && countries.length > 0) {
+          const randomIndex = Math.floor(Math.random() * countries.length);
+          setRandomCountryId(countries[randomIndex].id);
+        }
+      } catch (error) {
+        console.error("Error fetching random country:", error);
+      }
+    };
+
+    fetchRandomCountryId();
+  }, []); // Run once when the component mounts
+
+  useEffect(() => {
+    const fetchRandomSupportGroupId = async () => {
+      try {
+        const response = await axios.get('https://api.palestinewatch.me/api/support-groups');
+        const supportGroups = response.data;
+        if (supportGroups && supportGroups.length > 0) {
+          const randomIndex = Math.floor(Math.random() * supportGroups.length);
+          setRandomSupportGroupId(supportGroups[randomIndex].id);
+        }
+      } catch (error) {
+        console.error("Error fetching random support group:", error);
+      }
+    };
+
+    fetchRandomSupportGroupId();
+  }, []); // Run once when the component mounts
 
   if (!article) {
     return <div>Loading...</div>;
@@ -107,6 +142,18 @@ export default function ArticlePage() {
             <CountryCard {...country} />
           ) : (
             <p>No country available</p>
+          )}
+        </div>
+
+        {/* Explore More Section */}
+        <div className="text-center mb-3">
+          {randomCountryId && (
+            <ExploreCard link={`/countries/${randomCountryId}`} type="Country" />
+          )}
+        </div>
+        <div className="text-center mb-3">
+          {randomSupportGroupId && (
+            <ExploreCard link={`/support-groups/${randomSupportGroupId}`} type="Support Group" />
           )}
         </div>
       </main>
