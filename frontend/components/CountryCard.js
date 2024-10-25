@@ -12,6 +12,11 @@ export default function CountryCard({
 }) {
   return (
     <div className="card h-100 d-flex flex-column">
+      {/* Country name at the top */}
+      <div className="card-header text-center">
+        <h4>{id}</h4>
+      </div>
+
       <div className="d-flex justify-content-center">
         {flag && (
           <img
@@ -22,8 +27,8 @@ export default function CountryCard({
           />
         )}
       </div>
+
       <div className="card-body d-flex flex-column flex-grow-1">
-        <h5 className="card-title">{country}</h5>
         <div className="mb-2">
           <p className="card-text mb-1">
             <strong>Capital:</strong> {capital || "Loading..."}

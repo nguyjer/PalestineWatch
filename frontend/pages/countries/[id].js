@@ -1,20 +1,20 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Head from "next/head";
-import CountryDetails from "../../components/CountryDetails.js";
 import axios from "axios";
 import idToCoaMap from "../../components/idToCoaMap.js";
 import NewsCard from "../../components/NewsCard.js";
 import SupportCard from "../../components/SupportGroupCard.js";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function CountryPage() {
   const router = useRouter();
   const { id } = router.query;
   const [country, setCountry] = useState({});
   const [countryDetails, setCountryDetails] = useState({});
-  const [news, setNews] = useState({}); // Keep as an object for a single article
+  const [news, setNews] = useState({});
   const coa = idToCoaMap[id];
-  const [supportGroup, setSupportGroup] = useState({}); // Keep as an object
+  const [supportGroup, setSupportGroup] = useState({});
 
   useEffect(() => {
     if (!coa) return;
@@ -27,18 +27,14 @@ export default function CountryPage() {
       cf_type: "ISO",
     };
 
-    // const baseUrl = "https://api.unhcr.org/population/v1/unrwa/";
-    // const queryString = new URLSearchParams(opts).toString();
-    const apiUrl = `http://api.palestinewatch.me/api/countries`;
-
     const fetchCountries = async () => {
       try {
         const response = await axios.get(
           `https://api.palestinewatch.me/api/countries/${id}`
         );
-        const data = await response.data; // Access the data directly
+        const data = await response.data;
 
-        setCountry(data); // Set the unique countries data to state
+        setCountry(data);
       } catch (error) {
         console.error("Error fetching countries:", error);
       }
@@ -64,12 +60,12 @@ export default function CountryPage() {
         );
         const group = await response.data;
 
-        // Assuming group is an object for a single support group
         setSupportGroup(group);
       } catch (error) {
         console.error("Error fetching support group:", error);
       }
     };
+
     const fetchCountryDetails = async () => {
       const details = {};
       try {
@@ -95,7 +91,6 @@ export default function CountryPage() {
     fetchNews();
   }, [coa]);
 
-
   return (
     <div>
       <Head>
@@ -103,13 +98,61 @@ export default function CountryPage() {
         <link rel="icon" href="/watermelon.ico" />
       </Head>
       <main>
-        <CountryDetails
-          countryData={country}
-          countryDetails={countryDetails}
-        />
+        {/* Moved CountryDetails JSX here */}
+        <div className="container mt-5">
+          <h1 className="text-center mb-4">Country Details</h1>
+          <p className="text-center mb-4">
+            Here you can find important information about the country, including its
+            history, demographics, and geographical location.
+          </p>
+          <div className="row justify-content-center">
+            <div className="col-md-6 text-center">
+              {countryDetails["flag"] && (
+                <img
+                  src={countryDetails["flag"]}
+                  alt={`flag picture`}
+                  style={{ width: "100px" }}
+                  className="mb-3"
+                />
+              )}
+              <h3>Official Name: {countryDetails["officialName"]}</h3>
+              <h3>Common Name: {countryDetails["commonName"]}</h3>
+              <h5>Member of the UN: {countryDetails["unMember"]}</h5>
+              <br />
+              <p>Capital: {countryDetails["capital"]}</p>
+              <p>Population: {countryDetails["population"]}</p>
+              <p>Region: {countryDetails["region"]}</p>
+              <p>Subregion: {countryDetails["subregion"]}</p>
+
+              <div>
+                <h4>Google Maps:</h4>
+                <a
+                  href={countryDetails["maps"]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <u>View on Google Maps</u>
+                </a>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <h4 className="text-center">Refugee Statistics</h4>
+              <ul className="list-group">
+                {/* Add actual country data or remove this block if not needed */}
+                {/* {countryData.map((entry, index) => (
+                  <li key={index} className="list-group-item">
+                    Year: {entry.year}, Total Refugees:{" "}
+                    {entry.total.toLocaleString()}
+                  </li>
+                ))} */}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Rest of the content */}
         <div>
           <h2>Explore More</h2>
-          {/* Conditional rendering for NewsCard and SupportCard */}
           {news && Object.keys(news).length > 0 ? (
             <NewsCard {...news} />
           ) : (
