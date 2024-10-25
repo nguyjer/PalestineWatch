@@ -35,7 +35,7 @@ function ArticlePage() {
     const fetchCountry = async () => {
       try {
         const response = await axios.get(
-          `http://api.palestinewatch.me/api/countries`
+          `http://api.palestinewatch.me/api/countries/${id}`
         ); // Fetch the article details
         const data = await response.data;
         console.log(data);

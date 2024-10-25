@@ -1,10 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function CountryDetails({ countryData, countryDetails }) {
-  if (countryData.length === 0) {
+  if (countryDetails.length === 0) {
     return <p>Loading data...</p>;
   }
-
+  
   return (
     <div className="container mt-5">
       <h1 className="text-center mb-4">Country Details</h1>{" "}
@@ -46,12 +46,12 @@ export default function CountryDetails({ countryData, countryDetails }) {
         <div className="col-md-6">
           <h4 className="text-center">Refugee Statistics</h4>
           <ul className="list-group">
-            {countryData.map((entry, index) => (
+            {/* {countryData.map((entry, index) => (
               <li key={index} className="list-group-item">
                 Year: {entry.year}, Total Refugees:{" "}
                 {entry.total.toLocaleString()}
               </li>
-            ))}
+            ))} */}
           </ul>
         </div>
       </div>

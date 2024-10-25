@@ -9,75 +9,29 @@ const ITEMS_PER_PAGE = 3; // Number of countries per page
 
 export default function Countries() {
   const [countries, setCountries] = useState([]);
-  const [countryDetails, setCountryDetails] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    const opts = {
-      page: 1,
-      yearFrom: 2014,
-      yearTo: 2023,
-      coa: "JOR,LBN,SYR",
-      cf_type: "ISO",
+    const fetchCountries = async () => {
+      try {
+        const response = await axios.get(
+          "https://api.palestinewatch.me/api/countries"
+        );
+        const data = response.data; // Access the data directly
+
+        // Filter unique countries based on coa_iso
+        const uniqueCountries = Array.from(
+          new Map(data.map((country) => [country.coa_iso, country])).values()
+        );
+
+        setCountries(uniqueCountries); // Set the unique countries data to state
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
     };
 
-    const baseUrl = "https://api.unhcr.org/population/v1/unrwa/";
-    const queryString = new URLSearchParams(opts).toString();
-    const apiUrl = `http://api.palestinewatch.me/api/countries`;
-
-    fetch(apiUrl)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response error " + response.statusText);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        const uniqueCountries = [];
-        const countrySet = new Set();
-        let idCounter = 1;
-
-        data["items"].forEach((country) => {
-          if (!countrySet.has(country.coa_iso)) {
-            countrySet.add(country.coa_iso);
-            uniqueCountries.push({
-              ...country,
-              id: idCounter,
-            });
-            idCounter += 1;
-          }
-        });
-        setCountries(uniqueCountries);
-        fetchCountryDetails(uniqueCountries);
-      })
-      .catch((error) => {
-        console.error("Problem with fetch: ", error);
-      });
+    fetchCountries();
   }, []);
-
-  const fetchCountryDetails = async (countries) => {
-    const details = {};
-
-    for (const country of countries) {
-      const coaIso = country.coa_iso;
-
-      try {
-        const countryData = res.data[0];
-
-        details[coaIso] = {
-          flag: country.flag_url,
-          capital: country.capital ? country.capital : "Unknown",
-          population: country.population,
-          region: countryData.region,
-          subregion: countryData.subregion,
-        };
-      } catch (error) {
-        console.error(`Problem with country - ${coaIso}:`, error);
-      }
-    }
-
-    setCountryDetails(details);
-  };
 
   // Pagination logic
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
@@ -124,27 +78,23 @@ export default function Countries() {
           following countries have shown support for Palestine and have provided
           asylum to refugees during the conflict:
         </p>
-        <h2 className="text-center mb-4">Number of Countries: {countries.length}</h2>
+        <h2 className="text-center mb-4">
+          Number of Countries: {countries.length}
+        </h2>
         <div className="row justify-content-center">
-          {currentCountries.map((country, index) => {
-            const coaIso = country.coa_iso;
-            const details = countryDetails[coaIso] || {};
-            const id = country.id;
-
-            return (
-              <div key={id} className="col-lg-4 col-md-6 mb-4">
-                <CountryCard
-                  id={id}
-                  country={country.coa_name}
-                  flag={details.flag}
-                  capital={details.capital}
-                  population={details.population}
-                  region={details.region}
-                  subregion={details.subregion}
-                />
-              </div>
-            );
-          })}
+          {currentCountries.map((country) => (
+            <div key={country.coa_iso} className="col-lg-4 col-md-6 mb-4">
+              <CountryCard
+                id={country.coa_iso} // Using coa_iso as the ID
+                country={country.coa_name}
+                flag={country.flag_url}
+                capital={country.capital}
+                population={country.population}
+                region={country.region}
+                subregion={country.subregion}
+              />
+            </div>
+          ))}
         </div>
         {/* Pagination */}
         <Pagination className="justify-content-center mt-4">

@@ -30,11 +30,11 @@ export default function SupportGroupPage() {
     const fetchCountry = async () => {
       try {
         const response = await axios.get(
-          `http://api.palestinewatch.me/api/countries`
+          `http://api.palestinewatch.me/api/countries/${id}`
         ); // Fetch the article details
         const data = await response.data;
         console.log(data);
-        setCountry(data[id] || {});
+        setCountry(data || {});
       } catch (error) {
         console.error("Error fetching country:", error);
       }
