@@ -8,9 +8,13 @@ function TotalStats({ stats }) {
     <section>
       <h2 className="text-center pt-5">Overall Stats</h2>
       <div className="text-center">
-      <p>Total No. of Issues: {stats.issues}<br></br>
-      Total No. of Commits: {stats.commits}<br></br>
-      Total No. of Unit Tests: {stats.utests}</p>
+        <p>
+          Total No. of Issues: {stats.issues}
+          <br></br>
+          Total No. of Commits: {stats.commits}
+          <br></br>
+          Total No. of Unit Tests: {stats.utests}
+        </p>
       </div>
     </section>
   );
@@ -211,37 +215,37 @@ export default function About() {
     <div>
       <Head>
         <title>Palestine Watch</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/watermelon.ico" />
       </Head>
 
       <main>
-        <h1 className="text-center">Our Mission</h1>
-          <p className="px-5 pt-3 text-center">
-            Welcome to Palestine Watch! The purpose of this website is to inform
-            you about the ongoing conflict between Israel and Palestine, and, if
-            you'd like, how you can help! Here, you'll be able to find different
-            news sources about the latest events in the conflict, as well as
-            support groups that you can donate to to help those in need. You'll
-            also be able to find information about other countries that are
-            involved in the conflict.
-          </p>
+        <h1 className="text-center mt-4 mb-4">Our Mission</h1>
+        <p className="px-5 pt-3 text-center">
+          Welcome to Palestine Watch! The purpose of this website is to inform
+          you about the ongoing conflict between Israel and Palestine, and, if
+          you'd like, how you can help! Here, you'll be able to find different
+          news sources about the latest events in the conflict, as well as
+          support groups that you can donate to to help those in need. You'll
+          also be able to find information about other countries that are
+          involved in the conflict.
+        </p>
 
-        <h2 className="text-center py-3">Members</h2>
-          <div className="row justify-content-center">
-            {members.map((member) => (
-              <MemberCard key={member.name} member={member} />
-            ))}
-          </div>
+        <h2 className="text-center mb-4">Members</h2>
+        <div className="row justify-content-center">
+          {members.map((member) => (
+            <MemberCard key={member.name} member={member} />
+          ))}
+        </div>
 
         <TotalStats key={stats.issues} stats={stats} />
         <h2 className="text-center pt-5"> Sources </h2>
-          <p className="text-center">
-            https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict{" "}
-            <br></br>
-            https://www.un.org/unispal/history/ <br></br>
-            https://www.britannica.com/place/Palestine <br></br>
-            Palestine Causality Toll: 42,385 Palestinians Killed
-          </p>
+        <p className="text-center">
+          https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict{" "}
+          <br></br>
+          https://www.un.org/unispal/history/ <br></br>
+          https://www.britannica.com/place/Palestine <br></br>
+          Palestine Causality Toll: 42,385 Palestinians Killed
+        </p>
         <div className="datahere text-center">
           <h2 className="pt-5">Data</h2>
           <a
@@ -272,74 +276,74 @@ export default function About() {
           </p>
         </div>
         <div className="container my-5">
-  <h2 className="text-center pt-5 pb-3">Tools</h2>
-  <div className="row">
-    <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
-      <div className="card h-100">
-        <div className="card-body">
-          <h3 className="card-title text-center">Docker</h3>
-          <p className="card-text text-center">
-            We used Docker to ensure a consistent environment across testing,
-            development, and production. This made it much easier for us to
-            deploy our website without worrying about different machine
-            configurations.
-          </p>
+          <h2 className="text-center pt-5 pb-3">Tools</h2>
+          <div className="row">
+            <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div className="card h-100">
+                <div className="card-body">
+                  <h3 className="card-title text-center">Docker</h3>
+                  <p className="card-text text-center">
+                    We used Docker to ensure a consistent environment across
+                    testing, development, and production. This made it much
+                    easier for us to deploy our website without worrying about
+                    different machine configurations.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div className="card h-100">
+                <div className="card-body">
+                  <h3 className="card-title text-center">AWS</h3>
+                  <p className="card-text text-center">
+                    We used AWS to host our website infrastructure.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div className="card h-100">
+                <div className="card-body">
+                  <h3 className="card-title text-center">Bootstrap</h3>
+                  <p className="card-text text-center">
+                    We used Bootstrap as a CSS framework, allowing us to
+                    streamline our front-end development.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div className="card h-100">
+                <div className="card-body">
+                  <h3 className="card-title text-center">Axios</h3>
+                  <p className="card-text text-center">
+                    We used Axios as a method of sending HTTP requests in order
+                    to fetch data from our APIs.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
-      <div className="card h-100">
-        <div className="card-body">
-          <h3 className="card-title text-center">AWS</h3>
-          <p className="card-text text-center">
-            We used AWS to host our website infrastructure.
-          </p>
-        </div>
-      </div>
-    </div>
-    <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
-      <div className="card h-100">
-        <div className="card-body">
-          <h3 className="card-title text-center">Bootstrap</h3>
-          <p className="card-text text-center">
-            We used Bootstrap as a CSS framework, allowing us to streamline our
-            front-end development.
-          </p>
-        </div>
-      </div>
-    </div>
-    <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
-      <div className="card h-100">
-        <div className="card-body">
-          <h3 className="card-title text-center">Axios</h3>
-          <p className="card-text text-center">
-            We used Axios as a method of sending HTTP requests in order to fetch
-            data from our APIs.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-    <h2 className="text-center">Links</h2>
-    <div className="text-center link-primary pb-5">
-      <a
-        href="https://gitlab.com/nguyjer/cs373-fall-2024-group-06"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Gitlab Repository
-      </a>
-      <br></br>
-      <a
-        href="https://documenter.getpostman.com/view/38731121/2sAXxLBDwn"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Postman API
-      </a>
-    </div>
+        <h2 className="text-center">Links</h2>
+        <div className="text-center link-primary pb-5">
+          <a
+            href="https://gitlab.com/nguyjer/cs373-fall-2024-group-06"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Gitlab Repository
+          </a>
+          <br></br>
+          <a
+            href="https://documenter.getpostman.com/view/38731121/2sAXxLBDwn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Postman API
+          </a>
+        </div>
       </main>
     </div>
   );

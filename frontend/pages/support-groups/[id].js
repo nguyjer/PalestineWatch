@@ -10,6 +10,7 @@ export default function SupportGroupPage() {
   const { id } = router.query;
   const [news, setNews] = useState(null);
   const [supportGroups, setSupportGroups] = useState(null); // Initialize as array
+  const [country, setCountry] = useState(null);
 
   useEffect(() => {
     if (!id) return; // Ensure id is available before fetching
@@ -17,7 +18,7 @@ export default function SupportGroupPage() {
     const fetchSupportGroups = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:5000/api/support-groups/${id}`
+          `http://api.palestinewatch.me/api/support-groups/${id}`
         );
         const group = await response.data;
         setSupportGroups(group || {});
@@ -26,10 +27,23 @@ export default function SupportGroupPage() {
       }
     };
 
+    const fetchCountry = async () => {
+      try {
+        const response = await axios.get(
+          `http://api.palestinewatch.me/api/countries`
+        ); // Fetch the article details
+        const data = await response.data;
+        console.log(data);
+        setCountry(data[id] || {});
+      } catch (error) {
+        console.error("Error fetching country:", error);
+      }
+    };
+
     const fetchNews = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:5000/api/news/${id}`
+          `http://api.palestinewatch.me/api/news/${id}`
         );
         const article = await response.data;
         setNews(article || {});
@@ -40,6 +54,7 @@ export default function SupportGroupPage() {
 
     fetchSupportGroups();
     fetchNews();
+    fetchCountry();
   }, [id]); // Add id as a dependency to trigger the effect when it changes
 
   if (!supportGroups) {
@@ -48,22 +63,26 @@ export default function SupportGroupPage() {
   if (!news) {
     return <p>Loading...</p>;
   }
+  if (!country) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div>
       <Head>
         <title>{supportGroups.name} Details</title>
+        <link rel="icon" href="/watermelon.ico" />
       </Head>
       <main>
         <h1>Details for {supportGroups.name}</h1>
         <img
-          src={supportGroups.imageURL || "/placeholder-image.jpg"} // Use a placeholder if no image URL
+          src={supportGroups.url_image || "/placeholder-image.jpg"} // Use a placeholder if no image URL
           alt={`${supportGroups.name} image`}
         />
         <p>Email: {supportGroups.email}</p>
         <p>City: {supportGroups.city}</p>
         <p>State: {supportGroups.state}</p>
-        <p>Zip Code: {supportGroups.zipCode}</p>
+        <p>Zip Code: {supportGroups.zipcode}</p>
         <p>
           <Link href={supportGroups.link}>
             <u>{supportGroups.link}</u>
@@ -76,6 +95,11 @@ export default function SupportGroupPage() {
             <NewsCard {...news} />
           ) : (
             <p>No news available</p>
+          )}
+          {country && Object.keys(country).length > 0 ? (
+            <CountryCard {...country} />
+          ) : (
+            <p>No country available</p>
           )}
         </div>
       </main>

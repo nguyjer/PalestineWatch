@@ -48,7 +48,7 @@ def all_groups():
     groups = get_all_groups()
     return jsonify(groups)
 
-@app.route('/api/support-groups/<int:news_id>', methods=['GET'])
+@app.route('/api/support-groups/<int:group_id>', methods=['GET'])
 def group_by_id(group_id):
     groups = get_group_by_id(group_id)
     return jsonify(groups)

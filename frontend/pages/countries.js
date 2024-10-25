@@ -23,7 +23,7 @@ export default function Countries() {
 
     const baseUrl = "https://api.unhcr.org/population/v1/unrwa/";
     const queryString = new URLSearchParams(opts).toString();
-    const apiUrl = `${baseUrl}?${queryString}`;
+    const apiUrl = `http://api.palestinewatch.me/api/countries`;
 
     fetch(apiUrl)
       .then((response) => {
@@ -62,15 +62,12 @@ export default function Countries() {
       const coaIso = country.coa_iso;
 
       try {
-        const res = await axios.get(
-          `https://restcountries.com/v3.1/alpha/${coaIso}`
-        );
         const countryData = res.data[0];
 
         details[coaIso] = {
-          flag: countryData.flags.png,
-          capital: countryData.capital ? countryData.capital[0] : "Unknown",
-          population: countryData.population.toLocaleString(),
+          flag: country.flag_url,
+          capital: country.capital ? country.capital : "Unknown",
+          population: country.population,
           region: countryData.region,
           subregion: countryData.subregion,
         };
@@ -107,7 +104,7 @@ export default function Countries() {
     <div>
       <Head>
         <title>Palestine Watch</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/watermelon.ico" />
       </Head>
       <main className="container">
         <h1 className="text-center mt-4 mb-4">Countries</h1>{" "}
@@ -127,6 +124,7 @@ export default function Countries() {
           following countries have shown support for Palestine and have provided
           asylum to refugees during the conflict:
         </p>
+        <h2 className="text-center mb-4">Number of Countries: {countries.length}</h2>
         <div className="row justify-content-center">
           {currentCountries.map((country, index) => {
             const coaIso = country.coa_iso;

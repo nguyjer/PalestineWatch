@@ -4,7 +4,6 @@ import NewsCard from "../components/NewsCard";
 import { React, useState, useEffect } from "react";
 import { Pagination } from "react-bootstrap"; // Assuming you're using Bootstrap for pagination
 
-
 export default function About() {
   const [newsCards, setNewsCards] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -35,6 +34,21 @@ export default function About() {
   const totalPages = Math.ceil(newsCards.length / cardsPerPage);
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Calculate visible page numbers
+  const maxVisiblePages = 3;
+  let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+  let endPage = startPage + maxVisiblePages - 1;
+
+  if (endPage > totalPages) {
+    endPage = totalPages;
+    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+  }
+
+  const pageNumbers = [];
+  for (let i = startPage; i <= endPage; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div>
@@ -82,13 +96,13 @@ export default function About() {
           >
             Previous
           </Pagination.Prev>
-          {[...Array(totalPages)].map((_, index) => (
+          {pageNumbers.map((pageNumber) => (
             <Pagination.Item
-              key={index + 1}
-              active={index + 1 === currentPage}
-              onClick={() => handlePageChange(index + 1)}
+              key={pageNumber}
+              active={pageNumber === currentPage}
+              onClick={() => handlePageChange(pageNumber)}
             >
-              {index + 1}
+              {pageNumber}
             </Pagination.Item>
           ))}
           <Pagination.Next
