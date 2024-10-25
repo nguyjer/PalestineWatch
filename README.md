@@ -22,13 +22,14 @@ URLs of at least three data sources that you will programmatically scrape (at le
 
 # Team Info
 
+Phase 1:
+
 - Git SHA: 74bf5ad3e8d07a999d9d318d42353c29c5b0119c
 
 - Phase Leader: Jeremy Nguyen
 
 - Phase Leader Responsibilites: Guide the team and make sure tasks are being
 completed in a timely matter.
-
 
 | Team Member | Estimate Time | Actual Time |
 | ----- | --- | --- | 
@@ -38,10 +39,31 @@ completed in a timely matter.
 | Kenny Nguyen      | 9 hours  | 10 hours |
 | Jeremy Nguyen     | 10 hours | 11 hours |
 
+
+Phase 2:
+
+- Git SHA: 
+
+- Phase Leader: Aryan Samal
+
+- Phase Leader Responsibilites: Periodically check in on the team, making sure tasks
+are on schedule, ask others if they need help.
+
+| Team Member | Estimate Time | Actual Time |
+| ----- | --- | --- | 
+| Aryan Samal       | 22 hours | 32 hours |
+| Rohan Damani      |  24 hours | 27 hours |
+| Will Matherne     |  25 hours | 26 hours |
+| Kenny Nguyen      | 23 hours  | 29 hours |
+| Jeremy Nguyen     | 22 hours | 33 hours |
+
 # Website Link
 
 - https://www.palestinewatch.me/
 
+# Backend Link
+
+- https://api.palestinewatch.me/
 
 # API Documentation Link
 
@@ -56,9 +78,9 @@ completed in a timely matter.
 - https://newsdata.io/news-sources/Palestine-news-api
 
 
-# The three models/Instance Estimation:
+# The three models/Instances:
 
-- News/Media (~100+)
+- News/Media (~200)
 
 - Support Groups (~50)
 
@@ -68,11 +90,11 @@ completed in a timely matter.
 
 Model Attributes(each model must have many attributes -- describe five of those attributes for each model that you can filter or sort):
 
-- News: Title, Image, Description, Publisher, Date, Link
+- News: Id, Author, Description, URL, Image URL, Publishing Date, Content, Source, Support Group Id, Country Id
 
-- Support Groups: Name, Resources provided, Status of Resource, Contact Info, Location, Year Established
+- Support Groups: Id, Name, Email, City, State, Zipcode, URL, Image URL, News Id, Country Id
 
-- Countries: Name, Capital, Region, Distance, Refugees Accepted 
+- Countries: Id, Flag URL, Capital, Population, Region, Sub-Region, Common Name, Official Name, UN Membership, Maps, News Id, Support Group Id, Country Code 
 
 Describe two types of media for instances of each model:
 

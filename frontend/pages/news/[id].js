@@ -22,7 +22,7 @@ function ArticlePage() {
     const fetchArticle = async () => {
       try {
         const response = await axios.get(
-          `http://api.palestinewatch.me/api/news/${id}`
+          `https://api.palestinewatch.me/api/news/${id}`
         ); // Fetch the article details
         const data = await response.data;
         console.log(data);
@@ -48,7 +48,7 @@ function ArticlePage() {
     const fetchSupportGroups = async () => {
       try {
         const response = await axios.get(
-          `http://api.palestinewatch.me/support-groups/${id}`
+          `https://api.palestinewatch.me/api/support-group/${article.supportGroupId}`
         );
         const group = await response.data;
         setSupportGroups(group || {});

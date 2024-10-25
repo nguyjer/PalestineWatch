@@ -11,9 +11,7 @@ export default function SupportGroups() {
   useEffect(() => {
     const fetchSupportGroups = async () => {
       try {
-        const response = await axios.get(
-          "http://api.palestinewatch.me/api/support-groups"
-        );
+        const response = await axios.get("https://api.palestinewatch.me/api/support-groups");
         const groups = await response.data; // Ensure correct data access
         setSupportGroups(groups); // Set the articles to state
       } catch (error) {
