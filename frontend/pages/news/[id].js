@@ -1,113 +1,63 @@
-// pages/articles/[id].js
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import Head from "next/head";
 import axios from "axios";
-import SupportCard from "../../components/SupportGroupCard.js";
-import SupportGroups from "../support-groups.js";
-import CountryCard from "../../components/CountryCard.js";
+import { useRouter } from "next/router";
+import { React, useState, useEffect } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is imported
 
-function ArticlePage() {
+export default function ArticlePage() {
   const router = useRouter();
-  const { id } = router.query; // Retrieve the dynamic article ID from the URL
+  const { id } = router.query;
   const [article, setArticle] = useState(null);
-  const [country, setCountry] = useState(null);
-  const randomSupport = Math.floor(Math.random() * 3) + 1;
-  const randomCountry = Math.floor(Math.random() * 3) + 1;
-  const [supportGroups, setSupportGroups] = useState({});
 
   useEffect(() => {
-    if (!id) return;
-
-    // Fetch the article details using the article ID
     const fetchArticle = async () => {
-      try {
-        const response = await axios.get(
-          `https://api.palestinewatch.me/api/news/${id}`
-        ); // Fetch the article details
-        const data = await response.data;
-        console.log(data);
-        setArticle(data || {});
-      } catch (error) {
-        console.error("Error fetching article:", error);
+      if (id) { // Only fetch data if `id` is available
+        try {
+          const response = await axios.get(`https://api.palestinewatch.me/api/news/${id}`);
+          const fetchedArticle = response.data;
+          setArticle(fetchedArticle);
+        } catch (error) {
+          console.error("Error fetching article:", error);
+        }
       }
     };
 
-    const fetchCountry = async () => {
-      try {
-        const response = await axios.get(
-          `http://api.palestinewatch.me/api/countries/${id}`
-        ); // Fetch the article details
-        const data = await response.data;
-        console.log(data);
-        setCountry(data[id] || {});
-      } catch (error) {
-        console.error("Error fetching country:", error);
-      }
-    };
-
-    const fetchSupportGroups = async () => {
-      try {
-        const response = await axios.get(
-          `https://api.palestinewatch.me/api/support-group/${article.supportGroupId}`
-        );
-        const group = await response.data;
-        setSupportGroups(group || {});
-      } catch (error) {
-        console.error("Error fetching group:", error);
-      }
-    };
-    fetchSupportGroups();
     fetchArticle();
-    fetchCountry();
-  }, [id]);
+  }, [id]); // Refetch whenever `id` changes
 
-  function removeBracketedText(str) {
-    // Use a regular expression to find and remove any trailing bracketed text, e.g., "(...)" or "[...]"
-    return str.replace(/\s?[\[\(][^\[\]\(\)]+[\]\)]$/, "");
+  if (!article) {
+    return <div>Loading...</div>;
   }
-
-  if (!article) return <p>Loading...</p>;
-  if (!country) return <p>Loading...</p>;
-  if (!SupportGroups) return <p>Loading...</p>;
-
 
   return (
     <div>
       <Head>
-        <title>Palestine Watch</title>
-        <link rel="icon" href="/watermelon.ico" />
+        <title>{article.title || "Article Details"} - Palestine Watch</title>
+        <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <div>
-          <h1>{article.title}</h1>
+
+      <main className="container">
+        <h2 className="text-center mt-4 mb-4">{article.title}</h2>
+        <div className="text-center mb-4">
+          <img 
+            src={article.url_image} 
+            alt={article.title} 
+            className="img-fluid mb-3" 
+            style={{ maxHeight: '300px', width: 'auto', objectFit: 'contain' }} // Made image smaller, no cropping
+          />
         </div>
-        <div>
-          <div>
-            <img src={article.url_image} alt="Article Image" />{" "}
-          </div>
-          <p>
-            {removeBracketedText(article.content)}
-            <a href={article.url}>Read More</a>
-          </p>
-          <p>Source: {article.source}</p>
-          <p>Published on: {article.publish_date}</p>
+        <div className="mb-4 text-center">
+          <p><strong>Author:</strong> {article.author}</p>
+          <p><strong>Published on:</strong> {new Date(article.publish_date).toLocaleDateString()}</p>
+          <p><strong>Source:</strong> {article.source}</p>
         </div>
-        <div>
-          <h2>Explore More</h2>
-          {article && Object.keys(article).length > 0 ? (
-            <NewsCard {...article} />
-          ) : (
-            <p>No news available</p>
-          )}
-          {country && Object.keys(country).length > 0 ? (
-            <CountryCard {...country} />
-          ) : (
-            <p>No country available</p>
-          )}
+        <article className="mb-5">
+          <p>{article.content}</p> {/* No cropping, full content displayed */}
+        </article>
+        <div className="text-center">
+          <button className="btn btn-primary" onClick={() => router.back()}>Go Back</button>
         </div>
       </main>
     </div>
   );
 }
-
-export default ArticlePage;
