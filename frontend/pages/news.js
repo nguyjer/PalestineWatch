@@ -36,11 +36,26 @@ export default function News() {
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
+  // Calculate visible page numbers
+  const maxVisiblePages = 3;
+  let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+  let endPage = startPage + maxVisiblePages - 1;
+
+  if (endPage > totalPages) {
+    endPage = totalPages;
+    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+  }
+
+  const pageNumbers = [];
+  for (let i = startPage; i <= endPage; i++) {
+    pageNumbers.push(i);
+  }
+
   return (
     <div>
       <Head>
         <title>Palestine Watch</title>
-        <link rel="icon" href="/watermelon.ico" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container">
         <h1 className="text-center mt-4 mb-4">News</h1> {/* Centered title */}
@@ -82,13 +97,13 @@ export default function News() {
           >
             Previous
           </Pagination.Prev>
-          {[...Array(totalPages)].map((_, index) => (
+          {pageNumbers.map((pageNumber) => (
             <Pagination.Item
-              key={index + 1}
-              active={index + 1 === currentPage}
-              onClick={() => handlePageChange(index + 1)}
+              key={pageNumber}
+              active={pageNumber === currentPage}
+              onClick={() => handlePageChange(pageNumber)}
             >
-              {index + 1}
+              {pageNumber}
             </Pagination.Item>
           ))}
           <Pagination.Next
