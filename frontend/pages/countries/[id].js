@@ -27,9 +27,9 @@ export default function CountryPage() {
       cf_type: "ISO",
     };
 
-    const baseUrl = "https://api.unhcr.org/population/v1/unrwa/";
-    const queryString = new URLSearchParams(opts).toString();
-    const apiUrl = `${baseUrl}?${queryString}`;
+    // const baseUrl = "https://api.unhcr.org/population/v1/unrwa/";
+    // const queryString = new URLSearchParams(opts).toString();
+    const apiUrl = `http://api.palestinewatch.me/api/countries`;
 
     fetch(apiUrl)
       .then((response) => {
@@ -49,7 +49,7 @@ export default function CountryPage() {
     const fetchNews = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:5000/api/news/${id}`
+          `http://api.palestinewatch.me/api/news/${id}`
         );
         const articles = response.data;
 
@@ -62,7 +62,7 @@ export default function CountryPage() {
     const fetchSupportGroup = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:5000/api/support-groups/${id}`
+          `http://api.palestinewatch.me/api/support-groups/${id}`
         );
         const group = response.data;
 
@@ -80,15 +80,12 @@ export default function CountryPage() {
   const fetchCountryDetails = async () => {
     const details = {};
     try {
-      const res = await axios.get(
-        `https://restcountries.com/v3.1/alpha/${coa}`
-      );
-      const countryData = res.data[0];
+
 
       details["commonName"] = countryData.name.common;
       details["officialName"] = countryData.name.official;
-      details["unMember"] = countryData.unMember ? "Yes" : "No";
-      details["flag"] = countryData.flags.png;
+      details["unMember"] = countryData.unMembership ? "Yes" : "No";
+      details["flag"] = countryData.flag_url.png;
       details["maps"] = countryData.maps.googleMaps;
       details["capital"] = countryData.capital
         ? countryData.capital[0]
@@ -107,6 +104,7 @@ export default function CountryPage() {
     <div>
       <Head>
         <title>{coa} Details</title>
+        <link rel="icon" href="/watermelon.ico" />
       </Head>
       <main>
         <CountryDetails
