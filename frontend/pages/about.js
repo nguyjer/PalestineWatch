@@ -255,7 +255,7 @@ export default function About() {
             We used an API from this website to get information on our support
             group instances.
           </p>
-          <a href="restcountries.com" target="_blank" rel="noopener noreferrer">
+          <a href="https://restcountries.com/" target="_blank" rel="noopener noreferrer">
             Rest Countries
           </a>
           <p>We used this API to get information on our country instances.</p>

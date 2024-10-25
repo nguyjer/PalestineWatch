@@ -12,7 +12,7 @@ def assign_random_ids():
         db.session.add(news)
 
     for support_group in SupportGroupsModel.query.all():
-        support_group.newId = get_random_id(NewsModel)
+        support_group.newsId = get_random_id(NewsModel)
         support_group.countryId = get_random_id(CountriesModel)
         db.session.add(support_group)
 
