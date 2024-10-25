@@ -37,13 +37,16 @@ unit-test-job:
 
 selenium-test-job:
   stage: test
-  image: python:latest
+  image: python:3.8
   services:
-    - selenium/standalone-chrome:latest
+    - name: selenium/standalone-chrome:latest
+      alias: selenium
   script:
     - echo "Running Selenium tests..."
-    # replace this with the command to run Selenium acceptance tests
+    - pip install selenium webdriver-manager
+    - python -m unittest discover -s frontend/__test__ -p "acceptance-tests.py" -v
     - echo "Selenium tests complete."
+
 
 api-test-job:
   stage: test
