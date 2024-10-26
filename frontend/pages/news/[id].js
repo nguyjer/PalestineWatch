@@ -51,44 +51,44 @@ export default function ArticlePage() {
       }
     };
 
+    fetchArticle();
     fetchCountry();
     fetchSupportGroups();
-    fetchArticle();
   }, [id]); // Refetch whenever `id` changes
 
-  useEffect(() => {
-    const fetchRandomCountryId = async () => {
-      try {
-        const response = await axios.get('https://api.palestinewatch.me/api/countries');
-        const countries = response.data;
-        if (countries && countries.length > 0) {
-          const randomIndex = Math.floor(Math.random() * countries.length);
-          setRandomCountryId(countries[randomIndex].id);
-        }
-      } catch (error) {
-        console.error("Error fetching random country:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchRandomCountryId = async () => {
+  //     try {
+  //       const response = await axios.get('https://api.palestinewatch.me/api/countries');
+  //       const countries = response.data;
+  //       if (countries && countries.length > 0) {
+  //         const randomIndex = Math.floor(Math.random() * countries.length);
+  //         setRandomCountryId(countries[randomIndex].id);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching random country:", error);
+  //     }
+  //   };
 
-    fetchRandomCountryId();
-  }, []); // Run once when the component mounts
+  //   fetchRandomCountryId();
+  // }, []); // Run once when the component mounts
 
-  useEffect(() => {
-    const fetchRandomSupportGroupId = async () => {
-      try {
-        const response = await axios.get('https://api.palestinewatch.me/api/support-groups');
-        const supportGroups = response.data;
-        if (supportGroups && supportGroups.length > 0) {
-          const randomIndex = Math.floor(Math.random() * supportGroups.length);
-          setRandomSupportGroupId(supportGroups[randomIndex].id);
-        }
-      } catch (error) {
-        console.error("Error fetching random support group:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchRandomSupportGroupId = async () => {
+  //     try {
+  //       const response = await axios.get('https://api.palestinewatch.me/api/support-groups');
+  //       const supportGroups = response.data;
+  //       if (supportGroups && supportGroups.length > 0) {
+  //         const randomIndex = Math.floor(Math.random() * supportGroups.length);
+  //         setRandomSupportGroupId(supportGroups[randomIndex].id);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching random support group:", error);
+  //     }
+  //   };
 
-    fetchRandomSupportGroupId();
-  }, []); // Run once when the component mounts
+  //   fetchRandomSupportGroupId();
+  // }, []); // Run once when the component mounts
 
   if (!article) {
     return <div>Loading...</div>;
