@@ -104,10 +104,10 @@ class TestPalestine(unittest.TestCase):
 		first = countries[0]
 		read_more = first.find_element(By.CLASS_NAME, "btn-primary")
 		read_more.click()
-		self.assertEqual(self.driver.current_url, "https://www.palestinewatch.me/countries/JOR")
+		self.assertEqual(self.driver.current_url, "https://www.palestinewatch.me/countries/1")
 
 	def test_nav_from_instance(self): 
-		self.driver.get("https://www.palestinewatch.me/countries/JOR")
+		self.driver.get("https://www.palestinewatch.me/countries/1")
 		link = self.driver.find_element(By.CSS_SELECTOR, "a[href='/']")
 		assert link
 		link.click()

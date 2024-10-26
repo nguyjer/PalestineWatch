@@ -128,7 +128,7 @@ export default function ArticlePage() {
             <div className="col-lg-4 col-md-6 mb-4">
               <CountryCard
                 id={country.id} // Using coa_iso as the ID
-                country={country.coa_name}
+                country={country.official_name}
                 flag={country.flag_url}
                 capital={country.capital}
                 population={country.population}

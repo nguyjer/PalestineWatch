@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import axios from "axios";
-import idToCoaMap from "../../components/idToCoaMap.js";
 import NewsCard from "../../components/NewsCard.js";
 import SupportCard from "../../components/SupportGroupCard.js";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -13,21 +12,12 @@ export default function CountryPage() {
   const [country, setCountry] = useState({});
   const [countryDetails, setCountryDetails] = useState({});
   const [news, setNews] = useState({});
-  const coa = idToCoaMap[id];
+
   const [supportGroup, setSupportGroup] = useState({});
   function truncateString(str, num) {
     return str?.length > num ? str.slice(0, num) + "..." : str;
   }
   useEffect(() => {
-    if (!coa) return;
-
-    const opts = {
-      page: 1,
-      yearFrom: 2014,
-      yearTo: 2023,
-      coa: coa,
-      cf_type: "ISO",
-    };
 
     // const baseUrl = "https://api.unhcr.org/population/v1/unrwa/";
     // const queryString = new URLSearchParams(opts).toString();
@@ -84,7 +74,7 @@ export default function CountryPage() {
   return (
     <div>
       <Head>
-        <title>{coa} Details</title>
+        <title>{country.official_name} Details</title>
         <link rel="icon" href="/watermelon.ico" />
       </Head>
       <main>
@@ -97,45 +87,33 @@ export default function CountryPage() {
           </p>
           <div className="row justify-content-center">
             <div className="col-md-6 text-center">
-              {countryDetails["flag"] && (
+              {/* {countryDetails["flag"] && (
                 <img
                   src={countryDetails["flag"]}
                   alt={`flag picture`}
                   style={{ width: "100px" }}
                   className="mb-3"
                 />
-              )}
-              <h3>Official Name: {countryDetails["officialName"]}</h3>
-              <h3>Common Name: {countryDetails["commonName"]}</h3>
-              <h5>Member of the UN: {countryDetails["unMember"]}</h5>
+              )} */}
+              <h3>Official Name: {country.official_name}</h3>
+              <h3>Common Name: {country.common_name}</h3>
+              <h5>Member of the UN: {country.unMembership}</h5>
               <br />
-              <p>Capital: {countryDetails["capital"]}</p>
-              <p>Population: {countryDetails["population"]}</p>
-              <p>Region: {countryDetails["region"]}</p>
-              <p>Subregion: {countryDetails["subregion"]}</p>
+              <p>Capital: {country.capital}</p>
+              <p>Population: {country.population}</p>
+              <p>Region: {country.region}</p>
+              <p>Subregion: {country.subregion}</p>
 
               <div>
                 <h4>Google Maps:</h4>
                 <a
-                  href={countryDetails["maps"]}
+                  href={country.maps}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <u>View on Google Maps</u>
                 </a>
               </div>
-            </div>
-            <div className="col-md-6">
-              <h4 className="text-center">Refugee Statistics</h4>
-              <ul className="list-group">
-                {/* Add actual country data or remove this block if not needed */}
-                {/* {countryData.map((entry, index) => (
-                  <li key={index} className="list-group-item">
-                    Year: {entry.year}, Total Refugees:{" "}
-                    {entry.total.toLocaleString()}
-                  </li>
-                ))} */}
-              </ul>
             </div>
           </div>
         </div>
@@ -162,7 +140,7 @@ export default function CountryPage() {
           {supportGroup && Object.keys(supportGroup).length > 0 ? (
             <div className="col-lg-4 col-md-6 mb-4">
               <SupportCard
-                id={group.id}
+                id={supportGroup.id}
                 groupName={truncateString(supportGroup.name, 50)}
                 groupEmail={supportGroup.email}
                 groupCity={supportGroup.city}
