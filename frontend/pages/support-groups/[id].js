@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import NewsCard from "../../components/NewsCard.js";
+import CountryCard from "../../components/CountryCard.js";
 
 export default function SupportGroupPage() {
   const router = useRouter();
@@ -18,7 +19,7 @@ export default function SupportGroupPage() {
     const fetchSupportGroups = async () => {
       try {
         const response = await axios.get(
-          `http://api.palestinewatch.me/api/support-groups/${id}`
+          `https://api.palestinewatch.me/api/support-groups/${id}`
         );
         const group = await response.data;
         setSupportGroups(group || {});
@@ -30,7 +31,7 @@ export default function SupportGroupPage() {
     const fetchCountry = async () => {
       try {
         const response = await axios.get(
-          `http://api.palestinewatch.me/api/countries/${supportGroups.countryId}`
+          `https://api.palestinewatch.me/api/countries/${supportGroups.countryId ? supportGroups.countryId : ""}`
         ); // Fetch the article details
         const data = await response.data;
         console.log(data);
@@ -43,7 +44,7 @@ export default function SupportGroupPage() {
     const fetchNews = async () => {
       try {
         const response = await axios.get(
-          `http://api.palestinewatch.me/api/news/${supportGroups.newsId}`
+          `https://api.palestinewatch.me/api/news/${supportGroups.newsId ? supportGroups.newsId : ""}`
         );
         const article = await response.data;
         setNews(article || {});
@@ -58,13 +59,7 @@ export default function SupportGroupPage() {
   }, [id]); // Add id as a dependency to trigger the effect when it changes
 
   if (!supportGroups) {
-    return <p>Loading...</p>;
-  }
-  if (!news) {
-    return <p>Loading...</p>;
-  }
-  if (!country) {
-    return <p>Loading...</p>;
+    return <p>Loading... groups</p>;
   }
 
   return (

@@ -29,7 +29,7 @@ export default function CountryPage() {
 
     // const baseUrl = "https://api.unhcr.org/population/v1/unrwa/";
     // const queryString = new URLSearchParams(opts).toString();
-    const apiUrl = `http://api.palestinewatch.me/api/countries`;
+    const apiUrl = `https://api.palestinewatch.me/api/countries`;
 
     const fetchCountries = async () => {
       try {
@@ -39,6 +39,7 @@ export default function CountryPage() {
         const data = await response.data; // Access the data directly
 
         setCountry(data); // Set the unique countries data to state
+        setCountryDetails(data);
       } catch (error) {
         console.error("Error fetching countries:", error);
       }
@@ -47,7 +48,7 @@ export default function CountryPage() {
     const fetchNews = async () => {
       try {
         const response = await axios.get(
-          `http://api.palestinewatch.me/api/news/${country.newsId}`
+          `https://api.palestinewatch.me/api/news/${country.newsId}`
         );
         const articles = await response.data;
 
@@ -60,7 +61,7 @@ export default function CountryPage() {
     const fetchSupportGroup = async () => {
       try {
         const response = await axios.get(
-          `http://api.palestinewatch.me/api/support-groups/${country.supportGroupId}`
+          `https://api.palestinewatch.me/api/support-groups/${country.supportGroupId}`
         );
         const group = await response.data;
 
@@ -70,30 +71,30 @@ export default function CountryPage() {
         console.error("Error fetching support group:", error);
       }
     };
-    const fetchCountryDetails = async () => {
-      const details = {};
-      try {
-        details["commonName"] = country.common_name;
-        details["officialName"] = country.official_name;
-        details["unMember"] = country.unMembership ? "Yes" : "No";
-        details["flag"] = country.flag_url;
-        details["maps"] = country.maps || "Unknown";
-        details["capital"] = country.capital ? country.capital[0] : "Unknown";
-        details["population"] = country.population.toLocaleString();
-        details["region"] = country.region;
-        details["subregion"] = country.subregion;
-      } catch (error) {
-        console.error(`Problem with country - ${coa}:`, error);
-      }
+    // const fetchCountryDetails = async () => {
+    //   const details = {};
+    //   try {
+    //     details["commonName"] = country.common_name;
+    //     details["officialName"] = country.official_name;
+    //     details["unMember"] = country.unMembership ? "Yes" : "No";
+    //     details["flag"] = country.flag_url;
+    //     details["maps"] = country.maps || "Unknown";
+    //     details["capital"] = country.capital ? country.capital[0] : "Unknown";
+    //     details["population"] = country.population.toLocaleString();
+    //     details["region"] = country.region;
+    //     details["subregion"] = country.subregion;
+    //   } catch (error) {
+    //     console.error(`Problem with country - ${coa}:`, error);
+    //   }
 
-      setCountryDetails(details);
-    };
+    //   setCountryDetails(details);
+    // };
 
     fetchCountries();
-    fetchCountryDetails();
+    // fetchCountryDetails();
     fetchSupportGroup();
     fetchNews();
-  }, [coa]);
+  }, [id]);
 
 
   return (

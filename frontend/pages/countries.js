@@ -82,10 +82,10 @@ export default function Countries() {
           Number of Countries: {countries.length}
         </h2>
         <div className="row justify-content-center">
-          {currentCountries.map((country) => (
-            <div key={country.coa_iso} className="col-lg-4 col-md-6 mb-4">
+          {currentCountries.map((country, index) => (
+            <div key={country.id || index} className="col-lg-4 col-md-6 mb-4">
               <CountryCard
-                id={country.coa_iso} // Using coa_iso as the ID
+                id={country.id} // Using coa_iso as the ID
                 country={country.coa_name}
                 flag={country.flag_url}
                 capital={country.capital}

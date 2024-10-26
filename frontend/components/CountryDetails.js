@@ -23,19 +23,19 @@ export default function CountryDetails({ countryData, countryDetails }) {
               className="mb-3"
             />
           )}
-          <h3>Official Name: {countryDetails["officialName"]}</h3>
-          <h3>Common Name: {countryDetails["commonName"]}</h3>
-          <h5>Member of the UN: {countryDetails["unMember"]}</h5>
+          <h3>Official Name: {countryDetails.official_name}</h3>
+          <h3>Common Name: {countryDetails.common_name}</h3>
+          <h5>Member of the UN: {countryDetails.unMembership}</h5>
           <br />
-          <p>Capital: {countryDetails["capital"]}</p>
-          <p>Population: {countryDetails["population"]}</p>
-          <p>Region: {countryDetails["region"]}</p>
-          <p>Subregion: {countryDetails["subregion"]}</p>
+          <p>Capital: {countryDetails.capital}</p>
+          <p>Population: {countryDetails.population}</p>
+          <p>Region: {countryDetails.region}</p>
+          <p>Subregion: {countryDetails.subregion}</p>
 
           <div>
             <h4>Google Maps:</h4>
             <a
-              href={countryDetails["maps"]}
+              href={countryDetails.maps}
               target="_blank"
               rel="noopener noreferrer"
             >

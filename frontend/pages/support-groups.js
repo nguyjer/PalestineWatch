@@ -2,18 +2,23 @@ import Head from "next/head";
 import SupportCard from "../components/SupportGroupCard";
 import { React, useState, useEffect } from "react";
 import { Pagination } from "react-bootstrap"; // Assuming you're using Bootstrap for pagination
+import axios from "axios";
 
 export default function SupportGroups() {
   const [supportGroups, setSupportGroups] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const cardsPerPage = 9; // Number of cards to display per page
   const groupsPerPage = 3; // Number of support groups to display per page
 
   useEffect(() => {
     const fetchSupportGroups = async () => {
       try {
-        const response = await axios.get("https://api.palestinewatch.me/api/support-groups");
+        const response = await axios.get(
+          "https://api.palestinewatch.me/api/support-groups"
+        );
         const groups = await response.data; // Ensure correct data access
         setSupportGroups(groups); // Set the articles to state
+        console.log(groups);
       } catch (error) {
         console.error("Error fetching groups:", error);
       }
@@ -27,16 +32,27 @@ export default function SupportGroups() {
   }
 
   // Pagination logic
-  const indexOfLastGroup = currentPage * groupsPerPage;
-  const indexOfFirstGroup = indexOfLastGroup - groupsPerPage;
-  const currentGroups = supportGroups.slice(
-    indexOfFirstGroup,
-    indexOfLastGroup
-  );
-
-  const totalPages = Math.ceil(supportGroups.length / groupsPerPage);
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentGroups = supportGroups.slice(indexOfFirstCard, indexOfLastCard);
+  const totalPages = Math.ceil(supportGroups.length / cardsPerPage);
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Calculate visible page numbers
+  const maxVisiblePages = 3;
+  let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+  let endPage = startPage + maxVisiblePages - 1;
+
+  if (endPage > totalPages) {
+    endPage = totalPages;
+    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+  }
+
+  const pageNumbers = [];
+  for (let i = startPage; i <= endPage; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div>
@@ -64,7 +80,7 @@ export default function SupportGroups() {
         </h2>
         <div className="row justify-content-center">
           {currentGroups.map((group) => (
-            <div key={group.id} className="col-lg-4 col-md-6 mb-4">
+            <div key={group.group_id} className="col-lg-4 col-md-6 mb-4">
               <SupportCard
                 id={group.id}
                 groupName={truncateString(group.name, 50)}
@@ -86,13 +102,13 @@ export default function SupportGroups() {
           >
             Previous
           </Pagination.Prev>
-          {[...Array(totalPages)].map((_, index) => (
+          {pageNumbers.map((pageNumber) => (
             <Pagination.Item
-              key={index + 1}
-              active={index + 1 === currentPage}
-              onClick={() => handlePageChange(index + 1)}
+              key={pageNumber}
+              active={pageNumber === currentPage}
+              onClick={() => handlePageChange(pageNumber)}
             >
-              {index + 1}
+              {pageNumber}
             </Pagination.Item>
           ))}
           <Pagination.Next

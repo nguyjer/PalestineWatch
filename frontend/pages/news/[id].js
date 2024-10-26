@@ -29,7 +29,7 @@ export default function ArticlePage() {
     const fetchCountry = async () => {
       try {
         const response = await axios.get(
-          `http://api.palestinewatch.me/api/countries/${article.countryId}`
+          `https://api.palestinewatch.me/api/countries/${article.countryId}`
         ); // Fetch the article details
         const data = await response.data;
         console.log(data);
@@ -56,41 +56,13 @@ export default function ArticlePage() {
     fetchArticle();
   }, [id]); // Refetch whenever `id` changes
 
-  useEffect(() => {
-    const fetchRandomCountryId = async () => {
-      try {
-        const response = await axios.get('https://api.palestinewatch.me/api/countries');
-        const countries = response.data;
-        if (countries && countries.length > 0) {
-          const randomIndex = Math.floor(Math.random() * countries.length);
-          setRandomCountryId(countries[randomIndex].id);
-        }
-      } catch (error) {
-        console.error("Error fetching random country:", error);
-      }
-    };
-
-    fetchRandomCountryId();
-  }, []); // Run once when the component mounts
-
-  useEffect(() => {
-    const fetchRandomSupportGroupId = async () => {
-      try {
-        const response = await axios.get('https://api.palestinewatch.me/api/support-groups');
-        const supportGroups = response.data;
-        if (supportGroups && supportGroups.length > 0) {
-          const randomIndex = Math.floor(Math.random() * supportGroups.length);
-          setRandomSupportGroupId(supportGroups[randomIndex].id);
-        }
-      } catch (error) {
-        console.error("Error fetching random support group:", error);
-      }
-    };
-
-    fetchRandomSupportGroupId();
-  }, []); // Run once when the component mounts
-
   if (!article) {
+    return <div>Loading...</div>;
+  }
+  if (!country) {
+    return <div>Loading...</div>;
+  }
+  if (!supportGroups) {
     return <div>Loading...</div>;
   }
 
