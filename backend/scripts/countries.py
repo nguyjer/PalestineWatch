@@ -3,7 +3,11 @@ from backend import db
 from backend.models import CountriesModel
 
 def fetch_countries():
-    unique_countries = ['JOR', 'LBN', 'SYR']
+    unique_countries = ['EGY', 'JOR', 'TUR', 'IRN', 'SYR', 'LBN', 'QAT', 'ARE', 'KWT', 'SAU',
+        'PAK', 'IDN', 'MYS', 'BHR', 'OMN', 'DZA', 'MAR', 'TUN', 'LBY', 'IRQ',
+        'SDN', 'NGA', 'ZAF', 'MLI', 'NIG', 'SEN', 'BAN', 'AFG', 'MRT', 'CIV',
+        'CUB', 'VEN', 'BOL', 'MEX', 'MYS', 'IDN', 'BRN', 'MUS', 'BGD', 'MLI', 
+        'YEM', 'DJI', 'SOM', 'COM']
         
     try:
         for coa_iso in unique_countries:

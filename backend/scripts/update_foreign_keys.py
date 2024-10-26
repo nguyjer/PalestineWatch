@@ -1,5 +1,6 @@
 import random
-from backend.models import db, NewsModel, SupportGroupsModel, CountriesModel
+from backend import db
+from backend.models import NewsModel, SupportGroupsModel, CountriesModel
 
 def get_random_id(model):
     ids = [item.id for item in model.query.all()]
@@ -25,4 +26,3 @@ def assign_random_ids():
 
 if __name__ == "__main__":
     assign_random_ids()
-    print("Foreign keys have been randomly assigned!")

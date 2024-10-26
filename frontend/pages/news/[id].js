@@ -51,9 +51,9 @@ export default function ArticlePage() {
       }
     };
 
+    fetchArticle();
     fetchCountry();
     fetchSupportGroups();
-    fetchArticle();
   }, [id]); // Refetch whenever `id` changes
 
   if (!article) {

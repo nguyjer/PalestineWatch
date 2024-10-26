@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv(dotenv_path='.flaskenv')
 
 from backend import db  # Import init_app() and db
-from backend.scripts import populate_news_db, fetch_groups, fetch_countries
+from backend.scripts import populate_news_db, fetch_groups, fetch_countries, assign_random_ids
 from backend.controllers.news_controller import get_all_news, get_news_by_id
 from backend.controllers.support_groups_controller import get_all_groups, get_group_by_id
 from backend.controllers.countries_controller import get_all_countries, get_country_by_id
@@ -26,7 +26,8 @@ cors = CORS(app, origins="*")
 # add script methods to populate db here if necessary
 with app.app_context():
     from backend.scripts import populate_news_db, fetch_groups, fetch_countries
-    db.create_all()
+    #db.create_all()
+    assign_random_ids()
     #populate_news_db() 
     # fetch_groups()
 
