@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Pagination } from "react-bootstrap"; // Importing Bootstrap for pagination
 
 const ITEMS_PER_PAGE = 3; // Number of countries per page
+const PAGINATION_LIMIT = 3; // Number of pagination items to show at a time
 
 export default function Countries() {
   const [countries, setCountries] = useState([]);
@@ -17,7 +18,7 @@ export default function Countries() {
         const response = await axios.get(
           "https://api.palestinewatch.me/api/countries"
         );
-        const data = response.data; // Access the data directly
+        const data = response.data;
 
         // Filter unique countries based on coa_iso
         const uniqueCountries = Array.from(
@@ -54,6 +55,10 @@ export default function Countries() {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  // Determine the range of page numbers to show in pagination
+  const startPage = Math.max(1, currentPage - Math.floor(PAGINATION_LIMIT / 2));
+  const endPage = Math.min(totalPages, startPage + PAGINATION_LIMIT - 1);
+
   return (
     <div>
       <Head>
@@ -61,9 +66,7 @@ export default function Countries() {
         <link rel="icon" href="/watermelon.ico" />
       </Head>
       <main className="container">
-        <h1 className="text-center mt-4 mb-4">Countries</h1>{" "}
-        {/* Centered title */}
-        {/* Summary below the word "Countries" */}
+        <h1 className="text-center mt-4 mb-4">Countries</h1>
         <p className="text-center mb-4">
           Recognition as a sovereign state is vital for Palestine, as it affirms
           its identity, enables participation in global diplomacy, and
@@ -104,15 +107,18 @@ export default function Countries() {
           >
             Previous
           </Pagination.Prev>
-          {[...Array(totalPages)].map((_, index) => (
-            <Pagination.Item
-              key={index + 1}
-              active={index + 1 === currentPage}
-              onClick={() => paginate(index + 1)}
-            >
-              {index + 1}
-            </Pagination.Item>
-          ))}
+          {Array.from({ length: endPage - startPage + 1 }, (_, index) => {
+            const pageNumber = startPage + index;
+            return (
+              <Pagination.Item
+                key={pageNumber}
+                active={pageNumber === currentPage}
+                onClick={() => paginate(pageNumber)}
+              >
+                {pageNumber}
+              </Pagination.Item>
+            );
+          })}
           <Pagination.Next
             onClick={handleNextPage}
             disabled={currentPage === totalPages}

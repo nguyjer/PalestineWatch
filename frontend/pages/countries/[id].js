@@ -14,13 +14,12 @@ export default function CountryPage() {
   const [news, setNews] = useState({});
 
   const [supportGroup, setSupportGroup] = useState({});
+  
   function truncateString(str, num) {
     return str?.length > num ? str.slice(0, num) + "..." : str;
   }
-  useEffect(() => {
 
-    // const baseUrl = "https://api.unhcr.org/population/v1/unrwa/";
-    // const queryString = new URLSearchParams(opts).toString();
+  useEffect(() => {
     const apiUrl = `https://api.palestinewatch.me/api/countries`;
 
     const fetchCountries = async () => {
@@ -30,7 +29,7 @@ export default function CountryPage() {
         );
         const data = await response.data;
 
-        setCountry(data); // Set the unique countries data to state
+        setCountry(data); 
         setCountryDetails(data);
       } catch (error) {
         console.error("Error fetching countries:", error);
@@ -66,7 +65,6 @@ export default function CountryPage() {
       }
     };
 
-    
     fetchSupportGroup();
     fetchNews();
   }, [country]);
@@ -78,7 +76,6 @@ export default function CountryPage() {
         <link rel="icon" href="/watermelon.ico" />
       </Head>
       <main>
-        {/* Moved CountryDetails JSX here */}
         <div className="container mt-5">
           <h1 className="text-center mb-4">Country Details</h1>
           <p className="text-center mb-4">
@@ -87,14 +84,6 @@ export default function CountryPage() {
           </p>
           <div className="row justify-content-center">
             <div className="col-md-6 text-center">
-              {/* {countryDetails["flag"] && (
-                <img
-                  src={countryDetails["flag"]}
-                  alt={`flag picture`}
-                  style={{ width: "100px" }}
-                  className="mb-3"
-                />
-              )} */}
               <h3>Official Name: {country.official_name}</h3>
               <h3>Common Name: {country.common_name}</h3>
               <h5>Member of the UN: {country.unMembership}</h5>
@@ -118,41 +107,43 @@ export default function CountryPage() {
           </div>
         </div>
 
-        {/* Rest of the content */}
-        <div>
-          <h2>Explore More</h2>
-          {news && Object.keys(news).length > 0 ? (
-            <div className="col-lg-4 col-md-6 mb-4">
-              <NewsCard
-                articleId={news.id}
-                title={truncateString(news.title, 50)}
-                description={truncateString(news.description, 95)}
-                imageUrl={news.url_image}
-                author={news.author}
-                publishedAt={news.publish_date}
-                source={news.source}
-              />
-            </div>
-          ) : (
-            <p>No news available</p>
-          )}
+        {/* Explore More section */}
+        <div className="container mt-5">
+          <h2 className="text-center mb-4">Explore More</h2>
+          <div className="row justify-content-center">
+            {news && Object.keys(news).length > 0 ? (
+              <div className="col-lg-4 col-md-6 mb-4">
+                <NewsCard
+                  articleId={news.id}
+                  title={truncateString(news.title, 50)}
+                  description={truncateString(news.description, 95)}
+                  imageUrl={news.url_image}
+                  author={news.author}
+                  publishedAt={news.publish_date}
+                  source={news.source}
+                />
+              </div>
+            ) : (
+              <p className="text-center">No news available</p>
+            )}
 
-          {supportGroup && Object.keys(supportGroup).length > 0 ? (
-            <div className="col-lg-4 col-md-6 mb-4">
-              <SupportCard
-                id={supportGroup.id}
-                groupName={truncateString(supportGroup.name, 50)}
-                groupEmail={supportGroup.email}
-                groupCity={supportGroup.city}
-                groupState={supportGroup.state}
-                groupZipCode={supportGroup.zipcode}
-                groupLink={supportGroup.link}
-                groupImageURL={supportGroup.url_image}
-              />
-            </div>
-          ) : (
-            <p>No support group available</p>
-          )}
+            {supportGroup && Object.keys(supportGroup).length > 0 ? (
+              <div className="col-lg-4 col-md-6 mb-4">
+                <SupportCard
+                  id={supportGroup.id}
+                  groupName={truncateString(supportGroup.name, 50)}
+                  groupEmail={supportGroup.email}
+                  groupCity={supportGroup.city}
+                  groupState={supportGroup.state}
+                  groupZipCode={supportGroup.zipcode}
+                  groupLink={supportGroup.link}
+                  groupImageURL={supportGroup.url_image}
+                />
+              </div>
+            ) : (
+              <p className="text-center">No support group available</p>
+            )}
+          </div>
         </div>
       </main>
     </div>

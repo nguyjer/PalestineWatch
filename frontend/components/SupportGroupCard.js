@@ -1,5 +1,3 @@
-// components/SupportCard.js
-
 import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is imported
 
@@ -14,7 +12,8 @@ export default function SupportCard({
   groupImageURL,
 }) {
   return (
-    <div className="card h-100 d-flex flex-column">
+    <div className="card h-100 d-flex flex-column text-center"
+    style={{ minHeight: '50vh' }}>
       <img
         src={groupImageURL || "/placeholder-image.jpg"}
         alt={`${groupName} image`}
@@ -26,34 +25,16 @@ export default function SupportCard({
         <div className="mb-2">
           <p className="card-text mb-1">Email: {groupEmail || "Loading..."}</p>
           <p className="card-text mb-1">City: {groupCity || "Missing Data"}</p>
-          <p className="card-text mb-1">
-            State: {groupState || "Missing Data"}
-          </p>
+          <p className="card-text mb-1">State: {groupState || "Missing Data"}</p>
           <p className="card-text mb-1">
             Zip Code: {groupZipCode || "Missing Data"}
           </p>
         </div>
-        {groupLink ? (
-          <Link
-            href={
-              groupLink.startsWith("http://") ||
-              groupLink.startsWith("https://")
-                ? groupLink
-                : `https://${groupLink}`
-            }
-            target="_blank"
-            rel="noopener noreferrer"
-            className="card-link" // Using card-link for subtle styling
-          >
-            Link to Website
-          </Link>
-        ) : (
-          <p className="card-text">No website available</p>
-        )}
-        <div className="mt-auto">
+        <div className="mt-auto d-flex justify-content-center">
           <Link
             href={`/support-groups/${id}`}
-            className="btn btn-primary mt-2 align-self-start"
+            className="btn btn-light mt-2"
+            style={{ width: "80%" }}
           >
             Read More
           </Link>
