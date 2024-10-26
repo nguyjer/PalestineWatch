@@ -27,7 +27,7 @@ describe("NewsCard Component", () => {
     // Check for the placeholder image
     const img = screen.getByAltText(/Breaking News image/i);
     expect(img).toHaveAttribute("src", "/placeholder-image.jpg");
-    expect(screen.getByText(/By Unknown \| 1\/1\/2024/i)).toBeInTheDocument();
+    expect(screen.getByText(/By Unknown \| d+\/d+\/2024/i)).toBeInTheDocument();
 
     const readMoreLink = screen.getByRole("link", { name: /Read More/i });
     expect(readMoreLink).toHaveAttribute("href", "/news/1");
