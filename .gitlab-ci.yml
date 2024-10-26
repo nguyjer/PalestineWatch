@@ -54,5 +54,5 @@ api-test-job:
   script:
     - echo "Running API tests..."
     - cd backend
-    - python -m unit_tests.unit-test
+    - PYTHONPATH=.. python -m unit_tests.unit-test
     - echo "API tests complete."
