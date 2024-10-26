@@ -13,6 +13,10 @@ export default function SupportGroupPage() {
   const [supportGroups, setSupportGroups] = useState(null); // Initialize as array
   const [country, setCountry] = useState(null);
 
+  function truncateString(str, num) {
+    return str?.length > num ? str.slice(0, num) + "..." : str;
+  }
+
   useEffect(() => {
     if (!id) return; // Ensure id is available before fetching
 
@@ -27,7 +31,10 @@ export default function SupportGroupPage() {
         console.error("Error fetching support groups:", error);
       }
     };
+    fetchSupportGroups();
+  }, [id]); // Add id as a dependency to trigger the effect when it changes
 
+  useEffect(() => {
     const fetchCountry = async () => {
       try {
         const response = await axios.get(
@@ -53,10 +60,10 @@ export default function SupportGroupPage() {
       }
     };
 
-    fetchSupportGroups();
+    
     fetchNews();
     fetchCountry();
-  }, [id]); // Add id as a dependency to trigger the effect when it changes
+  }, [supportGroups]); // Refetch whenever `supportGroups` changes
 
   if (!supportGroups) {
     return <p>Loading... groups</p>;
@@ -87,12 +94,32 @@ export default function SupportGroupPage() {
         <div>
           <h2>Explore More</h2>
           {news && Object.keys(news).length > 0 ? (
-            <NewsCard {...news} />
+            <div className="col-lg-4 col-md-6 mb-4">
+              <NewsCard
+                articleId={news.id}
+                title={truncateString(news.title, 50)}
+                description={truncateString(news.description, 95)}
+                imageUrl={news.url_image}
+                author={news.author}
+                publishedAt={news.publish_date}
+                source={news.source}
+              />
+            </div>
           ) : (
             <p>No news available</p>
           )}
           {country && Object.keys(country).length > 0 ? (
-            <CountryCard {...country} />
+            <div className="col-lg-4 col-md-6 mb-4">
+              <CountryCard
+                id={country.id} // Using coa_iso as the ID
+                country={country.coa_name}
+                flag={country.flag_url}
+                capital={country.capital}
+                population={country.population}
+                region={country.region}
+                subregion={country.subregion}
+              />
+            </div>
           ) : (
             <p>No country available</p>
           )}

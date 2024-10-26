@@ -14,7 +14,7 @@ export default function CountryCard({
     <div className="card h-100 d-flex flex-column">
       {/* Country name at the top */}
       <div className="card-header text-center">
-        <h4>{id}</h4>
+        <h4>{country}</h4>
       </div>
 
       <div className="d-flex justify-content-center">

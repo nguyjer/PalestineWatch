@@ -15,7 +15,9 @@ export default function CountryPage() {
   const [news, setNews] = useState({});
   const coa = idToCoaMap[id];
   const [supportGroup, setSupportGroup] = useState({});
-
+  function truncateString(str, num) {
+    return str?.length > num ? str.slice(0, num) + "..." : str;
+  }
   useEffect(() => {
     if (!coa) return;
 
@@ -44,7 +46,10 @@ export default function CountryPage() {
         console.error("Error fetching countries:", error);
       }
     };
+    fetchCountries();
+  }, [id]);
 
+  useEffect(() => {
     const fetchNews = async () => {
       try {
         const response = await axios.get(
@@ -70,30 +75,11 @@ export default function CountryPage() {
         console.error("Error fetching support group:", error);
       }
     };
-    // const fetchCountryDetails = async () => {
-    //   const details = {};
-    //   try {
-    //     details["commonName"] = country.common_name;
-    //     details["officialName"] = country.official_name;
-    //     details["unMember"] = country.unMembership ? "Yes" : "No";
-    //     details["flag"] = country.flag_url;
-    //     details["maps"] = country.maps || "Unknown";
-    //     details["capital"] = country.capital ? country.capital[0] : "Unknown";
-    //     details["population"] = country.population.toLocaleString();
-    //     details["region"] = country.region;
-    //     details["subregion"] = country.subregion;
-    //   } catch (error) {
-    //     console.error(`Problem with country - ${coa}:`, error);
-    //   }
 
-    //   setCountryDetails(details);
-    // };
-
-    fetchCountries();
-    // fetchCountryDetails();
+    
     fetchSupportGroup();
     fetchNews();
-  }, [id]);
+  }, [country]);
 
   return (
     <div>
@@ -106,8 +92,8 @@ export default function CountryPage() {
         <div className="container mt-5">
           <h1 className="text-center mb-4">Country Details</h1>
           <p className="text-center mb-4">
-            Here you can find important information about the country, including its
-            history, demographics, and geographical location.
+            Here you can find important information about the country, including
+            its history, demographics, and geographical location.
           </p>
           <div className="row justify-content-center">
             <div className="col-md-6 text-center">
@@ -158,13 +144,34 @@ export default function CountryPage() {
         <div>
           <h2>Explore More</h2>
           {news && Object.keys(news).length > 0 ? (
-            <NewsCard {...news} />
+            <div className="col-lg-4 col-md-6 mb-4">
+              <NewsCard
+                articleId={news.id}
+                title={truncateString(news.title, 50)}
+                description={truncateString(news.description, 95)}
+                imageUrl={news.url_image}
+                author={news.author}
+                publishedAt={news.publish_date}
+                source={news.source}
+              />
+            </div>
           ) : (
             <p>No news available</p>
           )}
 
           {supportGroup && Object.keys(supportGroup).length > 0 ? (
-            <SupportCard {...supportGroup} />
+            <div className="col-lg-4 col-md-6 mb-4">
+              <SupportCard
+                id={group.id}
+                groupName={truncateString(supportGroup.name, 50)}
+                groupEmail={supportGroup.email}
+                groupCity={supportGroup.city}
+                groupState={supportGroup.state}
+                groupZipCode={supportGroup.zipcode}
+                groupLink={supportGroup.link}
+                groupImageURL={supportGroup.url_image}
+              />
+            </div>
           ) : (
             <p>No support group available</p>
           )}

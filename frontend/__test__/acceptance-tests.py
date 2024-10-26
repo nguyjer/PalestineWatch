@@ -81,17 +81,17 @@ class TestPalestine(unittest.TestCase):
 		read_more.click()
 		self.assertEqual(self.driver.current_url, "https://www.palestinewatch.me/news/226")
 
-	# def test_support_instance(self):
-	# 	self.driver.get("https://www.palestinewatch.me/support-groups")
-	# 	groups = WebDriverWait(self.driver, 3).until(
-	# 		EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".card"))
-	# 	)
-	# 	assert groups
-	# 	assert len(groups) >= 3
-	# 	first = groups[0]
-	# 	read_more = first.find_element(By.CLASS_NAME, "btn-primary")
-	# 	read_more.click()
-	# 	self.assertEqual(self.driver.current_url, "https://www.palestinewatch.me/support-groups/1")
+	def test_support_instance(self):
+		self.driver.get("https://www.palestinewatch.me/support-groups")
+		groups = WebDriverWait(self.driver, 3).until(
+			EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".card"))
+		)
+		assert groups
+		assert len(groups) >= 3
+		first = groups[0]
+		read_more = first.find_element(By.CLASS_NAME, "btn-primary")
+		read_more.click()
+		self.assertEqual(self.driver.current_url, "https://www.palestinewatch.me/support-groups/14")
 
 	def test_country_instance(self):
 		self.driver.get("https://www.palestinewatch.me/countries")

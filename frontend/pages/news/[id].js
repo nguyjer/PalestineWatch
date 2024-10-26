@@ -2,8 +2,8 @@ import Head from "next/head";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { React, useState, useEffect } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is imported
-
+import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is imported
+import CountryCard from "../../components/CountryCard";
 import SupportCard from "../../components/SupportGroupCard";
 
 export default function ArticlePage() {
@@ -11,13 +11,19 @@ export default function ArticlePage() {
   const { id } = router.query;
   const [article, setArticle] = useState(null);
   const [country, setCountry] = useState(null);
-  const [supportGroups, setSupportGroups] = useState(null);
-
+  const [supportGroup, setSupportGroup] = useState(null);
+  function truncateString(str, num) {
+    return str?.length > num ? str.slice(0, num) + "..." : str;
+  }
   useEffect(() => {
     const fetchArticle = async () => {
-      if (id) { // Only fetch data if `id` is available
+      console.log("article");
+      if (id) {
+        // Only fetch data if `id` is available
         try {
-          const response = await axios.get(`https://api.palestinewatch.me/api/news/${id}`);
+          const response = await axios.get(
+            `https://api.palestinewatch.me/api/news/${id}`
+          );
           const fetchedArticle = response.data;
           setArticle(fetchedArticle);
         } catch (error) {
@@ -25,44 +31,41 @@ export default function ArticlePage() {
         }
       }
     };
-
+    fetchArticle();
+  }, [id]);
+  useEffect(() => {
+    if (!article) return;
     const fetchCountry = async () => {
+      console.log("Fetching country...");
       try {
         const response = await axios.get(
           `https://api.palestinewatch.me/api/countries/${article.countryId}`
-        ); // Fetch the article details
-        const data = await response.data;
+        );
+        const data = response.data;
         console.log(data);
-        setCountry(data[id] || {});
+        setCountry(data || {});
       } catch (error) {
         console.error("Error fetching country:", error);
       }
     };
-
-    const fetchSupportGroups = async () => {
+    const fetchSupportGroup = async () => {
+      console.log("Fetching support group...");
       try {
         const response = await axios.get(
-          `https://api.palestinewatch.me/api/support-group/${article.supportGroupId}`
+          `https://api.palestinewatch.me/api/support-groups/${article.supportGroupId}`
         );
-        const group = await response.data;
-        setSupportGroups(group || {});
+        const group = response.data;
+        console.log(group);
+        setSupportGroup(group || {});
       } catch (error) {
         console.error("Error fetching group:", error);
       }
     };
-
-    fetchArticle();
     fetchCountry();
-    fetchSupportGroups();
-  }, [id]); // Refetch whenever `id` changes
+    fetchSupportGroup();
+  }, [article]);
 
   if (!article) {
-    return <div>Loading...</div>;
-  }
-  if (!country) {
-    return <div>Loading...</div>;
-  }
-  if (!supportGroups) {
     return <div>Loading...</div>;
   }
 
@@ -105,18 +108,38 @@ export default function ArticlePage() {
         </div>
         <h1>Explore More: </h1>
         <div>
-          {supportGroups && Object.keys(supportGroups).length > 0 ? (
-            <SupportCard {...supportGroups} />
+          {supportGroup && Object.keys(supportGroup).length > 0 ? (
+            <div className="col-lg-4 col-md-6 mb-4">
+              <SupportCard
+                id={supportGroup.id}
+                groupName={truncateString(supportGroup.name, 50)}
+                groupEmail={supportGroup.email}
+                groupCity={supportGroup.city}
+                groupState={supportGroup.state}
+                groupZipCode={supportGroup.zipcode}
+                groupLink={supportGroup.link}
+                groupImageURL={supportGroup.url_image}
+              />
+            </div>
           ) : (
             <p>No support group available</p>
           )}
           {country && Object.keys(country).length > 0 ? (
-            <CountryCard {...country} />
+            <div className="col-lg-4 col-md-6 mb-4">
+              <CountryCard
+                id={country.id} // Using coa_iso as the ID
+                country={country.coa_name}
+                flag={country.flag_url}
+                capital={country.capital}
+                population={country.population}
+                region={country.region}
+                subregion={country.subregion}
+              />
+            </div>
           ) : (
             <p>No country available</p>
           )}
         </div>
-
       </main>
     </div>
   );
