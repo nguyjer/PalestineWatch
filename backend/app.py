@@ -24,15 +24,17 @@ cors = CORS(app, origins="*")
 
 # Create tables if they do not exist
 # add script methods to populate db here if necessary
-with app.app_context():
-    from backend.scripts import populate_news_db, fetch_groups, fetch_countries
-    #db.create_all()
-    assign_random_ids()
-    #populate_news_db() 
-    # fetch_groups()
+if __name__ == "__main__":
 
-    # fetch_countries()
-    pass
+	with app.app_context():
+		from backend.scripts import populate_news_db, fetch_groups, fetch_countries
+		#db.create_all()
+		assign_random_ids()
+		#populate_news_db() 
+		# fetch_groups()
+
+		# fetch_countries()
+		pass
 
 
 # news endpoints
