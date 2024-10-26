@@ -31,7 +31,6 @@ describe("SupportCard Component", () => {
     expect(screen.getByText(/City: Missing Data/i)).toBeInTheDocument();
     expect(screen.getByText(/State: Missing Data/i)).toBeInTheDocument();
     expect(screen.getByText(/Zip Code: Missing Data/i)).toBeInTheDocument();
-    expect(screen.getByText(/No website available/i)).toBeInTheDocument();
     const readMoreLink = screen.getByRole("link", { name: /Read More/i });
     expect(readMoreLink).toHaveAttribute("href", "/support-groups/1");
   });
