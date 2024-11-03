@@ -81,7 +81,11 @@ export default function SupportGroupPage() {
         <h1 className="text-center mb-4">Details for {supportGroups.name}</h1>
         <div className="text-center mb-4">
           <img
-            src={supportGroups.url_image || "/placeholder-image.jpg"}
+            src={
+              supportGroups.url_image == "No Image Found" || !supportGroups.url_image.startsWith("http")
+                ? "/Designer.png"
+                : supportGroups.url_image
+            }
             alt={`${supportGroups.name} image`}
             style={{ maxWidth: "200px", height: "auto" }}
           />

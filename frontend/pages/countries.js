@@ -5,7 +5,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Pagination } from "react-bootstrap"; // Importing Bootstrap for pagination
 
-const ITEMS_PER_PAGE = 3; // Number of countries per page
+const ITEMS_PER_PAGE = 9; // Number of countries per page
 const PAGINATION_LIMIT = 3; // Number of pagination items to show at a time
 
 export default function Countries() {

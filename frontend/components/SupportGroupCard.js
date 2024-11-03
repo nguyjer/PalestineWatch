@@ -15,7 +15,7 @@ export default function SupportCard({
     <div className="card h-100 d-flex flex-column text-center"
     style={{ minHeight: '50vh' }}>
       <img
-        src={groupImageURL || "/placeholder-image.jpg"}
+        src={groupImageURL == "No Image Found" || !groupImageURL.startsWith("http") ? "/Designer.png" : groupImageURL}
         alt={`${groupName} image`}
         className="card-img-top"
         style={{ height: "200px", objectFit: "cover" }} // Ensuring uniform image height
