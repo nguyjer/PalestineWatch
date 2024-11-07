@@ -53,5 +53,4 @@ api-test-job:
   image: python:latest
   script:
     - echo "Running API tests..."
-    # replace this with the command to run api unittests
     - echo "API tests complete."

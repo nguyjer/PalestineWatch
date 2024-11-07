@@ -11,25 +11,33 @@ export default function CountryCard({
   subregion,
 }) {
   return (
-    <div className="card h-100 d-flex flex-column">
+    <div
+      className="card h-100 d-flex flex-column justify-content-between text-center"
+      style={{ minHeight: "50vh" }} // Set the minimum height for the card
+    >
       {/* Country name at the top */}
-      <div className="card-header text-center">
-        <h4>{country}</h4>
+      <div
+        className="card-header d-flex justify-content-center align-items-center"
+        style={{ minHeight: "11vh", overflow: "hidden" }} // Flexbox to center the country name
+      >
+        <h4 className="m-0">{country}</h4>
       </div>
 
-      <div className="d-flex justify-content-center">
+      {/* Center flag image */}
+      <div className="d-flex justify-content-center my-3">
         {flag && (
           <img
             src={flag}
-            className="card-img-top pt-3"
+            className="img-fluid"
             alt={`${country} flag`}
-            style={{ height: "100px", width: "auto", maxWidth: "100%" }} // Adjusting the width to keep aspect ratio
+            style={{ height: "100px", width: "auto", maxWidth: "100%", objectFit: "contain" }} // Adjusting the width to keep aspect ratio
           />
         )}
       </div>
 
-      <div className="card-body d-flex flex-column flex-grow-1">
-        <div className="mb-2">
+      {/* Card body with centered text */}
+      <div className="card-body d-flex flex-column justify-content-center flex-grow-1">
+        <div>
           <p className="card-text mb-1">
             <strong>Capital:</strong> {capital || "Loading..."}
           </p>
@@ -43,14 +51,14 @@ export default function CountryCard({
             <strong>Subregion:</strong> {subregion || "Loading..."}
           </p>
         </div>
-        <div className="mt-auto">
-          <Link
-            href={`/countries/${id}`}
-            className="btn btn-primary mt-2 align-self-start"
-          >
-            Read More
-          </Link>
-        </div>
+      </div>
+
+      {/* Centered Read More button */}
+      <div className="pb-3">
+        <Link href={`/countries/${id}`}
+        className="btn btn-light" style={{ width: "80%" }}>
+         Read More
+        </Link>
       </div>
     </div>
   );

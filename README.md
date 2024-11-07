@@ -42,7 +42,7 @@ completed in a timely matter.
 
 Phase 2:
 
-- Git SHA: 
+- Git SHA: 2549cfed621e1718633841df657c4ab18f36e535
 
 - Phase Leader: Aryan Samal
 

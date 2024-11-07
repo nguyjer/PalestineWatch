@@ -1,5 +1,6 @@
 from flask import jsonify, abort
 from backend.models import SupportGroupsModel
+from backend import db
 
 def get_all_groups():
     try:
@@ -26,7 +27,7 @@ def get_all_groups():
 
 def get_group_by_id(groups_id):
     try:
-        group = SupportGroupsModel.query.get(groups_id)
+        group = db.session.get(SupportGroupsModel, groups_id)
         if group is None:
             abort(404, description="Support Group not found")
 

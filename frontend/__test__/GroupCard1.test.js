@@ -23,9 +23,9 @@ describe("SupportCard Component", () => {
     expect(screen.getByText(/City: Test City/i)).toBeInTheDocument();
     expect(screen.getByText(/State: TS/i)).toBeInTheDocument();
     expect(screen.getByText(/Zip Code: 12345/i)).toBeInTheDocument();
-    expect(screen.getByText(/Link to Website/i)).toHaveAttribute(
+    expect(screen.getByText(/Read More/i)).toHaveAttribute(
       "href",
-      "https://test.com"
+      "/support-groups/1"
     );
   });
 });

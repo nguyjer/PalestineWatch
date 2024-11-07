@@ -26,12 +26,13 @@ def get_all_news():
         return jsonify({"error": str(e)}), 500
 
 def get_news_by_id(news_id):
-    try:
-        article = NewsModel.query.get(news_id)
-        if article is None:
-            abort(404, description="News article not found")
+	try:
+		session = db.session
+		article = session.get(NewsModel, news_id)
+		if article is None:
+			abort(404, description="News article not found")
 
-        article_data = {
+		article_data = {
             "id": article.id,
             "author": article.author,
             "description": article.description,
@@ -43,6 +44,6 @@ def get_news_by_id(news_id):
             "supportGroupId": article.supportGroupId,
             "countryId": article.countryId,
         }
-        return jsonify(article_data), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+		return jsonify(article_data), 200
+	except Exception as e:
+		return jsonify({"error": str(e)}), 500

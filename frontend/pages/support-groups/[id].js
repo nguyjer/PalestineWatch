@@ -10,7 +10,7 @@ export default function SupportGroupPage() {
   const router = useRouter();
   const { id } = router.query;
   const [news, setNews] = useState(null);
-  const [supportGroups, setSupportGroups] = useState(null); // Initialize as array
+  const [supportGroups, setSupportGroups] = useState(null);
   const [country, setCountry] = useState(null);
 
   function truncateString(str, num) {
@@ -18,7 +18,7 @@ export default function SupportGroupPage() {
   }
 
   useEffect(() => {
-    if (!id) return; // Ensure id is available before fetching
+    if (!id) return;
 
     const fetchSupportGroups = async () => {
       try {
@@ -32,16 +32,17 @@ export default function SupportGroupPage() {
       }
     };
     fetchSupportGroups();
-  }, [id]); // Add id as a dependency to trigger the effect when it changes
+  }, [id]);
 
   useEffect(() => {
     const fetchCountry = async () => {
       try {
         const response = await axios.get(
-          `https://api.palestinewatch.me/api/countries/${supportGroups.countryId ? supportGroups.countryId : ""}`
-        ); // Fetch the article details
+          `https://api.palestinewatch.me/api/countries/${
+            supportGroups.countryId ? supportGroups.countryId : ""
+          }`
+        );
         const data = await response.data;
-        console.log(data);
         setCountry(data || {});
       } catch (error) {
         console.error("Error fetching country:", error);
@@ -51,7 +52,9 @@ export default function SupportGroupPage() {
     const fetchNews = async () => {
       try {
         const response = await axios.get(
-          `https://api.palestinewatch.me/api/news/${supportGroups.newsId ? supportGroups.newsId : ""}`
+          `https://api.palestinewatch.me/api/news/${
+            supportGroups.newsId ? supportGroups.newsId : ""
+          }`
         );
         const article = await response.data;
         setNews(article || {});
@@ -60,10 +63,9 @@ export default function SupportGroupPage() {
       }
     };
 
-    
     fetchNews();
     fetchCountry();
-  }, [supportGroups]); // Refetch whenever `supportGroups` changes
+  }, [supportGroups]);
 
   if (!supportGroups) {
     return <p>Loading... groups</p>;
@@ -76,53 +78,64 @@ export default function SupportGroupPage() {
         <link rel="icon" href="/watermelon.ico" />
       </Head>
       <main>
-        <h1>Details for {supportGroups.name}</h1>
-        <img
-          src={supportGroups.url_image || "/placeholder-image.jpg"} // Use a placeholder if no image URL
-          alt={`${supportGroups.name} image`}
-        />
-        <p>Email: {supportGroups.email}</p>
-        <p>City: {supportGroups.city}</p>
-        <p>State: {supportGroups.state}</p>
-        <p>Zip Code: {supportGroups.zipcode}</p>
-        <p>
+        <h1 className="text-center mb-4">Details for {supportGroups.name}</h1>
+        <div className="text-center mb-4">
+          <img
+            src={
+              supportGroups.url_image == "No Image Found" || !supportGroups.url_image.startsWith("http")
+                ? "/Designer.png"
+                : supportGroups.url_image
+            }
+            alt={`${supportGroups.name} image`}
+            style={{ maxWidth: "200px", height: "auto" }}
+          />
+        </div>
+        <p className="text-center">Email: {supportGroups.email}</p>
+        <p className="text-center">City: {supportGroups.city}</p>
+        <p className="text-center">State: {supportGroups.state}</p>
+        <p className="text-center">Zip Code: {supportGroups.zipcode}</p>
+        <p className="text-center">
           <Link href={supportGroups.link}>
             <u>{supportGroups.link}</u>
           </Link>
         </p>
 
-        <div>
-          <h2>Explore More</h2>
-          {news && Object.keys(news).length > 0 ? (
-            <div className="col-lg-4 col-md-6 mb-4">
-              <NewsCard
-                articleId={news.id}
-                title={truncateString(news.title, 50)}
-                description={truncateString(news.description, 95)}
-                imageUrl={news.url_image}
-                author={news.author}
-                publishedAt={news.publish_date}
-                source={news.source}
-              />
-            </div>
-          ) : (
-            <p>No news available</p>
-          )}
-          {country && Object.keys(country).length > 0 ? (
-            <div className="col-lg-4 col-md-6 mb-4">
-              <CountryCard
-                id={country.id} // Using coa_iso as the ID
-                country={country.official_name}
-                flag={country.flag_url}
-                capital={country.capital}
-                population={country.population}
-                region={country.region}
-                subregion={country.subregion}
-              />
-            </div>
-          ) : (
-            <p>No country available</p>
-          )}
+        {/* Explore More section */}
+        <div className="container mt-5">
+          <h2 className="text-center mb-4">Explore More</h2>
+          <div className="row justify-content-center">
+            {news && Object.keys(news).length > 0 ? (
+              <div className="col-lg-4 col-md-6 mb-4">
+                <NewsCard
+                  articleId={news.id}
+                  title={truncateString(news.title, 50)}
+                  description={truncateString(news.description, 95)}
+                  imageUrl={news.url_image}
+                  author={news.author}
+                  publishedAt={news.publish_date}
+                  source={news.source}
+                />
+              </div>
+            ) : (
+              <p className="text-center">No news available</p>
+            )}
+
+            {country && Object.keys(country).length > 0 ? (
+              <div className="col-lg-4 col-md-6 mb-4">
+                <CountryCard
+                  id={country.id}
+                  country={country.official_name}
+                  flag={country.flag_url}
+                  capital={country.capital}
+                  population={country.population}
+                  region={country.region}
+                  subregion={country.subregion}
+                />
+              </div>
+            ) : (
+              <p className="text-center">No country available</p>
+            )}
+          </div>
         </div>
       </main>
     </div>

@@ -30,7 +30,7 @@ def get_all_countries():
 
 def get_country_by_id(country_id):
     try:
-        country = CountriesModel.query.get(country_id)
+        country = db.session.get(CountriesModel, country_id)
         if country is None:
             abort(404, description="Country not found")
 
