@@ -3,6 +3,7 @@ import SupportCard from "../components/SupportGroupCard";
 import { React, useState, useEffect } from "react";
 import { Pagination } from "react-bootstrap"; // Assuming you're using Bootstrap for pagination
 import axios from "axios";
+import SearchBar from "../components/SearchBar";
 
 export default function SupportGroups() {
   const [supportGroups, setSupportGroups] = useState([]);
@@ -82,6 +83,7 @@ export default function SupportGroups() {
           like food, medical care, and shelter reach those in need despite
           difficult conditions on the ground.
         </p>
+        <SearchBar />
         <h2 className="text-center mb-4">
           Number of Groups: {supportGroups.length}
         </h2>

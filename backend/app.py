@@ -29,9 +29,9 @@ if __name__ == "__main__":
 	with app.app_context():
 		from backend.scripts import populate_news_db, fetch_groups, fetch_countries
 		#db.create_all()
-		assign_random_ids()
+		# assign_random_ids()
 		#populate_news_db() 
-		# fetch_groups()
+		fetch_groups()
 
 		# fetch_countries()
 		pass

@@ -3,6 +3,7 @@ import axios from "axios";
 import NewsCard from "../components/NewsCard";
 import { React, useState, useEffect } from "react";
 import { Pagination } from "react-bootstrap"; // Assuming you're using Bootstrap for pagination
+import SearchBar from "../components/SearchBar";
 
 
 export default function News() {
@@ -34,7 +35,14 @@ export default function News() {
   const currentCards = newsCards.slice(indexOfFirstCard, indexOfLastCard);
   const totalPages = Math.ceil(newsCards.length / cardsPerPage);
 
-  const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
+   const handlePageChange = (pageNumber) => {
+     setCurrentPage(pageNumber);
+
+     window.scrollTo({
+       top: 0,
+       behavior: "smooth",
+     });
+   };
 
   // Calculate visible page numbers
   const maxVisiblePages = 3;
@@ -71,6 +79,7 @@ export default function News() {
           complexities of the situation and the voices of Palestinians might be
           overlooked or underrepresented.
         </p>
+        <SearchBar />
         <h2 className="text-center mb-4">
           Number of Articles: {newsCards.length}
         </h2>

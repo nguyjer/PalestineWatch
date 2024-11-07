@@ -4,6 +4,7 @@ import CountryCard from "../components/CountryCard";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Pagination } from "react-bootstrap"; // Importing Bootstrap for pagination
+import SearchBar from "../components/SearchBar";
 
 const ITEMS_PER_PAGE = 9; // Number of countries per page
 const PAGINATION_LIMIT = 3; // Number of pagination items to show at a time
@@ -41,16 +42,12 @@ export default function Countries() {
 
   const totalPages = Math.ceil(countries.length / ITEMS_PER_PAGE);
 
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -81,6 +78,7 @@ export default function Countries() {
           following countries have shown support for Palestine and have provided
           asylum to refugees during the conflict:
         </p>
+        <SearchBar />
         <h2 className="text-center mb-4">
           Number of Countries: {countries.length}
         </h2>
@@ -102,7 +100,7 @@ export default function Countries() {
         {/* Pagination */}
         <Pagination className="justify-content-center mt-4">
           <Pagination.Prev
-            onClick={handlePrevPage}
+            onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
           >
             Previous
@@ -113,14 +111,14 @@ export default function Countries() {
               <Pagination.Item
                 key={pageNumber}
                 active={pageNumber === currentPage}
-                onClick={() => paginate(pageNumber)}
+                onClick={() => handlePageChange(pageNumber)}
               >
                 {pageNumber}
               </Pagination.Item>
             );
           })}
           <Pagination.Next
-            onClick={handleNextPage}
+            onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
           >
             Next

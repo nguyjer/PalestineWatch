@@ -82,7 +82,8 @@ export default function SupportGroupPage() {
         <div className="text-center mb-4">
           <img
             src={
-              supportGroups.url_image == "No Image Found" || !supportGroups.url_image.startsWith("http")
+              supportGroups.url_image == "No Image Found" ||
+              !supportGroups.url_image.startsWith("http")
                 ? "/Designer.png"
                 : supportGroups.url_image
             }
@@ -95,9 +96,23 @@ export default function SupportGroupPage() {
         <p className="text-center">State: {supportGroups.state}</p>
         <p className="text-center">Zip Code: {supportGroups.zipcode}</p>
         <p className="text-center">
-          <Link href={supportGroups.link}>
-            <u>{supportGroups.link}</u>
-          </Link>
+          {supportGroups.link ? (
+            <Link
+              href={
+                supportGroups.link.startsWith("http://") ||
+                supportGroups.link.startsWith("https://")
+                  ? groupLink
+                  : `https://${groupLink}`
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <u>Link to Website</u>
+              <p></p>
+            </Link>
+          ) : (
+            <p>No website available</p>
+          )}
         </p>
 
         {/* Explore More section */}
