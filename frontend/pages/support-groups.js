@@ -37,7 +37,14 @@ export default function SupportGroups() {
   const currentGroups = supportGroups.slice(indexOfFirstCard, indexOfLastCard);
   const totalPages = Math.ceil(supportGroups.length / cardsPerPage);
 
-  const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", 
+    });
+  };
 
   // Calculate visible page numbers
   const maxVisiblePages = 3;

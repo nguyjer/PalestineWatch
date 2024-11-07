@@ -73,7 +73,7 @@ export default function ArticlePage() {
     <div>
       <Head>
         <title>{article.title || "Article Details"} - Palestine Watch</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/watermelon.ico" />
       </Head>
 
       <main className="container">

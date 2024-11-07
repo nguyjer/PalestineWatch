@@ -55,7 +55,7 @@ export default function News() {
     <div>
       <Head>
         <title>Palestine Watch</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/watermelon.ico" />
       </Head>
       <main className="container">
         <h1 className="text-center mt-4 mb-4">News</h1> {/* Centered title */}
