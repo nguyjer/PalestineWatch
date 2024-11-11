@@ -43,6 +43,20 @@ export default function News() {
        behavior: "smooth",
      });
    };
+  
+  const handleSearch = async (searchParams) => {
+    try {
+      console.log("Searching with params:", searchParams);
+      const response = await axios.get(
+        "https://api.palestinewatch.me/api/news",
+        { params: { query: searchParams } }
+      );
+      setNewsCards(response.data);
+      setCurrentPage(1); // Reset to first page after searching
+    } catch (error) {
+      console.error("Error fetching filtered news:", error);
+    }
+  }
 
   // Calculate visible page numbers
   const maxVisiblePages = 3;
@@ -79,7 +93,7 @@ export default function News() {
           complexities of the situation and the voices of Palestinians might be
           overlooked or underrepresented.
         </p>
-        <SearchBar />
+        <SearchBar onSearch={handleSearch} />
         <h2 className="text-center mb-4">
           Number of Articles: {newsCards.length}
         </h2>

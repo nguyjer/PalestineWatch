@@ -1,10 +1,25 @@
-from flask import jsonify, abort
+from flask import jsonify, abort, request
 from backend.models import SupportGroupsModel
 from backend import db
 
 def get_all_groups():
     try:
-        groups = SupportGroupsModel.query.all()
+        # Start with the base query
+        query = SupportGroupsModel.query
+        search_term = request.args.get('query')
+        if search_term:
+            search_term = f"%{search_term}%"
+            query = query.filter(
+                (SupportGroupsModel.name.ilike(search_term)) |
+                (SupportGroupsModel.city.ilike(search_term)) |
+                (SupportGroupsModel.state.ilike(search_term)) |
+                (SupportGroupsModel.zipcode.ilike(search_term))
+            )
+
+        # Execute the filtered query
+        groups = query.all()
+
+        # Serialize the result
         groups_data = [
             {
                 "id": group.id,

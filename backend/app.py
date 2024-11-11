@@ -31,7 +31,7 @@ if __name__ == "__main__":
 		#db.create_all()
 		# assign_random_ids()
 		#populate_news_db() 
-		fetch_groups()
+		# fetch_groups()
 
 		# fetch_countries()
 		pass

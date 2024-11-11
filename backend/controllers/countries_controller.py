@@ -1,11 +1,24 @@
-from flask import jsonify, abort
+from flask import jsonify, abort, request
 from backend.models import CountriesModel
 from backend import db
 
 
 def get_all_countries():
     try:
-        countries = CountriesModel.query.all()
+        query = CountriesModel.query
+        search_term = request.args.get('query')
+        if search_term:
+            search_term = f"%{search_term}%"
+            query = query.filter(
+                (CountriesModel.capital.ilike(search_term)) |
+                (CountriesModel.region.ilike(search_term)) |
+                (CountriesModel.official_name.ilike(search_term)) |
+                (CountriesModel.common_name.ilike(search_term)) |
+                (CountriesModel.subregion.ilike(search_term))
+                )
+
+        # Execute the filtered query
+        countries = query.all()
         countries_data = [
             {
                 "id": country.id,

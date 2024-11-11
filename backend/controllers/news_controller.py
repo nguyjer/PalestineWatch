@@ -1,11 +1,23 @@
-from flask import jsonify, abort
+from flask import jsonify, abort, request
 from backend.models import NewsModel
 from backend import db
 
 
 def get_all_news():
     try:
-        articles = NewsModel.query.all()
+        query = NewsModel.query
+        search_term = request.args.get('query')
+        if search_term:
+            search_term = f"%{search_term}%"
+            query = query.filter(
+                (NewsModel.author.ilike(search_term)) |
+                (NewsModel.description.ilike(search_term)) |
+                (NewsModel.publish_date.ilike(search_term)) |
+                (NewsModel.source.ilike(search_term))
+            )
+
+        # Execute the filtered query
+        articles = query.all()
         articles_data = [
             {
                 "id": article.id,

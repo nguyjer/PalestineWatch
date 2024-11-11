@@ -3,11 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 function SearchBar({ onSearch }) {
+  const [searchTerm, setSearchTerm] = useState("");
   const [sortLabel, setSortLabel] = useState("Sort By"); // Default label
 
   const handleSearchClick = () => {
     if (onSearch) {
-      onSearch();
+      onSearch(searchTerm); // Pass the search term to the parent component
     }
   };
 
@@ -72,6 +73,8 @@ function SearchBar({ onSearch }) {
         className="form-control rounded"
         placeholder="Search"
         aria-label="Search"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)} // Update searchTerm state
       />
       <button
         className="btn btn-outline-secondary"

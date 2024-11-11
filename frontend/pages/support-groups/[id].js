@@ -101,8 +101,8 @@ export default function SupportGroupPage() {
               href={
                 supportGroups.link.startsWith("http://") ||
                 supportGroups.link.startsWith("https://")
-                  ? groupLink
-                  : `https://${groupLink}`
+                  ? supportGroups.link
+                  : `https://${supportGroups.link}`
               }
               target="_blank"
               rel="noopener noreferrer"

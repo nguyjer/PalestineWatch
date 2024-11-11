@@ -35,6 +35,27 @@ export default function Countries() {
     fetchCountries();
   }, []);
 
+  const handleSearch = async (searchParams) => {
+    try {
+      console.log("Searching with params:", searchParams);
+      const response = await axios.get(
+        "https://api.palestinewatch.me/api/countries",
+        { params: { query: searchParams } }
+      );
+      const data = response.data;
+
+      // Filter unique countries based on coa_iso
+      const uniqueCountries = Array.from(
+        new Map(data.map((country) => [country.coa_iso, country])).values()
+      );
+
+      setCountries(uniqueCountries);
+      setCurrentPage(1); // Reset to first page after searching
+    } catch (error) {
+      console.error("Error fetching filtered countries:", error);
+    }
+  }
+
   // Pagination logic
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
@@ -78,7 +99,7 @@ export default function Countries() {
           following countries have shown support for Palestine and have provided
           asylum to refugees during the conflict:
         </p>
-        <SearchBar />
+        <SearchBa onSearch={handleSearch} />
         <h2 className="text-center mb-4">
           Number of Countries: {countries.length}
         </h2>
