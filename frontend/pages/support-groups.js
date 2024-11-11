@@ -14,7 +14,7 @@ export default function SupportGroups() {
     const fetchSupportGroups = async () => {
       try {
         const response = await axios.get(
-          "http://palestinewatch.me/api/support-groups"
+          "https://api.palestinewatch.me/api/support-groups"
         );
         const groups = response.data;
         setSupportGroups(groups); // Set the full list of groups
@@ -31,7 +31,7 @@ export default function SupportGroups() {
     try {
       console.log("Searching with params:", searchParams);
       const response = await axios.get(
-        "http://palestinewatch.me/api/support-groups",
+        "https://api.palestinewatch.me/api/support-groups",
         { params: { query: searchParams } }
       );
       setSupportGroups(response.data);
