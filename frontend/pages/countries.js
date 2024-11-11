@@ -99,7 +99,7 @@ export default function Countries() {
           following countries have shown support for Palestine and have provided
           asylum to refugees during the conflict:
         </p>
-        <SearchBa onSearch={handleSearch} />
+        <SearchBar onSearch={handleSearch} />
         <h2 className="text-center mb-4">
           Number of Countries: {countries.length}
         </h2>
