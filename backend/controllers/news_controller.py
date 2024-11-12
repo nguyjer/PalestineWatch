@@ -1,5 +1,6 @@
 from flask import jsonify, abort, request
 from backend.models import NewsModel
+from sqlalchemy import cast, Text
 from backend import db
 
 
@@ -12,7 +13,7 @@ def get_all_news():
             query = query.filter(
                 (NewsModel.author.ilike(search_term)) |
                 (NewsModel.description.ilike(search_term)) |
-                (NewsModel.publish_date.ilike(search_term)) |
+                (cast(NewsModel.publish_date, Text).ilike(search_term)) |
                 (NewsModel.source.ilike(search_term))
             )
 
