@@ -9,11 +9,31 @@ export default function NewsCard({
   author,
   publishedAt,
   source,
+  searchTerm
 }) {
   // Function to truncate the description to 85 characters
   function truncateString(str, num) {
     return str?.length > num ? str.slice(0, num) + "..." : str;
   }
+
+  const highlightText = (text, term) => {
+    if (!term) return text;
+    const regex = new RegExp(`(${term})`, "i"); // Match only the first occurrence, case-insensitive
+    const matchIndex = text.search(regex);
+    if (matchIndex === -1) return text;
+    // Highlight the first match
+    const beforeMatch = text.slice(0, matchIndex);
+    const matchText = text.slice(matchIndex, matchIndex + term.length);
+    const afterMatch = text.slice(matchIndex + term.length);
+
+    return (
+      <>
+        {beforeMatch}
+        <span style={{ backgroundColor: "yellow" }}>{matchText}</span>
+        {afterMatch}
+      </>
+    );
+  };
 
   return (
     <div className="card h-100 d-flex flex-column"
@@ -27,11 +47,11 @@ export default function NewsCard({
       <div className="card-body d-flex flex-column flex-grow-1">
         <h5 className="card-title">{title}</h5>
         <p className="card-text">
-          {truncateString(description, 85)} {/* Truncate to 85 characters */}
+          {highlightText(truncateString(description, 85), searchTerm)} {/* Truncate to 85 characters */}
         </p>
         <p className="card-text">
           <small className="text-muted">
-            By {truncateString(author, 20) || "Unknown"} | {source || "Unknown"} <br></br> {new Date(publishedAt).toLocaleDateString()}
+            By {highlightText(truncateString(author, 20), searchTerm) || "Unknown"} | {highlightText(source, searchTerm) || "Unknown"} <br></br> {highlightText(new Date(publishedAt).toLocaleDateString(), searchTerm)}
           </small>
         </p>
         {/* Adding a spacer to push the button to the bottom */}

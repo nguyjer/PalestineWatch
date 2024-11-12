@@ -12,6 +12,7 @@ const PAGINATION_LIMIT = 3; // Number of pagination items to show at a time
 export default function Countries() {
   const [countries, setCountries] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -37,7 +38,7 @@ export default function Countries() {
 
   const handleSearch = async (searchParams) => {
     try {
-      console.log("Searching with params:", searchParams);
+      setSearchTerm(searchParams);
       const response = await axios.get(
         "https://api.palestinewatch.me/api/countries",
         { params: { query: searchParams } }
@@ -114,6 +115,7 @@ export default function Countries() {
                 population={country.population}
                 region={country.region}
                 subregion={country.subregion}
+                searchTerm={searchTerm}
               />
             </div>
           ))}

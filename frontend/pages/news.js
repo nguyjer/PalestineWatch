@@ -9,6 +9,7 @@ import SearchBar from "../components/SearchBar";
 export default function News() {
   const [newsCards, setNewsCards] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
   const cardsPerPage = 9; // Number of cards to display per page
 
   useEffect(() => {
@@ -46,7 +47,7 @@ export default function News() {
   
   const handleSearch = async (searchParams) => {
     try {
-      console.log("Searching with params:", searchParams);
+      setSearchTerm(searchParams);
       const response = await axios.get(
         "https://api.palestinewatch.me/api/news",
         { params: { query: searchParams } }
@@ -108,6 +109,7 @@ export default function News() {
                 author={article.author}
                 publishedAt={article.publish_date}
                 source={article.source}
+                searchTerm={searchTerm}
               />
             </div>
           ))}

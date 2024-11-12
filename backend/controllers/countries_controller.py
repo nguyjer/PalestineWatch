@@ -13,7 +13,6 @@ def get_all_countries():
                 (CountriesModel.capital.ilike(search_term)) |
                 (CountriesModel.region.ilike(search_term)) |
                 (CountriesModel.official_name.ilike(search_term)) |
-                (CountriesModel.common_name.ilike(search_term)) |
                 (CountriesModel.subregion.ilike(search_term))
                 )
 

@@ -8,6 +8,7 @@ import SearchBar from "../components/SearchBar";
 export default function SupportGroups() {
   const [supportGroups, setSupportGroups] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
   const cardsPerPage = 9; 
 
   useEffect(() => {
@@ -29,7 +30,8 @@ export default function SupportGroups() {
 
   const handleSearch = async (searchParams) => {
     try {
-      console.log("Searching with params:", searchParams);
+      setSearchTerm(searchParams);
+      console.log("Searching with params:", searchTerm);
       const response = await axios.get(
         "https://api.palestinewatch.me/api/support-groups",
         { params: { query: searchParams } }
@@ -99,6 +101,7 @@ export default function SupportGroups() {
                 groupZipCode={group.zipcode}
                 groupLink={group.link}
                 groupImageURL={group.url_image}
+                searchTerm={searchTerm}
               />
             </div>
           ))}
