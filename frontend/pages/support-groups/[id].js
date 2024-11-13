@@ -78,7 +78,7 @@ export default function SupportGroupPage() {
         <link rel="icon" href="/watermelon.ico" />
       </Head>
       <main>
-        <h1 className="text-center mb-4">Details for {supportGroups.name}</h1>
+        <h1 className="text-center mt-5 mb-4">Details for {supportGroups.name}</h1>
         <div className="text-center mb-4">
           <img
             src={
