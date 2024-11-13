@@ -57,6 +57,24 @@ are on schedule, ask others if they need help.
 | Kenny Nguyen      | 23 hours  | 29 hours |
 | Jeremy Nguyen     | 22 hours | 33 hours |
 
+
+Phase 3:
+
+- Git SHA: 
+
+- Phase Leader: Jeremy Nguyen
+
+- Phase Leader Responsibilites: Facilitate meetings, and ensure that people
+are finishing their tasks in a timely manner
+
+| Team Member | Estimate Time | Actual Time |
+| ----- | --- | --- | 
+| Aryan Samal       | 5 hours | 4 hours |
+| Rohan Damani      |  6 hours | 2 hours |
+| Will Matherne     |  4 hours | 3 hours |
+| Kenny Nguyen      | 7 hours  | 3 hours |
+| Jeremy Nguyen     | 5 hours | 6 hours |
+
 # Website Link
 
 - https://www.palestinewatch.me/

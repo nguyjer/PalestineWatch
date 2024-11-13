@@ -240,11 +240,33 @@ export default function About() {
 
         <TotalStats key={stats.issues} stats={stats} />
         <h2 className="text-center pt-5"> Sources </h2>
+        <a 
+            className="text-center d-block"
+            href="https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            CFR Global Conflict Tracker<br></br>
+        </a>
+        <a
+            className="text-center d-block"
+            href="https://www.un.org/unispal/history"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            History of the Palestine Conflict<br></br>
+        </a>
+        <a
+            className="text-center d-block"
+            href="https://www.britannica.com/place/Palestine"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Britannica overview on Palestine<br></br>
+        </a>
+
+          
         <p className="text-center">
-          https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict{" "}
-          <br></br>
-          https://www.un.org/unispal/history/ <br></br>
-          https://www.britannica.com/place/Palestine <br></br>
           Palestine Causality Toll: 42,385 Palestinians Killed
         </p>
         <div className="datahere text-center">
