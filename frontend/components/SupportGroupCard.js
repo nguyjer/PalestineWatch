@@ -52,16 +52,17 @@ export default function SupportCard({
         <h5 className="card-title">{highlightText(groupName, searchTerm)}</h5>
         <div className="mb-2">
           <p className="card-text mb-1">
-            Email: {highlightText(groupEmail, searchTerm)}
+            Email: {highlightText(groupEmail || "Missing Data", searchTerm)}
           </p>
           <p className="card-text mb-1">
-            City: {highlightText(groupCity, searchTerm)}
+            City: {highlightText(groupCity || "Missing Data", searchTerm)}
           </p>
           <p className="card-text mb-1">
-            State: {highlightText(groupState, searchTerm)}
+            State: {highlightText(groupState || "Missing Data", searchTerm)}
           </p>
           <p className="card-text mb-1">
-            Zip Code: {highlightText(groupZipCode, searchTerm)}
+            Zip Code:{" "}
+            {highlightText(groupZipCode || "Missing Data", searchTerm)}
           </p>
         </div>
         <div className="mt-auto d-flex justify-content-center">

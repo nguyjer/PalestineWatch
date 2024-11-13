@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-function SearchBar({ onSearch }) {
+function SearchBar({ onSearch, onSort }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortLabel, setSortLabel] = useState("Sort By"); // Default label
 
@@ -14,6 +14,9 @@ function SearchBar({ onSearch }) {
 
   const handleDropdownClick = (label) => {
     setSortLabel(label); // Update button label when item is clicked
+    if (onSort) {
+      onSort(label); // Pass the sort label to the parent component
+    }
   };
 
   return (
@@ -43,9 +46,9 @@ function SearchBar({ onSearch }) {
             <a
               className="dropdown-item"
               href="#"
-              onClick={() => handleDropdownClick("Action")}
+              onClick={() => handleDropdownClick("name")}
             >
-              Action
+              Name
             </a>
           </li>
           <li>

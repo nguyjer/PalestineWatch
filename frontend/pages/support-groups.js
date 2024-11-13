@@ -43,6 +43,15 @@ export default function SupportGroups() {
     }
   };
 
+  const handleSort = (sortType) => {
+    if (sortType === "name") {
+      supportGroups.sort(function (a, b) {
+        return a.name.localeCompare(b.name);
+      });
+      setCurrentPage(1)
+    }
+  }
+
   // Pagination logic
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
@@ -85,7 +94,7 @@ export default function SupportGroups() {
           essential for humanitarian assistance.
         </p>
         {/* Pass handleSearch to SearchBar */}
-        <SearchBar onSearch={handleSearch} />
+        <SearchBar onSearch={handleSearch} onSort={handleSort} />
         <h2 className="text-center mb-4">
           Number of Groups: {supportGroups.length}
         </h2>

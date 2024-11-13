@@ -27,7 +27,7 @@ describe("SupportCard Component", () => {
     };
     render(<SupportCard {...props} />);
 
-    expect(screen.getByText(/Email: Loading.../i)).toBeInTheDocument();
+    expect(screen.getByText(/Email: Missing Data/i)).toBeInTheDocument();
     expect(screen.getByText(/City: Missing Data/i)).toBeInTheDocument();
     expect(screen.getByText(/State: Missing Data/i)).toBeInTheDocument();
     expect(screen.getByText(/Zip Code: Missing Data/i)).toBeInTheDocument();
