@@ -7,10 +7,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import unittest
 
+# SELENIUM TESTS
+
 class TestPalestine(unittest.TestCase):
 
-
-	# this works on my machine, i have no clue if it will on yours
 	@classmethod
 	def setUpClass(cls):
 		chrome_options = Options()
