@@ -14,27 +14,66 @@ export default function Countries() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
 
+  const fetchCountries = async () => {
+    try {
+      const response = await axios.get(
+        "https://api.palestinewatch.me/api/countries"
+      );
+      const data = response.data;
+
+      // Filter unique countries based on coa_iso
+      const uniqueCountries = Array.from(
+        new Map(data.map((country) => [country.coa_iso, country])).values()
+      );
+
+      setCountries(uniqueCountries); // Set the unique countries data to state
+    } catch (error) {
+      console.error("Error fetching countries:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchCountries = async () => {
-      try {
-        const response = await axios.get(
-          "https://api.palestinewatch.me/api/countries"
-        );
-        const data = response.data;
-
-        // Filter unique countries based on coa_iso
-        const uniqueCountries = Array.from(
-          new Map(data.map((country) => [country.coa_iso, country])).values()
-        );
-
-        setCountries(uniqueCountries); // Set the unique countries data to state
-      } catch (error) {
-        console.error("Error fetching countries:", error);
-      }
-    };
 
     fetchCountries();
   }, []);
+
+  const handleSort = (sortType) => {
+    console.log("Sorting by:", sortType);
+    if (sortType === "Sort By") {
+      fetchCountries();
+    } else if (sortType === "Country Name") {
+      const sortedCountries = [...countries].sort((a, b) =>
+        a.official_name.localeCompare(b.official_name)
+      );
+      setCountries(sortedCountries);
+      setCurrentPage(1);
+    } else if (sortType === "Population") {
+      const sortedCountries = [...countries].sort((a, b) =>
+        parseInt(a.population) - parseInt(b.population)
+      );
+      setCountries(sortedCountries);
+      setCurrentPage(1);
+    } else if (sortType === "Region") {
+      const sortedCountries = [...countries].sort((a, b) =>
+        a.region.localeCompare(b.region)
+      );
+      setCountries(sortedCountries);
+      setCurrentPage(1);
+    } else if (sortType === "Subregion") {
+      const sortedCountries = [...countries].sort((a, b) =>
+        a.subregion.localeCompare(b.subregion)
+      );
+      setCountries(sortedCountries);
+      setCurrentPage(1);
+    } else if (sortType === "Capital") {
+      const sortedCountries = [...countries].sort((a, b) =>
+        a.capital.localeCompare(b.capital)
+      );
+      setCountries(sortedCountries);
+      setCurrentPage(1);
+    }
+  };
+
 
   const handleSearch = async (searchParams) => {
     try {
@@ -100,7 +139,7 @@ export default function Countries() {
           following countries have shown support for Palestine and have provided
           asylum to refugees during the conflict:
         </p>
-        <SearchBar onSearch={handleSearch} />
+        <SearchBar onSearch={handleSearch} onSort={handleSort} sortLabels={["Country Name", "Capital", "Population", "Region", "Subregion"]} />
         <h2 className="text-center mb-4">
           Number of Countries: {countries.length}
         </h2>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-function SearchBar({ onSearch, onSort }) {
+function SearchBar({ onSearch, onSort, sortLabels }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortLabel, setSortLabel] = useState("Sort By"); // Default label
 
@@ -42,33 +42,17 @@ function SearchBar({ onSearch, onSort }) {
               </a>
             </li>
           )}
-          <li>
-            <a
-              className="dropdown-item"
-              href="#"
-              onClick={() => handleDropdownClick("name")}
-            >
-              Name
-            </a>
-          </li>
-          <li>
-            <a
-              className="dropdown-item"
-              href="#"
-              onClick={() => handleDropdownClick("Something else here")}
-            >
-              Something else here
-            </a>
-          </li>
-          <li>
-            <a
-              className="dropdown-item"
-              href="#"
-              onClick={() => handleDropdownClick("Separated link")}
-            >
-              Separated link
-            </a>
-          </li>
+          {sortLabels.map((label, index) => (
+            <li key={index}>
+              <a
+                className="dropdown-item"
+                href="#"
+                onClick={() => handleDropdownClick(label)}
+              >
+                {label}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
       <input
