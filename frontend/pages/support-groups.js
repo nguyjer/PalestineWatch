@@ -45,27 +45,36 @@ export default function SupportGroups() {
     console.log("Sorting by:", sortType);
     if (sortType === "Sort By") {
       fetchSupportGroups();
-    }
-    else if (sortType === "Name") {
+    } else if (sortType === "Name") {
       const sortedGroups = [...supportGroups].sort((a, b) =>
         a.name.localeCompare(b.name)
       );
       setSupportGroups(sortedGroups);
-      setCurrentPage(1); 
-    }
-    else if (sortType === "City") {
+      setCurrentPage(1);
+    } else if (sortType === "City") {
       const sortedGroups = [...supportGroups].sort((a, b) =>
         a.city.localeCompare(b.city)
       );
       setSupportGroups(sortedGroups);
-      setCurrentPage(1); 
-    }
-    else if (sortType === "State") {
+      setCurrentPage(1);
+    } else if (sortType === "State") {
       const sortedGroups = [...supportGroups].sort((a, b) =>
         a.state.localeCompare(b.state)
       );
       setSupportGroups(sortedGroups);
-      setCurrentPage(1); 
+      setCurrentPage(1);
+    } else if (sortType === "Email") {
+      const sortedGroups = [...supportGroups].sort((a, b) =>
+        a.email.localeCompare(b.email)
+      );
+      setSupportGroups(sortedGroups);
+      setCurrentPage(1);
+    } else if (sortType === "Zip Code") {
+      const sortedGroups = [...supportGroups].sort((a, b) =>
+        parseInt(a.zipcode) - parseInt(b.zipcode)
+      );
+      setSupportGroups(sortedGroups);
+      setCurrentPage(1);
     }
   };
 
@@ -111,7 +120,7 @@ export default function SupportGroups() {
           essential for humanitarian assistance.
         </p>
         {/* Pass handleSearch to SearchBar */}
-        <SearchBar onSearch={handleSearch} onSort={handleSort} sortLabels={["Name", "City", "State"]} />
+        <SearchBar onSearch={handleSearch} onSort={handleSort} sortLabels={["Name", "City", "State", "Email", "Zip Code"]} />
         <h2 className="text-center mb-4">
           Number of Groups: {supportGroups.length}
         </h2>
