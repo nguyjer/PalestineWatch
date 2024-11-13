@@ -56,5 +56,5 @@ api-test-job:
     - cd backend
     - pip install -r requirements.txt
     - echo "Running API tests..."
-    - PYTHONPATH=.. python -m unit_tests/unit-test
+    - PYTHONPATH=.. python -m unit_tests.unit-test
     - echo "API tests complete."
