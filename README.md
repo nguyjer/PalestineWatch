@@ -100,9 +100,9 @@ are finishing their tasks in a timely manner
 
 - News/Media (~200)
 
-- Support Groups (~50)
+- Support Groups (~300)
 
-- Countries (~20)
+- Countries (~40)
 
 # Instance Description:
 
