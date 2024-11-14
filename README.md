@@ -60,7 +60,7 @@ are on schedule, ask others if they need help.
 
 Phase 3:
 
-- Git SHA: 
+- Git SHA: 732107db9a269a85aa914c8e6b20daafe3dad1e5
 
 - Phase Leader: Jeremy Nguyen
 
