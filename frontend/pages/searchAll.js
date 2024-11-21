@@ -31,17 +31,18 @@ export default function searchAll() {
             params: { query: searchParams },
           }),
         ]);
-
+      const uniqueCountries = Array.from(
+        new Map(countriesResponse.data.map((country) => [country.coa_iso, country])).values()
+      );
       // Merge all results with a type field to identify them
       const mergedResults = [
         ...groupsResponse.data.map((item) => ({ ...item, type: "group" })),
         ...newsResponse.data.map((item) => ({ ...item, type: "news" })),
-        ...countriesResponse.data.map((item) => ({
+        ...uniqueCountries.map((item) => ({
           ...item,
           type: "country",
         })),
       ];
-
       setAllCards(mergedResults);
       setCurrentPage(1);
     } catch (error) {
