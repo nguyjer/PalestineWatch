@@ -15,7 +15,12 @@ export default function NavBar() {
           <img
             src="/watermelon.ico"
             alt="PalestineWatch Icon"
-            style={{ width: "20px", height: "20px", marginRight: "5px", marginBottom: "3px" }}
+            style={{
+              width: "20px",
+              height: "20px",
+              marginRight: "5px",
+              marginBottom: "3px",
+            }}
           />
           PalestineWatch
         </a>
@@ -64,6 +69,14 @@ export default function NavBar() {
               href="/countries"
             >
               Countries
+            </a>
+            <a
+              className={`nav-link me-4 ${
+                isActive("/searchAll") ? "active font-weight-bold" : ""
+              }`}
+              href="/searchAll"
+            >
+              Search All
             </a>
           </div>
         </div>
