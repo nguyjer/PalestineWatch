@@ -39,7 +39,7 @@ export default function NavBar() {
           {/* Shift all links to the right */}
           <div className="navbar-nav ms-auto">
             <a
-              className={`nav-link me-4 ${
+              className={`nav-link me-1 ${
                 isActive("/about") ? "active font-weight-bold" : ""
               }`}
               href="/about"
@@ -47,7 +47,23 @@ export default function NavBar() {
               About
             </a>
             <a
-              className={`nav-link me-4 ${
+              className={`nav-link me-1 ${
+                isActive("/visualizations") ? "active font-weight-bold" : ""
+              }`}
+              href="/visualizations"
+            >
+              Visualizations
+            </a>
+            <a
+              className={`nav-link me-1 ${
+                isActive("/provider-visualizations") ? "active font-weight-bold" : ""
+              }`}
+              href="/provider-visualizations"
+            >
+              Provider Visualizations
+            </a>
+            <a
+              className={`nav-link me-1 ${
                 isActive("/news") ? "active font-weight-bold" : ""
               }`}
               href="/news"
@@ -55,7 +71,7 @@ export default function NavBar() {
               News
             </a>
             <a
-              className={`nav-link me-4 ${
+              className={`nav-link me-1 ${
                 isActive("/support-groups") ? "active font-weight-bold" : ""
               }`}
               href="/support-groups"
@@ -63,7 +79,7 @@ export default function NavBar() {
               Support Groups
             </a>
             <a
-              className={`nav-link me-4 ${
+              className={`nav-link me-1 ${
                 isActive("/countries") ? "active font-weight-bold" : ""
               }`}
               href="/countries"
@@ -71,7 +87,7 @@ export default function NavBar() {
               Countries
             </a>
             <a
-              className={`nav-link me-4 ${
+              className={`nav-link me-1 ${
                 isActive("/searchAll") ? "active font-weight-bold" : ""
               }`}
               href="/searchAll"
