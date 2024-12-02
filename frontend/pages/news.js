@@ -136,6 +136,7 @@ export default function News() {
                 articleId={article.id}
                 title={truncateString(article.title, 50)}
                 description={truncateString(article.description, 95)}
+                url={article.url}
                 imageUrl={article.url_image}
                 author={article.author}
                 publishedAt={article.publish_date}
