@@ -5,6 +5,7 @@ export default function NewsCard({
   articleId,
   title,
   description,
+  url,
   imageUrl,
   author,
   publishedAt,
@@ -59,7 +60,7 @@ export default function NewsCard({
           <small className="text-muted">
             {url ? (
               <a href={url} target="_blank" rel="noopener noreferrer">
-                {url}
+                {highlightText(truncateString(url, 100), searchTerm)}
               </a>
             ) : "URL Missing"}
           </small>
