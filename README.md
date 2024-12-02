@@ -58,7 +58,7 @@ are on schedule, ask others if they need help.
 | Jeremy Nguyen     | 22 hours | 33 hours |
 
 
-Phase 2:
+Phase 3:
 
 - Git SHA: 
 
