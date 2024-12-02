@@ -54,6 +54,16 @@ export default function NewsCard({
             By {highlightText(truncateString(author, 20), searchTerm) || "Unknown"} | {highlightText(source, searchTerm) || "Unknown"} <br></br> {highlightText(new Date(publishedAt).toLocaleDateString(), searchTerm)}
           </small>
         </p>
+        {/* Add the URL under the date */}
+        <p className="card-text">
+          <small className="text-muted">
+            {url ? (
+              <a href={url} target="_blank" rel="noopener noreferrer">
+                {url}
+              </a>
+            ) : "URL Missing"}
+          </small>
+        </p>
         {/* Adding a spacer to push the button to the bottom */}
         <div className="mt-auto d-flex justify-content-center">
           <Link href={`/news/${articleId}`} className="btn btn-light" style={{ width: "80%" }}>
