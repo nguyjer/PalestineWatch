@@ -107,7 +107,7 @@ export default function Visualizations() {
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px", display: "flex", flexDirection: "column", alignItems: "center" }}>
       <Head>
         <title>Visualizations</title>
         <meta name="description" content="Visualizations" />
@@ -116,21 +116,25 @@ export default function Visualizations() {
       <h1 className="text-center mt-4 mb-4">Visualizations</h1>
 
       {/* Countries Map Section */}
-      <div style={{ width: "50%", paddingTop: "20px", marginBottom: "40px" }}>
+      <div style={{ width: "80%", paddingTop: "20px", marginBottom: "40px" }}>
         <h2 className="text-center">Countries Map</h2>
         <div
           id="world-map"
           style={{
             width: "100%",
             height: "600px",
+            display: "flex",
+            justifyContent: "center",
           }}
         ></div>
       </div>
 
       {/* Word Frequency Chart Section */}
-      <div style={{ width: "100%", paddingTop: "20px" }}>
+      <div style={{ width: "80%", paddingTop: "20px" }}>
         <h2 className="text-center">Most Commonly Referenced Words in News Descriptions</h2>
-        <WordFrequencyChart descriptions={descriptions} />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <WordFrequencyChart descriptions={descriptions} />
+        </div>
       </div>
     </div>
   );
