@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import WordFrequencyChart from "../components/WordFrequencyChart";
 import Head from "next/head";
 import * as d3 from "d3";
 import axios from "axios";
@@ -84,7 +85,24 @@ async function countriesMap() {
 }
 
 export default function Visualizations() {
+  const [descriptions, setDescriptions] = useState([]);
+
   useEffect(() => {
+    // Fetch news descriptions for word frequency visualization
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://api.palestinewatch.me/api/news");
+        const data = await response.json();
+        const descriptionList = data.map((item) => item.description);
+        setDescriptions(descriptionList);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+
+    // Initialize the countries map
     countriesMap();
   }, []);
 
@@ -96,7 +114,9 @@ export default function Visualizations() {
         <link rel="icon" href="/watermelon.ico" />
       </Head>
       <h1 className="text-center mt-4 mb-4">Visualizations</h1>
-      <div style={{ width: "50%", paddingTop: "20px" }}>
+
+      {/* Countries Map Section */}
+      <div style={{ width: "50%", paddingTop: "20px", marginBottom: "40px" }}>
         <h2 className="text-center">Countries Map</h2>
         <div
           id="world-map"
@@ -105,6 +125,12 @@ export default function Visualizations() {
             height: "600px",
           }}
         ></div>
+      </div>
+
+      {/* Word Frequency Chart Section */}
+      <div style={{ width: "100%", paddingTop: "20px" }}>
+        <h2 className="text-center">Most Commonly Referenced Words in News Descriptions</h2>
+        <WordFrequencyChart descriptions={descriptions} />
       </div>
     </div>
   );
