@@ -12,19 +12,50 @@ export default function News() {
   const [searchTerm, setSearchTerm] = useState("");
   const cardsPerPage = 9; // Number of cards to display per page
 
+  const fetchNews = async () => {
+    try {
+      const response = await axios.get(
+        "https://api.palestinewatch.me/api/news"
+      );
+      const articles = response.data; // Ensure correct data access
+      setNewsCards(articles); // Set the articles to state
+    } catch (error) {
+      console.error("Error fetching news:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await axios.get("https://api.palestinewatch.me/api/news");
-        const articles = response.data; // Ensure correct data access
-        setNewsCards(articles); // Set the articles to state
-      } catch (error) {
-        console.error("Error fetching news:", error);
-      }
-    };
 
     fetchNews();
   }, []);
+
+  const handleSort = (sortType) => {
+    console.log("Sorting by:", sortType);
+    if (sortType === "Sort By") {
+      fetchNews();
+    }
+    else if (sortType === "Author") {
+      const sortedNews = [...newsCards].sort((a, b) =>
+        a.author.localeCompare(b.author)
+      );
+      setNewsCards(sortedNews);
+      setCurrentPage(1); 
+    }
+    else if (sortType === "Publish Date") {
+      const sortedNews = [...newsCards].sort((a, b) =>
+        new Date(a.publish_date) - new Date(b.publish_date)
+      );
+      setNewsCards(sortedNews);
+      setCurrentPage(1); 
+    }
+    else if (sortType === "Description") {
+      const sortedNews = [...newsCards].sort((a, b) =>
+        a.description.localeCompare(b.description)
+      );
+      setNewsCards(sortedNews);
+      setCurrentPage(1); 
+    }
+  };
 
   function truncateString(str, num) {
     return str?.length > num ? str.slice(0, num) + "..." : str;
@@ -94,7 +125,7 @@ export default function News() {
           complexities of the situation and the voices of Palestinians might be
           overlooked or underrepresented.
         </p>
-        <SearchBar onSearch={handleSearch} />
+        <SearchBar onSearch={handleSearch} onSort={handleSort} sortLabels={["Author", "Publish Date", "Description"]} />
         <h2 className="text-center mb-4">
           Number of Articles: {newsCards.length}
         </h2>

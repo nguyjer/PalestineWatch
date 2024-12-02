@@ -52,5 +52,9 @@ api-test-job:
   stage: test
   image: python:latest
   script:
+    - echo "Installing API test requirements..."
+    - cd backend
+    - pip install -r requirements.txt
     - echo "Running API tests..."
+    - PYTHONPATH=.. python -m unit_tests.unit-test
     - echo "API tests complete."

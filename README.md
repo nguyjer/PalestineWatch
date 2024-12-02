@@ -60,7 +60,7 @@ are on schedule, ask others if they need help.
 
 Phase 3:
 
-- Git SHA: 
+- Git SHA: 26473d50f3f6790731729b964e0aba04deb70573
 
 - Phase Leader: Jeremy Nguyen
 
@@ -100,9 +100,9 @@ are finishing their tasks in a timely manner
 
 - News/Media (~200)
 
-- Support Groups (~50)
+- Support Groups (~300)
 
-- Countries (~20)
+- Countries (~40)
 
 # Instance Description:
 
