@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import WordFrequencyChart from '../components/WordFrequencyChart';
 import Head from 'next/head';
 import axios from 'axios';
+import AreasServedChart from "../components/AreasServedChart";
 import * as d3 from 'd3';
 
 // Function to fetch shelters
@@ -155,7 +156,21 @@ async function sheltersMap() {
 }
 
 export default function ProviderVisualizations() {
-  const [descriptions, setDescriptions] = useState([]);
+  const [foodBanks, setFoodBanks] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://api.homelessaid.me/food_banks");
+        const data = await response.json();
+        setFoodBanks(data.food_banks);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     // Fetch shelter descriptions for word frequency visualization
@@ -165,6 +180,7 @@ export default function ProviderVisualizations() {
         const data = response.data.shelters;
         const descriptionList = data.map((item) => item.description);
         setDescriptions(descriptionList);
+        
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -199,11 +215,10 @@ export default function ProviderVisualizations() {
         ></div>
       </div>
 
-      {/* Word Frequency Chart Section */}
       <div style={{ width: '80%', paddingTop: '20px' }}>
-        <h2 className="text-center">Most Commonly Referenced Words in Shelter Descriptions</h2>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <WordFrequencyChart descriptions={descriptions} />
+      <div>
+          <h1>Areas Served by Food Banks</h1>
+          <AreasServedChart foodBanks={foodBanks} />
         </div>
       </div>
     </div>
