@@ -217,8 +217,10 @@ export default function ProviderVisualizations() {
 
       <div style={{ width: '80%', paddingTop: '20px' }}>
       <div>
-          <h1>Areas Served by Food Banks</h1>
-          <AreasServedChart foodBanks={foodBanks} />
+        <h2 className="text-center">Areas with the most food banks serving it</h2>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+        <AreasServedChart foodBanks={foodBanks} />
+        </div>
         </div>
       </div>
     </div>
