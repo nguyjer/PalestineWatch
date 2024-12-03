@@ -7,14 +7,24 @@ import * as d3 from 'd3';
 // Function to fetch shelters
 async function fetchShelters() {
   try {
-    const response = await axios.get('https://api.homelessaid.me/homeless_shelters');
+    const response = await axios.get(
+      "https://api.homelessaid.me/homeless_shelters"
+    );
     const data = response.data.shelters;
 
-    // Assuming counties_served provides FIPS codes, e.g., ["06001", "06075"]
-    const uniqueFipsCodes = Array.from(new Set(data.flatMap((shelter) => shelter.counties_served)));
-    return uniqueFipsCodes; // Return an array of unique FIPS codes
+    const countyShelterCounts = data.reduce((counts, shelter) => {
+      (shelter.counties_served || "")
+        .split(",") // Split the string into individual counties
+        .map((county) => county.trim()) // Trim spaces
+        .forEach((county) => {
+          counts[county] = (counts[county] || 0) + 1; // Increment the count for this county
+        });
+      return counts;
+    }, {});
+
+    return countyShelterCounts;; // Return an array of unique county names
   } catch (error) {
-    console.error('Error fetching shelters:', error);
+    console.error("Error fetching shelters:", error);
     return [];
   }
 }
@@ -22,8 +32,7 @@ async function fetchShelters() {
 // Function to draw the shelters map
 async function sheltersMap() {
   // Fetch shelter data from backend
-  const backendFipsCodes = await fetchShelters();
-
+  const backendCounties = await fetchShelters();
   // Load GeoJSON file for US counties
   const countyData = await d3.json(
     'https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json'
@@ -46,11 +55,13 @@ async function sheltersMap() {
   const projection = d3.geoAlbersUsa().scale(1000).translate([width / 2, height / 2]);
   const path = d3.geoPath().projection(projection);
 
+  const maxShelterCount = d3.max(Object.values(backendCounties)) || 1;
+
   // Create a color scale for gradient (shades of blue)
   const colorScale = d3
-    .scaleQuantize()
-    .domain([0, 100]) // Assuming the maximum number of shelters a county can serve is 100
-    .range(d3.schemeBlues[9]); // Using D3's Blues color scheme
+    .scaleSequential(d3.interpolateBlues)
+    .domain([0, maxShelterCount]) // Assuming the maximum number of shelters a county can serve is 100
+    
 
   // Setup tooltip
   const tooltip = d3
@@ -72,14 +83,16 @@ async function sheltersMap() {
     .enter()
     .append('path')
     .attr('d', path)
-    .attr('fill', (d) => colorScale(backendFipsCodes.includes(d.id) ? 10 : 0)) // Adjust value as per service level
+    .attr('fill', (d) => colorScale(backendCounties[d.properties.NAME] || 0)) // Adjust value as per service level
     .attr('stroke', '#333')
     .on('mouseover', function (event, d) {
       tooltip
-        .style('opacity', 1)
-        .html(`<strong>${d.properties.NAME}</strong>`) // Display county name and state
-        .style('left', `${event.pageX + 10}px`)
-        .style('top', `${event.pageY + 10}px`);
+        .style("opacity", 1)
+        .html(
+          `<strong>${d.properties.NAME}</strong><br>Shelters: ${backendCounties[d.properties.NAME] || 0}`
+        ) // Display county name and state
+        .style("left", `${event.pageX + 10}px`)
+        .style("top", `${event.pageY + 10}px`);
       d3.select(this).attr('fill', '#FFD700'); // Highlight county on hover
     })
     .on('mousemove', function (event) {
@@ -89,7 +102,7 @@ async function sheltersMap() {
     })
     .on('mouseout', function (event, d) {
       tooltip.style('opacity', 0);
-      d3.select(this).attr('fill', (d) => colorScale(backendFipsCodes.includes(d.id) ? 10 : 0));
+      d3.select(this).attr('fill', (d) => colorScale(backendCounties[d.properties.NAME] || 0));
     });
 
   // Add legend/key for the color scale
@@ -170,7 +183,7 @@ export default function ProviderVisualizations() {
         <meta name="description" content="Visualizations" />
         <link rel="icon" href="/watermelon.ico" />
       </Head>
-      <h1 className="text-center mt-4 mb-4">Visualizations</h1>
+      <h1 className="text-center mt-4 mb-4">Provider Visualizations</h1>
 
       {/* Counties Map Section */}
       <div style={{ width: '80%', paddingTop: '20px', marginBottom: '40px' }}>

@@ -14,6 +14,104 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException, ElementClickInterceptedException
 import requests
 
+def update_links_and_images():
+    try:
+        # Set up headless Chrome options
+        options = Options()
+        options.headless = True
+        options.add_argument('--disable-gpu')
+
+        # Initialize the main WebDriver
+        service = Service(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service, options=options)
+
+        # Open the initial page
+        driver.get("https://uscpr.org/connect-with-a-local-group/")
+        time.sleep(3)  # Wait for the page to load
+        
+        # Close popup if it appears
+        try:
+            close_button = driver.find_element("css selector", ".sgpb-popup-close-button-3")
+            close_button.click()
+            time.sleep(1)  # Wait for the popup to close
+        except NoSuchElementException:
+            print("Close button not found. Make sure the page is fully loaded.")
+        
+        # Open a single secondary WebDriver instance for fetching group details
+        group_driver = webdriver.Chrome(service=service, options=options)
+
+        while True:
+            # Parse page source
+            html = driver.page_source
+            soup = BeautifulSoup(html, 'html.parser')
+            rows = soup.select('.row-hover tr')
+
+            with db.session.no_autoflush:
+                for index, row in enumerate(rows):
+                    group_name = row.select_one('.column-1').get_text(strip=True) if row.select_one('.column-1') else 'Missing Data'
+                    group_link = row.select_one('.column-3').get_text(strip=True) if row.select_one('.column-3') else 'Missing Data'
+                    group_image = 'No Image Found'
+
+                    # Fetch image from group link if it exists
+                    if group_link != 'Missing Data':
+                        try:
+                            group_driver.get(group_link)
+                            time.sleep(3)
+
+                            group_html = group_driver.page_source
+                            group_soup = BeautifulSoup(group_html, 'html.parser')
+                            image_tag = group_soup.find('img')
+                            if image_tag and 'src' in image_tag.attrs:
+                                group_image = image_tag['src']
+                        except Exception as e:
+                            print(f"Error fetching image for {group_name}: {str(e)}")
+
+                    # Fetch the existing group in the database
+                    existing_group = SupportGroupsModel.query.filter_by(name=group_name).first()
+                    if existing_group:
+                        # Update the link and image if they have changed
+                        update_needed = False
+                        if existing_group.link != group_link:
+                            print(f"Updating link for {group_name}")
+                            existing_group.link = group_link
+                            update_needed = True
+                        if existing_group.url_image != group_image:
+                            print(f"Updating image for {group_name}")
+                            existing_group.url_image = group_image
+                            update_needed = True
+                        
+                        if update_needed:
+                            db.session.add(existing_group)
+
+            # Commit the database session after each page
+            db.session.commit()
+
+            # Locate and click the "Next" button
+            try:
+                next_button = WebDriverWait(driver, 10).until(
+                    EC.element_to_be_clickable((By.CLASS_NAME, "paginate_button.next"))
+                )
+                driver.execute_script("arguments[0].scrollIntoView();", next_button)
+                time.sleep(0.5)  # Wait for scroll to complete
+                if next_button.get_attribute("aria-disabled") == "true":
+                    print("Next button is disabled. Exiting loop.")
+                    break
+                driver.execute_script("arguments[0].click();", next_button)
+                time.sleep(3)  # Wait for the new page to load
+                print("Navigated to the next page.")
+            except (TimeoutException, NoSuchElementException):
+                print("No more pages to load or 'Next' button not found.")
+                break
+
+    except Exception as e:
+        print("Error updating links and images:", str(e))
+        db.session.rollback()
+    finally:
+        # Ensure drivers are quit at the end
+        driver.quit()
+        group_driver.quit()
+
+
 def fetch_image_url(group_link):
     try:
         response = requests.get(group_link, timeout=10)
