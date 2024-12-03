@@ -157,6 +157,7 @@ async function sheltersMap() {
 
 export default function ProviderVisualizations() {
   const [foodBanks, setFoodBanks] = useState([]);
+  const [descriptions, setDescriptions] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -193,7 +194,14 @@ export default function ProviderVisualizations() {
   }, []);
 
   return (
-    <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div
+      style={{
+        padding: "20px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       <Head>
         <title>Visualizations</title>
         <meta name="description" content="Visualizations" />
@@ -202,25 +210,36 @@ export default function ProviderVisualizations() {
       <h1 className="text-center mt-4 mb-4">Provider Visualizations</h1>
 
       {/* Counties Map Section */}
-      <div style={{ width: '80%', paddingTop: '20px', marginBottom: '40px' }}>
+      <div style={{ width: "80%", paddingTop: "20px", marginBottom: "40px" }}>
         <h2 className="text-center">Counties Served by Homeless Shelters</h2>
         <div
           id="world-map"
           style={{
-            width: '100%',
-            height: '600px',
-            display: 'flex',
-            justifyContent: 'center',
+            width: "100%",
+            height: "600px",
+            display: "flex",
+            justifyContent: "center",
           }}
         ></div>
       </div>
 
-      <div style={{ width: '80%', paddingTop: '20px' }}>
-      <div>
-        <h2 className="text-center">Areas with the most food banks serving it</h2>
+      <div style={{ width: "80%", paddingTop: "20px" }}>
+        <h2 className="text-center">
+          Most Commonly Referenced Words in Shelter Descriptions
+        </h2>
         <div style={{ display: "flex", justifyContent: "center" }}>
-        <AreasServedChart foodBanks={foodBanks} />
+          <WordFrequencyChart descriptions={descriptions} />
         </div>
+      </div>
+
+      <div style={{ width: "80%", paddingTop: "20px" }}>
+        <div>
+          <h2 className="text-center">
+            Areas with the most food banks serving it
+          </h2>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <AreasServedChart foodBanks={foodBanks} />
+          </div>
         </div>
       </div>
     </div>

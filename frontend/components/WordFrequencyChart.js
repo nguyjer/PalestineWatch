@@ -97,8 +97,8 @@ const WordFrequencyChart = ({ descriptions }) => {
     // Add axis labels
     svg
       .append("text")
-      .attr("x", width / 2)
-      .attr("y", height - 10)
+      .attr("x", width / 2 - 5)
+      .attr("y", height - 1)
       .attr("text-anchor", "middle")
       .text("Words");
 
