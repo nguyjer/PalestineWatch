@@ -4,6 +4,7 @@ import Head from "next/head";
 import axios from "axios";
 import NewsCard from "../../components/NewsCard.js";
 import SupportCard from "../../components/SupportGroupCard.js";
+import Map from "../../components/map.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function CountryPage() {
@@ -31,6 +32,7 @@ export default function CountryPage() {
 
         setCountry(data); 
         setCountryDetails(data);
+        
       } catch (error) {
         console.error("Error fetching countries:", error);
       }
@@ -85,6 +87,19 @@ export default function CountryPage() {
           <div className="row justify-content-center">
             <div className="col-md-6 text-center">
               <h3>Official Name: {country.official_name}</h3>
+              {country.flag_url && (
+                <img
+                  src={country.flag_url}
+                  className="img-fluid"
+                  alt={`${country.official_name} flag`}
+                  style={{
+                    height: "300px",
+                    width: "auto",
+                    maxWidth: "100%",
+                    objectFit: "contain",
+                  }} // Adjusting the width to keep aspect ratio
+                />
+              )}
               <h3>Common Name: {country.common_name}</h3>
               <h5>Member of the UN: {country.unMembership}</h5>
               <br />
@@ -92,17 +107,8 @@ export default function CountryPage() {
               <p>Population: {country.population}</p>
               <p>Region: {country.region}</p>
               <p>Subregion: {country.subregion}</p>
-
-              <div>
-                <h4>Google Maps:</h4>
-                <a
-                  href={country.maps}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <u>View on Google Maps</u>
-                </a>
-              </div>
+              <Map placeName={country.official_name} />
+              
             </div>
           </div>
         </div>

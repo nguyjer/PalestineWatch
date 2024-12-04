@@ -105,7 +105,8 @@ def update_links_and_images():
 
     except Exception as e:
         print("Error updating links and images:", str(e))
-        db.session.rollback()
+        db.session.commit()
+        # db.session.rollback()
     finally:
         # Ensure drivers are quit at the end
         driver.quit()
