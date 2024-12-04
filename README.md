@@ -62,7 +62,7 @@ Phase 3:
 
 - Git SHA: 26473d50f3f6790731729b964e0aba04deb70573
 
-- Phase Leader: Jeremy Nguyen
+- Phase Leader: Kenny Nguyen
 
 - Phase Leader Responsibilites: Facilitate meetings, and ensure that people
 are finishing their tasks in a timely manner
@@ -74,6 +74,24 @@ are finishing their tasks in a timely manner
 | Will Matherne     |  4 hours | 3 hours |
 | Kenny Nguyen      | 7 hours  | 3 hours |
 | Jeremy Nguyen     | 5 hours | 6 hours |
+
+
+Phase 4:
+
+- Git SHA: 
+
+- Phase Leader: Will Matherne
+
+- Phase Leader Responsibilites: Ensure that all aspects of the website are up
+to the spec found on the website, and guide team in finishing tasks.
+
+| Team Member | Estimate Time | Actual Time |
+| ----- | --- | --- | 
+| Aryan Samal       | 3 hours | 3 hours |
+| Rohan Damani      |  4 hours | 3 hours |
+| Will Matherne     |  5 hours | 4 hours |
+| Kenny Nguyen      | 3 hours  | 3 hours |
+| Jeremy Nguyen     | 4 hours | 3 hours |
 
 # Website Link
 
