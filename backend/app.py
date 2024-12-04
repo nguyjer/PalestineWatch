@@ -31,6 +31,7 @@ if __name__ == "__main__":
 		# assign_random_ids()
 		#populate_news_db() 
 		# fetch_groups()
+        # fetch_countries()
 
 
 # news endpoints

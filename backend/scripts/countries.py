@@ -7,7 +7,7 @@ def fetch_countries():
         'PAK', 'IDN', 'MYS', 'BHR', 'OMN', 'DZA', 'MAR', 'TUN', 'LBY', 'IRQ',
         'SDN', 'NGA', 'ZAF', 'MLI', 'NIG', 'SEN', 'BAN', 'AFG', 'MRT', 'CIV',
         'CUB', 'VEN', 'BOL', 'MEX', 'MYS', 'IDN', 'BRN', 'MUS', 'BGD', 'MLI', 
-        'YEM', 'DJI', 'SOM', 'COM']
+        'YEM', 'DJI', 'SOM', 'COM', 'CAN', 'NOR', 'IRL', 'ESP', 'COL', 'LCA', 'SWE', 'THA', 'GTM']
         
     try:
         for coa_iso in unique_countries:
