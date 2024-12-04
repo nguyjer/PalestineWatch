@@ -88,6 +88,14 @@ export default function NavBar() {
             </a>
             <a
               className={`nav-link me-1 ${
+                isActive("/critiques") ? "active font-weight-bold" : ""
+              }`}
+              href="/critiques"
+            >
+              Critiques
+            </a>
+            <a
+              className={`nav-link me-1 ${
                 isActive("/searchAll") ? "active font-weight-bold" : ""
               }`}
               href="/searchAll"

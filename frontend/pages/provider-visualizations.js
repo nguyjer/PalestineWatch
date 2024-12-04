@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import WordFrequencyChart from '../components/WordFrequencyChart';
+import WordBubbleChart from '../components/WordBubbleChart';
 import Head from 'next/head';
 import axios from 'axios';
 import AreasServedChart from "../components/AreasServedChart";
@@ -158,6 +158,21 @@ async function sheltersMap() {
 export default function ProviderVisualizations() {
   const [foodBanks, setFoodBanks] = useState([]);
   const [descriptions, setDescriptions] = useState([]);
+  const [nonprofits, setNonprofits] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://api.homelessaid.me/nonprofits");
+        const data = await response.json();
+        setNonprofits(data.nonprofits);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -225,10 +240,10 @@ export default function ProviderVisualizations() {
 
       <div style={{ width: "80%", paddingTop: "20px" }}>
         <h2 className="text-center">
-          Most Commonly Referenced Words in Shelter Descriptions
+          Most Commonly Referenced Services for Nonprofits
         </h2>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <WordFrequencyChart descriptions={descriptions} />
+          <WordBubbleChart nonprofits={nonprofits} />
         </div>
       </div>
 
@@ -239,6 +254,20 @@ export default function ProviderVisualizations() {
           </h2>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <AreasServedChart foodBanks={foodBanks} />
+          </div>
+        </div>
+      </div>
+
+      <div style={{ width: "80%", paddingTop: "20px" }}>
+        <div>
+          <h2 className="text-center">
+            Provider Critiques
+          </h2>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <ul>
+              <li>What did they do well?</li>
+              <p>They did a very good job of </p>
+            </ul>
           </div>
         </div>
       </div>

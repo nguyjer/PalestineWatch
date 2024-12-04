@@ -14,7 +14,6 @@ const WordFrequencyChart = ({ descriptions }) => {
       "will", "who", "not"
     ]);
 
-    // Preprocess descriptions to count word frequencies
     const wordFrequency = {};
     descriptions.forEach((description) => {
       const words = description.toLowerCase().split(/\W+/);
@@ -41,13 +40,11 @@ const WordFrequencyChart = ({ descriptions }) => {
     // Clear previous chart
     d3.select(chartRef.current).selectAll("*").remove();
 
-    // Create the SVG container
     const svg = d3
       .select(chartRef.current)
       .attr("width", width)
       .attr("height", height);
 
-    // Set up scales
     const x = d3
       .scaleBand()
       .domain(wordData.map((d) => d.word))
@@ -79,7 +76,6 @@ const WordFrequencyChart = ({ descriptions }) => {
         d3.select(this).attr("fill", "steelblue");
       });
 
-    // Add x-axis
     svg
       .append("g")
       .attr("transform", `translate(0,${chartHeight + margin.top})`)
@@ -88,7 +84,6 @@ const WordFrequencyChart = ({ descriptions }) => {
       .attr("transform", "rotate(-45)")
       .style("text-anchor", "end");
 
-    // Add y-axis
     svg
       .append("g")
       .attr("transform", `translate(${margin.left},0)`)
