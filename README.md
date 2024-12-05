@@ -1,3 +1,27 @@
+# Website Demo
+
+- https://youtu.be/odG9xhEvCC8
+
+# Website Link
+
+- https://www.palestinewatch.me/
+
+# Backend Link
+
+- https://api.palestinewatch.me/
+
+# API Documentation Link
+
+- https://documenter.getpostman.com/view/38731121/2sAXxLBDwn
+
+# APIs Used
+
+- RESTful API: https://api.unhcr.org/docs/refugee-statistics.html?_gl=1*pjfjx4*_gcl_au*MjA3NTM3Mjgrup_ga_EVDQTJ4LMY*MTcyNzMwNDAxOS4xLjEuMTcyNzMwNDY5OS40MC4wLjA.
+
+- https://data.techforpalestine.org/
+
+- https://newsdata.io/news-sources/Palestine-news-api
+
 # Group 06 Team Members:
 
 - Will Matherne
@@ -78,7 +102,7 @@ are finishing their tasks in a timely manner
 
 Phase 4:
 
-- Git SHA: 
+- Git SHA: 9e8f0b3abef4b2af9dee8911f87c821989067c66
 
 - Phase Leader: Will Matherne
 
@@ -92,27 +116,6 @@ to the spec found on the website, and guide team in finishing tasks.
 | Will Matherne     |  5 hours | 4 hours |
 | Kenny Nguyen      | 3 hours  | 3 hours |
 | Jeremy Nguyen     | 4 hours | 3 hours |
-
-# Website Link
-
-- https://www.palestinewatch.me/
-
-# Backend Link
-
-- https://api.palestinewatch.me/
-
-# API Documentation Link
-
-- https://documenter.getpostman.com/view/38731121/2sAXxLBDwn
-
-# APIs Used
-
-- RESTful API: https://api.unhcr.org/docs/refugee-statistics.html?_gl=1*pjfjx4*_gcl_au*MjA3NTM3Mjgrup_ga_EVDQTJ4LMY*MTcyNzMwNDAxOS4xLjEuMTcyNzMwNDY5OS40MC4wLjA.
-
-- https://data.techforpalestine.org/
-
-- https://newsdata.io/news-sources/Palestine-news-api
-
 
 # The three models/Instances:
 
