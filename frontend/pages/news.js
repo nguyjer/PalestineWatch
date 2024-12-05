@@ -33,27 +33,36 @@ export default function News() {
     console.log("Sorting by:", sortType);
     if (sortType === "Sort By") {
       fetchNews();
-    }
-    else if (sortType === "Author") {
+    } else if (sortType === "Author") {
       const sortedNews = [...newsCards].sort((a, b) =>
         a.author.localeCompare(b.author)
       );
       setNewsCards(sortedNews);
-      setCurrentPage(1); 
-    }
-    else if (sortType === "Publish Date") {
-      const sortedNews = [...newsCards].sort((a, b) =>
-        new Date(a.publish_date) - new Date(b.publish_date)
+      setCurrentPage(1);
+    } else if (sortType === "Publish Date") {
+      const sortedNews = [...newsCards].sort(
+        (a, b) => new Date(a.publish_date) - new Date(b.publish_date)
       );
       setNewsCards(sortedNews);
-      setCurrentPage(1); 
-    }
-    else if (sortType === "Description") {
+      setCurrentPage(1);
+    } else if (sortType === "Description") {
       const sortedNews = [...newsCards].sort((a, b) =>
         a.description.localeCompare(b.description)
       );
       setNewsCards(sortedNews);
-      setCurrentPage(1); 
+      setCurrentPage(1);
+    } else if (sortType === "Source") {
+      const sortedNews = [...newsCards].sort((a, b) =>
+        a.source.localeCompare(b.source)
+      );
+      setNewsCards(sortedNews);
+      setCurrentPage(1);
+    } else if (sortType === "Website") {
+      const sortedNews = [...newsCards].sort((a, b) =>
+        a.url.localeCompare(b.url)
+      );
+      setNewsCards(sortedNews);
+      setCurrentPage(1);
     }
   };
 
@@ -125,7 +134,7 @@ export default function News() {
           complexities of the situation and the voices of Palestinians might be
           overlooked or underrepresented.
         </p>
-        <SearchBar onSearch={handleSearch} onSort={handleSort} sortLabels={["Author", "Publish Date", "Description"]} />
+        <SearchBar onSearch={handleSearch} onSort={handleSort} sortLabels={["Author", "Publish Date", "Description", "Source", "Website"]} />
         <h2 className="text-center mb-4">
           Number of Articles: {newsCards.length}
         </h2>
