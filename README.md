@@ -102,7 +102,7 @@ are finishing their tasks in a timely manner
 
 Phase 4:
 
-- Git SHA: 9e8f0b3abef4b2af9dee8911f87c821989067c66
+- Git SHA: f3887dfe11809d15c21b4bc7d492744f4311cc02
 
 - Phase Leader: Will Matherne
 
@@ -123,7 +123,7 @@ to the spec found on the website, and guide team in finishing tasks.
 
 - Support Groups (~300)
 
-- Countries (~40)
+- Countries (~50)
 
 # Instance Description:
 
